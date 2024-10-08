@@ -1,5 +1,5 @@
 import comp from "F:/Script_Youtube/script_youtube_vuepress/docs/.vuepress/.temp/pages/index.html.vue"
-const data = JSON.parse("{\"path\":\"/\",\"title\":\"Vite Press\",\"lang\":\"en-US\",\"frontmatter\":{},\"headers\":[],\"git\":{\"updatedTime\":1728358763000,\"contributors\":[{\"name\":\"LearnCodingEasy\",\"email\":\"learncodingeasy@yahoo.com\",\"commits\":4}]},\"filePathRelative\":\"index.md\"}")
+const data = JSON.parse("{\"path\":\"/\",\"title\":\"Vite Press\",\"lang\":\"en-US\",\"frontmatter\":{},\"headers\":[],\"git\":{\"updatedTime\":1728364251000,\"contributors\":[{\"name\":\"LearnCodingEasy\",\"email\":\"learncodingeasy@yahoo.com\",\"commits\":6}]},\"filePathRelative\":\"index.md\"}")
 export { comp, data }
 
 if (import.meta.webpackHot) {
