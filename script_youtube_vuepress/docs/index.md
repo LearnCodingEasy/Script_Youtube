@@ -71,7 +71,56 @@ cd script_youtube_django
 ```cmd
 python manage.py startapp account
 ```
-* Setup Django Libraries And Settings
+* Setup Django File 📁 Settings
+```python
+# Page [script_youtube/script_youtube_django/script_youtube_django/settings.py]
+
+from datetime import timedelta
+ALLOWED_HOSTS = []
+WEBSITE_URL = "http://127.0.0.1:8000"
+AUTH_USER_MODEL = "account.User"
+SIMPLE_JWT = {
+  "ACCESS_TOKEN_LIFETIME": timedelta(days=30),
+  "REFRESH_TOKEN_LIFETIME": timedelta(days=180),
+  "ROTATE_REFRESH_TOKENS": False,
+}
+
+REST_FRAMEWORK = {
+  "DEFAULT_AUTHENTICATION_CLASSES": (
+      "rest_framework_simplejwt.authentication.JWTAuthentication",
+  ),
+  "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+}
+
+CORS_ALLOWED_ORIGINS = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+]
+
+INSTALLED_APPS = [
+    # ...
+    # Apps
+    "account",
+    # Libraries
+    "rest_framework",
+    "rest_framework_simplejwt",
+    "corsheaders",
+]
+
+MIDDLEWARE = [
+    # ...
+    "corsheaders.middleware.CorsMiddleware",
+    # ...
+]
+
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "media"
+```
 # Vue
 ```cmd
 ```
