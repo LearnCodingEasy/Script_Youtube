@@ -50,14 +50,28 @@ script_youtube_virtual_environment\Scripts\activate
 ```cmd
 pip install django
 ```
-* 5 Install Django Libraries [ 1 - djangorestframework | 2 - djangorestframework-simplejwt | 3 - django-cors-headers | 4 - pillow ]
-```
+* 5 Install Django Libraries 
+[ 
+1 - djangorestframework | 
+2 - djangorestframework-simplejwt | 
+3 - django-cors-headers | 
+4 - pillow 
+]
+```cmd
 pip install djangorestframework djangorestframework-simplejwt django-cors-headers pillow
 ```
 * Create Django Project
 ```cmd
 django-admin startproject script_youtube_django
 ```
+* Create Django App
+```cmd
+cd script_youtube_django
+```
+```cmd
+python manage.py startapp account
+```
+* Setup Django Libraries And Settings
 # Vue
 ```cmd
 ```
