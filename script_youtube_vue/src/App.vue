@@ -43,8 +43,7 @@ let logout = () => {
 
 <template>
   <!-- Header -->
-  <!-- v-if="userStore.user.isAuthenticated" -->
-  <prime_card class="header_wrapper">
+  <prime_card class="header_wrapper" v-if="userStore.user.isAuthenticated">
     <template #content>
       <header class="card shadow-md fixed top-0 left-0 right-0 h-16 px-2">
         <div class="container mx-auto flex justify-between items-center h-full">

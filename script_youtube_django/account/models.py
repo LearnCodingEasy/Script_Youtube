@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserM
 from django.db import models
 from django.utils import timezone
 
+
 class CustomUserManager(UserManager):
     def _create_user(self, name, email, password, **extra_fields):
         if not email:
@@ -26,27 +27,27 @@ class CustomUserManager(UserManager):
         extra_fields.setdefault("is_superuser", True)
         return self._create_user(name, email, password, **extra_fields)
 
+
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-          
-    name = models.CharField(max_length=255, blank=True, default="")
+
+    name = models.CharField(max_length=255, blank=True, null=True, default="")
     surname = models.CharField(max_length=255, blank=True, default="")
     email = models.EmailField(unique=True)
     date_of_birth = models.DateField(default=timezone.now)
     gender = models.CharField(max_length=15, blank=True, null=True)
     avatar = models.ImageField(upload_to="avatars", blank=True, null=True)
     cover = models.ImageField(upload_to="covers", blank=True, null=True)
-        
+
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-        
+
     date_joined = models.DateTimeField(default=timezone.now)
     last_login = models.DateTimeField(blank=True, null=True)
-        
+
     objects = CustomUserManager()
-        
+
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
     REQUIRED_FIELDS = []
-

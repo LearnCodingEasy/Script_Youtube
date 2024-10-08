@@ -155,7 +155,7 @@ class CustomUserManager(UserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
           
-    name = models.CharField(max_length=255, blank=True, default="")
+    name = models.CharField(max_length=255, blank=True, null=True, default="")
     surname = models.CharField(max_length=255, blank=True, default="")
     email = models.EmailField(unique=True)
     date_of_birth = models.DateField(default=timezone.now)
@@ -175,6 +175,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
     REQUIRED_FIELDS = []
+```
+
+* Edite Page 📝 [ admin.py ] Inside App Account
+```python
+from django.contrib import admin
+from .models import User
+admin.site.register(User)
 ```
 
 * Create Page 📝 [ serializers.py ] Inside App Account
@@ -264,7 +271,7 @@ def signup(request):
 
   if form.is_valid():
     user = form.save()
-    user.is_active = False
+    user.is_active = True
     user.save()
 
     return JsonResponse({"message": message, "email_sent": True}, safe=False)
@@ -322,6 +329,11 @@ urlpatterns = [
     path("api/", include("account.urls")),
     path("admin/", admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+
+* 🛠️ Create Superuser
+```cmd
+python manage.py createsuperuser
 ```
 
 * 🛠️ Modifications To Models File
@@ -817,6 +829,24 @@ export const useUserStore = defineStore({
         },
     }
 })
+```
+
+* Create Page 📝 [ Authentication/Login.vue ] Inside views
+```text
+Authentication/Login.vue
+```
+```html
+```
+```js
+```
+
+* Create Page 📝 [ Account/Profile.vue ] Inside views
+```text
+Account/Profile.vue
+```
+```html
+```
+```js
 ```
 
 * Edite Page 📝 [ App.vue ]

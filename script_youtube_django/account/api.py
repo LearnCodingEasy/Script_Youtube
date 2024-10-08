@@ -45,9 +45,9 @@ def signup(request):
 
     if form.is_valid():
         user = form.save()
-        user.is_active = False
+        user.is_active = True
         user.save()
-
+        print(message)
         return JsonResponse({"message": message, "email_sent": True}, safe=False)
     else:
         message = form.errors.as_json()
