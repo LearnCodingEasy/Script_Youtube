@@ -12,10 +12,11 @@ cd script_youtube_vuepress
 ```cmd
 npm install -D sass-embedded
 ```
-
+* Run Press
 ```cmd
 npm run docs:dev
 ```
+
 * Open Docs File 📁 > Create File 📁
 ```
 index.md
