@@ -2,6 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 // Authentication
 import LoginView from '../views/Authentication/Login.vue'
+// 
+import ScriptCreate from '../views/Script/Script_Create.vue'
+import ScriptList from '../views/Script/Scripts_List.vue'
 
 
 // Account
@@ -21,11 +24,28 @@ const router = createRouter({
       name: 'login',
       component: LoginView
     },
-    // Account
+    // Account [ Profile ]
     {
       path: '/profile/:id',
       name: 'profile',
       component: ProfileView,
+      meta: {
+        requireLogin: true
+      }
+    },
+    // CreateScript
+    {
+      path: '/ScriptCreate',
+      name: 'Script_Create',
+      component: ScriptCreate,
+      meta: {
+        requireLogin: true
+      }
+    },
+    {
+      path: '/ScriptList',
+      name: 'ScriptList',
+      component: ScriptList,
       meta: {
         requireLogin: true
       }

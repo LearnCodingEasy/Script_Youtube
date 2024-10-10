@@ -1,6 +1,14 @@
 # Script_Youtube
 
 # Django
+* 🛠️ Modifications To Models File
+```cmd
+python manage.py makemigrations
+```
+* 📦 Modifications To The Database
+```cmd
+python manage.py migrate
+```
 ```cmd
 python manage.py runserver
 ```

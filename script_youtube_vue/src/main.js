@@ -63,6 +63,9 @@ import Message from 'primevue/message';
 // PrimeIcons أيقونات 
 import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
+// Quill محرر النصوص الغنية المستندة إلى 
+import Editor from 'primevue/editor';
+
 import 'primeicons/primeicons.css'
 import 'tailwindcss/tailwind.css'
 
@@ -122,5 +125,7 @@ app.component('prime_input_icon', InputIcon);
 // Message
 // app.use(Message);
 app.component('prime_message', Message);
+// Editor
+app.component('prime_editor', Editor);
 
 app.mount('#app')

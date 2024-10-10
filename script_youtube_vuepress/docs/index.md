@@ -1,6 +1,8 @@
 
 # Vite Press
 
+## Start Vuepress
+
 ```cmd
 npm init vuepress script_youtube_vuepress
 ```
@@ -12,12 +14,12 @@ cd script_youtube_vuepress
 ```cmd
 npm install -D sass-embedded
 ```
-* Run Press
+Run Vuepress
 ```cmd
 npm run docs:dev
 ```
 
-* Open Docs File 📁 > Create File 📁
+Open Docs File 📁 > Create File 📁
 ```
 index.md
 ```
@@ -40,7 +42,9 @@ __________________________________________
 __________________________________________
 __________________________________________
 
-# Github
+## Github
+- [Github](https://github.com/LearnCodingEasy/Script_Youtube)
+
 * Git Clone Project 📦
 ```cmd
 git clone https://github.com/LearnCodingEasy/script_youtube.git
@@ -65,8 +69,9 @@ __________________________________________
 __________________________________________
 __________________________________________
 
-# LICENSE
-* Create File 📝 [ LICENSE ]
+## LICENSE
+
+Create File 📝 [ LICENSE ]
 ```text
 LICENSE
 ```
@@ -94,8 +99,9 @@ __________________________________________
 __________________________________________
 __________________________________________
 
-# Django
-* Create Virtual Environment
+## Django
+
+Create Virtual Environment
 ```cmd
 python -m venv script_youtube_virtual_environment
 ```
@@ -117,18 +123,24 @@ pip install django
 ```cmd
 pip install djangorestframework djangorestframework-simplejwt django-cors-headers pillow
 ```
-* Create Django Project
+
+### Create Django Project
+
 ```cmd
 django-admin startproject script_youtube_django
 ```
-* Create Django App
+
+### Create Django App Account
 ```cmd
 cd script_youtube_django
 ```
 ```cmd
 python manage.py startapp account
 ```
-* Setup Django File 📁 Settings
+
+### Settings 📝
+Setup Django File 📝 Settings
+
 ```python
 # Page [script_youtube/script_youtube_django/script_youtube_django/settings.py]
 
@@ -179,7 +191,10 @@ MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 ```
 
+### Models 📝
+
 * Setup Django App 📦 Account
+* Edite Page 📝 [ models.py ] Inside App Account
 ```python
 # Page [ script_youtube/script_youtube_django/account/models.py ]
 
@@ -233,15 +248,16 @@ class User(AbstractBaseUser, PermissionsMixin):
     EMAIL_FIELD = "email"
     REQUIRED_FIELDS = []
 ```
+### Admin 📝
 
-* Edite Page 📝 [ admin.py ] Inside App Account
+Edite Page 📝 [ admin.py ] Inside App Account
 ```python
 from django.contrib import admin
 from .models import User
 admin.site.register(User)
 ```
-
-* Create Page 📝 [ serializers.py ] Inside App Account
+### Serializers 📝
+Create Page 📝 [ serializers.py ] Inside App Account
 ```text
 serializers.py
 ```
@@ -262,7 +278,9 @@ class UserSerializer(serializers.ModelSerializer):
     )
 ```
 
-* Create Page 📝[ forms.py ] Inside App Account
+### Forms 📝
+
+Create Page 📝[ forms.py ] Inside App Account
 ```text
 forms.py
 ```
@@ -286,7 +304,9 @@ class SignupForm(UserCreationForm):
         )
 ```
 
-* Create Page 📝 [ api.py ] Inside App Account
+### Api 📝
+
+Create Page 📝 [ api.py ] Inside App Account
 ```text
 api.py
 ```
@@ -353,8 +373,9 @@ def me(request):
     }
   )
 ```
+### Urls 📝
 
-* Create Page 📝[ urls.py ] Inside App Account
+Create Page 📝[ urls.py ] Inside App Account
 ```text
 urls.py
 ```
@@ -373,7 +394,7 @@ urlpatterns = [
 ]
 ```
 
-* Setup Page 📝 [ url.py ] Inside script_youtube_django
+* Setup Page 📝 [ urls.py ] Inside script_youtube_django
 ```python
 # Page [ script_youtube/script_youtube_django/script_youtube_django/urls.py ]
 
@@ -387,23 +408,28 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ```
+### Superuser 👉️
 
-* 🛠️ Create Superuser
+Create Superuser
 ```cmd
 python manage.py createsuperuser
 ```
 
-* 🛠️ Modifications To Models File
+### Makemigrations 🛠️
+
+🛠️ Modifications To Models File
 ```cmd
 python manage.py makemigrations
 ```
 
-* 🛠️ Modifications To The Database
+### Makemigrations 🛠️
+
+🛠️ Migrate To The Database
 ```cmd
 python manage.py migrate
 ```
-
-* 🚀 Try The Project On Your Device
+### Run Server 🚀
+🚀 Try The Project On Your Device
 ```cmd
 python manage.py runserver
 ```
@@ -424,8 +450,10 @@ __________________________________________
 __________________________________________
 __________________________________________
 __________________________________________
-# Vue
-* Create Vue Project
+
+## Vue
+
+### Create Vue Project
 ```cmd
 npm create vue@latest
 ```
@@ -452,7 +480,7 @@ Done. Now run:
   npm run build
   npm run dev
 ```
-* Install Vue Libraries 
+### Install Vue Libraries 
 [ 
 1 - Tailwind | 
 2 - PrimeVue | 
@@ -472,10 +500,13 @@ npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 ```
 ```cmd
-npm install primevue primeicons
+npm install primevue primeicons 
 ```
 ```cmd
 npm install @primevue/themes
+```
+```cmd
+npm install quill
 ```
 ```cmd
 npm install -D sass
@@ -492,8 +523,10 @@ npm install -D vite-plugin-pwa
 ```cmd
 npm i swiper
 ```
+### Sutap Vue Libraries
+#### Tailwind
 
-* Configure Tailwind
+Configure Tailwind
 - File 📝 [ tailwind.config.js ]
 ```js
 // Page [ script_youtube/script_youtube_vue/tailwind.config.js ]
@@ -509,7 +542,7 @@ content: [
 @tailwind utilities;
 ```
 
-* Import Font Awesome
+#### Import Font Awesome
 ```js
 // Page [ script_youtube/script_youtube_vue/src/main.js ]
 // Font Awesome
@@ -525,7 +558,7 @@ library.add(fas, far, fab);
 app.component("fa", FontAwesomeIcon)
 ```
 
-* Setup Pwa
+#### Setup Pwa
 - Edit Page 📝 [ vite.config.js ]
 ```js
 // Page [ script_youtube/script_youtube_vue/vite.config.js ]
@@ -1203,4 +1236,53 @@ let logout = () => {
 
   <RouterView />
 </template>
+```
+
+__________________________________________
+__________________________________________
+__________________________________________
+__________________________________________
+__________________________________________
+__________________________________________
+__________________________________________
+__________________________________________
+__________________________________________
+__________________________________________
+__________________________________________
+__________________________________________
+
+## Django
+
+### Start Create App Script
+
+```cmd
+python manage.py startapp script
+```
+
+Add To Apps Inside [ settings.py ]
+```python
+```
+
+Edite Page 📝 [ models.py ] Inside App Script 
+```python
+```
+
+Edite Page 📝 [ admin.py ] Inside App Script 
+```python
+```
+
+Edite Page 📝 [ serializers.py ] Inside App Script 
+```python
+```
+
+Create Page 📝 [ forms.py ] Inside App Script 
+```python
+```
+
+Create Page 📝 [ api.py ] Inside App Script 
+```python
+```
+
+Create Page 📝 [ urls.py ] Inside App Script 
+```python
 ```

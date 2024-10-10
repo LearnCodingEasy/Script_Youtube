@@ -5,7 +5,7 @@ import { viteBundler } from '@vuepress/bundler-vite'
 export default defineUserConfig({
   lang: 'en-US',
 
-  title: 'VuePress',
+  title: 'Scipt Youtube',
   description: 'My first VuePress Site',
 
   theme: defaultTheme({
