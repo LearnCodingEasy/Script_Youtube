@@ -22,4 +22,3 @@ npm run dev
 ```cmd
 npm run docs:dev
 ```
-

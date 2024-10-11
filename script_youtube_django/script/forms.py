@@ -12,8 +12,16 @@ class ScriptForm(ModelForm):
             "title",
             "list_of_sources_urls",
             "list_of_shots",
-            "list_of_Paragraphs",
+            "list_of_examples",
+            "list_of_paragraphs",
             "list_of_fonts_urls",
+            "list_of_colors",
+            "list_of_musics",
+            "list_of_videos_background",
+            "list_of_images",
+            "list_of_icons",
+            "list_of_visual_effects",
+            "list_of_sound_effects",
         )
 
 

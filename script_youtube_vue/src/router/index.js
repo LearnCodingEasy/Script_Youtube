@@ -1,11 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+
 // Authentication
 import LoginView from '../views/Authentication/Login.vue'
-// 
+
+// Script
 import ScriptCreate from '../views/Script/Script_Create.vue'
 import ScriptList from '../views/Script/Scripts_List.vue'
-
 
 // Account
 import ProfileView from '../views/Account/Profile.vue'
@@ -33,7 +34,7 @@ const router = createRouter({
         requireLogin: true
       }
     },
-    // CreateScript
+    // Script []
     {
       path: '/ScriptCreate',
       name: 'Script_Create',

@@ -5,13 +5,15 @@
         <form class="form_login" v-on:submit.prevent="submitAddScriptForm">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
             <!-- 1️⃣ title -->
-            <div class="title">
+            <div class="title border p-5 rounded shadow-lg">
+              <h2 dir="auto" class="mb-5 text-2xl">موضوع الفديو [ العنوان ]</h2>
               <div class="card">
                 <prime_editor v-model="title" editorStyle="height: 50px" />
               </div>
             </div>
             <!-- 2️⃣ list of sources urls -->
             <div class="list_of_sources">
+              <h2 dir="auto">قائمة المصادار</h2>
               <div v-for="(url, index) in list_of_sources_urls" :key="index">
                 <prime_input_text
                   type="url"
@@ -45,11 +47,6 @@
                 >
                 </prime_input_text>
                 <prime_editor v-model="item.discription" editorStyle="height: 100px" />
-                <!-- <prime_input_text
-                  type="url"
-                  v-model="item.discription"
-                  placeholder="Shot Discription"
-                /> -->
                 <prime_button
                   @click="removeOneOfListOfShots(index)"
                   severity="danger"
@@ -65,7 +62,75 @@
                 ></prime_button>
               </div>
             </div>
-            <!-- 4️⃣ -->
+            <!-- 4️⃣ list of examples -->
+            <div class="list_of_sources shadow-lg py-7 px-3">
+              <h2 dir="auto">قائمة الامثلة</h2>
+              <div v-for="(item, index) in list_of_examples" :key="index" class="mb-5">
+                <prime_input_text
+                  type="text"
+                  v-model="item.title"
+                  placeholder="Examples Title"
+                  class="mb-5"
+                >
+                </prime_input_text>
+                <prime_input_text
+                  type="text"
+                  v-model="item.page"
+                  placeholder="Examples Page Name"
+                  class="mb-5"
+                >
+                </prime_input_text>
+                <prime_input_text
+                  type="text"
+                  v-model="item.lang"
+                  placeholder="Examples  Language"
+                  class="mb-5"
+                >
+                </prime_input_text>
+                <prime_editor v-model="item.code" editorStyle="height: 100px" />
+                <prime_button
+                  @click="removeOneOfListOfExamples(index)"
+                  severity="danger"
+                  icon="pi pi-trash"
+                  iconPos="right"
+                  class="mx-3"
+                >
+                </prime_button>
+                <prime_button
+                  @click="addOneOfListOfExamples"
+                  severity="success"
+                  icon="pi pi-folder-plus"
+                  iconPos="right"
+                ></prime_button>
+              </div>
+            </div>
+            <!-- 5️⃣ list of Paragraphs -->
+            <div class="list_of_sources shadow-lg py-7 px-3">
+              <h2 dir="auto">قائمة الفقرات</h2>
+              <div v-for="(item, index) in list_of_paragraphs" :key="index" class="mb-5">
+                <prime_input_text
+                  type="text"
+                  v-model="item.text"
+                  placeholder="Font Name"
+                  class="mb-5"
+                >
+                </prime_input_text>
+                <prime_editor v-model="item.discription" editorStyle="height: 100px" />
+                <prime_button
+                  @click="removeOneOfListOfParagraphs(index)"
+                  severity="danger"
+                  icon="pi pi-trash"
+                  iconPos="right"
+                  class="mx-3"
+                ></prime_button>
+                <prime_button
+                  @click="addOneOfListOfShots"
+                  severity="success"
+                  icon="pi pi-folder-plus"
+                  iconPos="right"
+                ></prime_button>
+              </div>
+            </div>
             <!-- 6️⃣ list of fonts urls -->
             <div class="list_of_sources shadow-lg py-7 px-3">
               <h2 dir="auto">قائمةالخط</h2>
@@ -88,7 +153,7 @@
                 ></prime_button>
               </div>
             </div>
-
+            <!-- Send -->
             <div class="send">
               <prime_button
                 @click="submitAddScriptForm"
@@ -123,6 +188,7 @@ export default {
       title: '',
       list_of_sources_urls: [''],
       list_of_shots: [{ text: '', discription: '' }],
+      list_of_examples: [{ title: '', page: '', lang: '', code: '' }],
       list_of_paragraphs: [{ text: '', discription: '', start: '', end: '' }],
       list_of_fonts_urls: [{ name: '', url: '' }],
       errors: []
@@ -160,8 +226,48 @@ export default {
           life: 3000
         })
       }
-      // 2️⃣
-      // 3️⃣
+      // 2️⃣ list of Shots
+      const validShots = this.list_of_shots.filter((item) => item.text !== '')
+      if (validShots.length > 0) {
+        // console.log('validFontsUrls: ', validFontsUrls)
+        formData.append('list_of_shots', JSON.stringify(validShots))
+      } else {
+        this.errors.push('Type at least one valid Script URL')
+        this.$toast.add({
+          severity: 'error',
+          summary: 'List Shots',
+          detail: 'At least one valid Script List Shots is required',
+          life: 3000
+        })
+      }
+      // 3️⃣ list of examples
+      const validExamples = this.list_of_shots.filter((item) => item.text !== '')
+      if (validExamples.length > 0) {
+        // console.log('validFontsUrls: ', validFontsUrls)
+        formData.append('list_of_examples', JSON.stringify(validExamples))
+      } else {
+        this.errors.push('Type at least one valid Examples Title')
+        this.$toast.add({
+          severity: 'error',
+          summary: 'List Examples',
+          detail: 'At least one valid Script List Examples is required',
+          life: 3000
+        })
+      }
+      // 4️⃣ list of paragraphs
+      const validParagraphs = this.list_of_paragraphs.filter((item) => item.text !== '')
+      if (validParagraphs.length > 0) {
+        // console.log('validFontsUrls: ', validFontsUrls)
+        formData.append('list_of_paragraphs', JSON.stringify(validParagraphs))
+      } else {
+        this.errors.push('Type at least one valid Paragraphs')
+        this.$toast.add({
+          severity: 'error',
+          summary: 'List Paragraphs',
+          detail: 'At least one valid Script List Paragraphs is required',
+          life: 3000
+        })
+      }
       // list of fonts urls
       const validFontsUrls = this.list_of_fonts_urls.filter((item) => item.url !== '')
       if (validFontsUrls.length > 0) {
@@ -173,20 +279,6 @@ export default {
           severity: 'error',
           summary: 'Font Url',
           detail: 'At least one valid Script Font URL is required',
-          life: 3000
-        })
-      }
-      // list of fonts urls
-      const validShots = this.list_of_fonts_urls.filter((item) => item.text !== '')
-      if (validShots.length > 0) {
-        // console.log('validFontsUrls: ', validFontsUrls)
-        formData.append('list_of_shots', JSON.stringify(validShots))
-      } else {
-        this.errors.push('Type at least one valid Script URL')
-        this.$toast.add({
-          severity: 'error',
-          summary: 'List Shots',
-          detail: 'At least one valid Script List Shots is required',
           life: 3000
         })
       }
@@ -206,9 +298,12 @@ export default {
               detail: 'Good Script Youtube Adding.',
               life: 3000
             })
-            this.scripts.unshift(response.data)
-            this.title = ''
+            this.scripts.unshift(response.data), (this.title = '')
             this.list_of_sources_urls = ['']
+            this.list_of_shots = [{ text: '', discription: '' }]
+            this.list_of_examples = [{ title: '', page: '', lang: '', code: '' }]
+            this.list_of_paragraphs = [{ text: '', discription: '', start: '', end: '' }]
+            this.list_of_fonts_urls = [{ name: '', url: '' }]
             this.list_of_fonts_urls = [{ name: '', url: '' }]
 
             if (this.user) {
@@ -221,23 +316,36 @@ export default {
           })
       }
     },
+
     addOneOfListOfSourcesUrls() {
       this.list_of_sources_urls.push('')
     },
     removeOneOfListOfSourcesUrls(index) {
       this.list_of_sources_urls.splice(index, 1)
     },
-    addOneOfListOfFontsUrls() {
-      this.list_of_fonts_urls.push({ name: '', url: '' })
-    },
-    removeOneOfListOfFontsUrls(index) {
-      this.list_of_fonts_urls.splice(index, 1)
-    },
     addOneOfListOfShots() {
       this.list_of_shots.push({ text: '', discription: '' })
     },
     removeOneOfListOfShots(index) {
       this.list_of_shots.splice(index, 1)
+    },
+    addOneOfListOfExamples() {
+      this.list_of_examples.push({ title: '', page: '', lang: '', code: '' })
+    },
+    removeOneOfListOfExamples(index) {
+      this.list_of_shots.splice(index, 1)
+    },
+    addOneOfListOfParagraphs() {
+      this.list_of_paragraphs.push({ text: '', discription: '', start: '', end: '' })
+    },
+    removeOneOfListOfParagraphs(index) {
+      this.list_of_shots.splice(index, 1)
+    },
+    addOneOfListOfFontsUrls() {
+      this.list_of_fonts_urls.push({ name: '', url: '' })
+    },
+    removeOneOfListOfFontsUrls(index) {
+      this.list_of_fonts_urls.splice(index, 1)
     }
   }
 }

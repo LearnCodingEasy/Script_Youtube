@@ -44,10 +44,26 @@ class Script(models.Model):
     list_of_sources_urls = models.JSONField(default=list)
     # 3️⃣ قائمة التصوير ✔️
     list_of_shots = models.JSONField(default=list)
-    # 4️⃣ قائمة الفقرات ✔️
-    list_of_Paragraphs = models.JSONField(default=list)
+    # 4️⃣ قائمة الامثلة ✔️
+    list_of_examples = models.JSONField(default=list)
+    # 5️⃣ قائمة الفقرات
+    list_of_paragraphs = models.JSONField(default=list)
     # 6️⃣ قائمةالخط ✔️
     list_of_fonts_urls = models.JSONField(default=list)
+    # 7️⃣ قائمة الالوان
+    list_of_colors = models.JSONField(default=list)
+    # 8️⃣ قائمة الموسيقى
+    list_of_musics = models.JSONField(default=list)
+    # 9️⃣ قائمة فيديوهات الخلفية
+    list_of_videos_background = models.JSONField(default=list)
+    # 🔟 قائمة الصور
+    list_of_images = models.JSONField(default=list)
+    # 1️⃣1️⃣ قائمة الأيقونات
+    list_of_icons = models.JSONField(default=list)
+    # 1️⃣2️⃣ قائمة التأثيرات البصرية
+    list_of_visual_effects = models.JSONField(default=list)
+    # 1️⃣3️⃣ قائمة المؤثرات الصوتية
+    list_of_sound_effects = models.JSONField(default=list)
     # Image
     attachments = models.ManyToManyField(ScriptAttachment, blank=True)
     # Video
