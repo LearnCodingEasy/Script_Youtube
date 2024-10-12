@@ -1,25 +1,33 @@
 # Script_Youtube
 
 # Django
-* 🛠️ Modifications To Models File
+
+- 🛠️ Modifications To Models File
+
 ```cmd
 python manage.py makemigrations
 ```
-* 📦 Modifications To The Database
+
+- 📦 Modifications To The Database
+
 ```cmd
 python manage.py migrate
 ```
-* emoj Run Project
+
+- 📍 Run Project
+
 ```cmd
 python manage.py runserver
 ```
 
 # Vue
+
 ```cmd
 npm run dev
 ```
 
 # Vite Press
+
 ```cmd
 npm run docs:dev
 ```
