@@ -1,7 +1,8 @@
-<template><div><h1 id="vite-press" tabindex="-1"><a class="header-anchor" href="#vite-press"><span>Vite Press</span></a></h1>
-<h2 id="github" tabindex="-1"><a class="header-anchor" href="#github"><span>Github</span></a></h2>
-<ul>
-<li><a href="https://github.com/LearnCodingEasy/Script_Youtube" target="_blank" rel="noopener noreferrer">Github</a></li>
+<template><div><p>This is the content of home page. Check <a href="https://vuejs.press/reference/default-theme/frontmatter.html#home-page" target="_blank" rel="noopener noreferrer">Home Page Docs</a> for more details.</p>
+</div></template>
+
+
+"https://github.com/LearnCodingEasy/Script_Youtube" target="_blank" rel="noopener noreferrer">Github</a></li>
 </ul>
 <ul>
 <li>Git Clone Project 📦</li>
