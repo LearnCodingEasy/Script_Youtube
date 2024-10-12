@@ -1,16 +1,12 @@
 <template><div><h1 id="vite-press" tabindex="-1"><a class="header-anchor" href="#vite-press"><span>Vite Press</span></a></h1>
-<h2 id="start-vuepress" tabindex="-1"><a class="header-anchor" href="#start-vuepress"><span>Start Vuepress</span></a></h2>
-<div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">npm init vuepress script_youtube_vuepress</span>
-<span class="line"></span></code></pre>
-<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">cd script_youtube_vuepress</span>
-<span class="line"></span></code></pre>
-<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">npm install -D sass-embedded</span>
-<span class="line"></span></code></pre>
-<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><p>Run Vuepress</p>
-<div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">npm run docs:dev</span>
-<span class="line"></span></code></pre>
-<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><p>Open Docs File 📁 &gt; Create File 📁</p>
-<div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre v-pre><code><span class="line">index.md</span>
+<h2 id="github" tabindex="-1"><a class="header-anchor" href="#github"><span>Github</span></a></h2>
+<ul>
+<li><a href="https://github.com/LearnCodingEasy/Script_Youtube" target="_blank" rel="noopener noreferrer">Github</a></li>
+</ul>
+<ul>
+<li>Git Clone Project 📦</li>
+</ul>
+<div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">git clone https://github.com/LearnCodingEasy/script_youtube.git</span>
 <span class="line"></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><hr>
 <hr>
@@ -29,14 +25,18 @@
 <hr>
 <hr>
 <hr>
-<h2 id="github" tabindex="-1"><a class="header-anchor" href="#github"><span>Github</span></a></h2>
-<ul>
-<li><a href="https://github.com/LearnCodingEasy/Script_Youtube" target="_blank" rel="noopener noreferrer">Github</a></li>
-</ul>
-<ul>
-<li>Git Clone Project 📦</li>
-</ul>
-<div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">git clone https://github.com/LearnCodingEasy/script_youtube.git</span>
+<h2 id="vuepress" tabindex="-1"><a class="header-anchor" href="#vuepress"><span>Vuepress</span></a></h2>
+<div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">npm init vuepress script_youtube_vuepress</span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">cd script_youtube_vuepress</span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">npm install -D sass-embedded</span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><p>Run Vuepress</p>
+<div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">npm run docs:dev</span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><p>Open Docs File 📁 &gt; Create File 📁</p>
+<div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre v-pre><code><span class="line">index.md</span>
 <span class="line"></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><hr>
 <hr>

@@ -6,7 +6,7 @@
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
             <!-- 1️⃣ title -->
             <div class="title border p-5 rounded shadow-lg">
-              <h2 dir="auto" class="mb-5 text-2xl">موضوع الفديو [ العنوان ]</h2>
+              <h2 dir="auto" class="mb-5 text-2xl">موضوع الفيديو [ العنوان ]</h2>
               <div class="card">
                 <prime_editor v-model="title" editorStyle="height: 50px" />
               </div>
@@ -46,7 +46,7 @@
                   class="mb-5"
                 >
                 </prime_input_text>
-                <prime_editor v-model="item.discription" editorStyle="height: 100px" />
+                <prime_editor v-model="item.description" editorStyle="height: 100px" />
                 <prime_button
                   @click="removeOneOfListOfShots(index)"
                   severity="danger"
@@ -115,7 +115,7 @@
                   class="mb-5"
                 >
                 </prime_input_text>
-                <prime_editor v-model="item.discription" editorStyle="height: 100px" />
+                <prime_editor v-model="item.description" editorStyle="height: 100px" />
                 <prime_button
                   @click="removeOneOfListOfParagraphs(index)"
                   severity="danger"
@@ -133,7 +133,7 @@
             </div>
             <!-- 6️⃣ list of fonts urls -->
             <div class="list_of_sources shadow-lg py-7 px-3">
-              <h2 dir="auto">قائمةالخط</h2>
+              <h2 dir="auto">قائمة الخط</h2>
               <div v-for="(item, index) in list_of_fonts_urls" :key="index">
                 <prime_input_text type="text" v-model="item.name" placeholder="Font Name">
                 </prime_input_text>
@@ -187,9 +187,9 @@ export default {
     return {
       title: '',
       list_of_sources_urls: [''],
-      list_of_shots: [{ text: '', discription: '' }],
+      list_of_shots: [{ text: '', description: '' }],
       list_of_examples: [{ title: '', page: '', lang: '', code: '' }],
-      list_of_paragraphs: [{ text: '', discription: '', start: '', end: '' }],
+      list_of_paragraphs: [{ text: '', description: '', start: '', end: '' }],
       list_of_fonts_urls: [{ name: '', url: '' }],
       errors: []
     }
@@ -300,9 +300,9 @@ export default {
             })
             this.scripts.unshift(response.data), (this.title = '')
             this.list_of_sources_urls = ['']
-            this.list_of_shots = [{ text: '', discription: '' }]
+            this.list_of_shots = [{ text: '', description: '' }]
             this.list_of_examples = [{ title: '', page: '', lang: '', code: '' }]
-            this.list_of_paragraphs = [{ text: '', discription: '', start: '', end: '' }]
+            this.list_of_paragraphs = [{ text: '', description: '', start: '', end: '' }]
             this.list_of_fonts_urls = [{ name: '', url: '' }]
             this.list_of_fonts_urls = [{ name: '', url: '' }]
 
@@ -324,7 +324,7 @@ export default {
       this.list_of_sources_urls.splice(index, 1)
     },
     addOneOfListOfShots() {
-      this.list_of_shots.push({ text: '', discription: '' })
+      this.list_of_shots.push({ text: '', description: '' })
     },
     removeOneOfListOfShots(index) {
       this.list_of_shots.splice(index, 1)
@@ -336,7 +336,7 @@ export default {
       this.list_of_shots.splice(index, 1)
     },
     addOneOfListOfParagraphs() {
-      this.list_of_paragraphs.push({ text: '', discription: '', start: '', end: '' })
+      this.list_of_paragraphs.push({ text: '', description: '', start: '', end: '' })
     },
     removeOneOfListOfParagraphs(index) {
       this.list_of_shots.splice(index, 1)

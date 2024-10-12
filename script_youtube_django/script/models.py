@@ -48,7 +48,7 @@ class Script(models.Model):
     list_of_examples = models.JSONField(default=list)
     # 5️⃣ قائمة الفقرات
     list_of_paragraphs = models.JSONField(default=list)
-    # 6️⃣ قائمةالخط ✔️
+    # 6️⃣ قائمة الخط ✔️
     list_of_fonts_urls = models.JSONField(default=list)
     # 7️⃣ قائمة الالوان
     list_of_colors = models.JSONField(default=list)
