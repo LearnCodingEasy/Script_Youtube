@@ -1263,6 +1263,11 @@ python manage.py startapp script
 
 Add To Apps Inside [ settings.py ]
 ```python
+INSTALLED_APPS = [
+    # Apps
+    "script",
+    # Libraries
+]
 ```
 
 Edite Page 📝 [ models.py ] Inside App Script 

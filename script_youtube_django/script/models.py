@@ -37,38 +37,24 @@ class ScriptVideo(models.Model):
 
 class Script(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    # 1️⃣ Title
     title = models.TextField(blank=True, null=True)
-    # 2️⃣ قائمة المصادار
-    # URLs تخزين قائمة من
-    list_of_sources_urls = models.JSONField(default=list)
-    # 3️⃣ قائمة التصوير ✔️
-    list_of_shots = models.JSONField(default=list)
-    # 4️⃣ قائمة الامثلة ✔️
-    list_of_examples = models.JSONField(default=list)
-    # 5️⃣ قائمة الفقرات
-    list_of_paragraphs = models.JSONField(default=list)
-    # 6️⃣ قائمة الخط ✔️
-    list_of_fonts_urls = models.JSONField(default=list)
-    # 7️⃣ قائمة الالوان
-    list_of_colors = models.JSONField(default=list)
-    # 8️⃣ قائمة الموسيقى
-    list_of_musics = models.JSONField(default=list)
-    # 9️⃣ قائمة فيديوهات الخلفية
-    list_of_videos_background = models.JSONField(default=list)
-    # 🔟 قائمة الصور
-    list_of_images = models.JSONField(default=list)
-    # 1️⃣1️⃣ قائمة الأيقونات
-    list_of_icons = models.JSONField(default=list)
-    # 1️⃣2️⃣ قائمة التأثيرات البصرية
-    list_of_visual_effects = models.JSONField(default=list)
-    # 1️⃣3️⃣ قائمة المؤثرات الصوتية
-    list_of_sound_effects = models.JSONField(default=list)
-    # Image
+    list_of_sources_urls = models.JSONField(default=list, blank=True, null=True)
+    list_of_shots = models.JSONField(default=list, blank=True, null=True)
+    list_of_examples = models.JSONField(default=list, blank=True, null=True)
+    list_of_paragraphs = models.JSONField(default=list, blank=True, null=True)
+    list_of_fonts_urls = models.JSONField(default=list, blank=True, null=True)
+    list_of_colors = models.JSONField(default=list, blank=True, null=True)
+    list_of_musics = models.JSONField(default=list, blank=True, null=True)
+    list_of_videos_background = models.JSONField(default=list, blank=True, null=True)
+    list_of_images = models.JSONField(default=list, blank=True, null=True)
+    list_of_icons = models.JSONField(default=list, blank=True, null=True)
+    list_of_visual_effects = models.JSONField(default=list, blank=True, null=True)
+    list_of_sound_effects = models.JSONField(default=list, blank=True, null=True)
+    script = models.TextField(blank=True, null=True)
+    # 🖼️ Image
     attachments = models.ManyToManyField(ScriptAttachment, blank=True)
-    # Video
+    # 🎥 Video
     videos = models.ManyToManyField(ScriptVideo, blank=True)
-
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(
         User, related_name="scripts", on_delete=models.CASCADE

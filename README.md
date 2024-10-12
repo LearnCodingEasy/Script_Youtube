@@ -9,6 +9,7 @@ python manage.py makemigrations
 ```cmd
 python manage.py migrate
 ```
+* emoj Run Project
 ```cmd
 python manage.py runserver
 ```

@@ -25,7 +25,6 @@ def script_create(request):
     form = ScriptForm(request.POST)
     attachment_form = AttachmentForm(request.POST, request.FILES)
     video_form = VideoForm(request.POST, request.FILES)
-
     # First, process the attachment form if it's valid
     attachment = None
     if attachment_form.is_valid():
