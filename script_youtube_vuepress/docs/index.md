@@ -1,34 +1,48 @@
-
 # Vite Press
 
 ## Github
+
 - [Github](https://github.com/LearnCodingEasy/Script_Youtube)
 
 * Git Clone Project 📦
+
 ```cmd
 git clone https://github.com/LearnCodingEasy/script_youtube.git
 ```
 
+---
 
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
+---
 
+---
 
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
 
 ## Vuepress
 
@@ -43,85 +57,128 @@ cd script_youtube_vuepress
 ```cmd
 npm install -D sass-embedded
 ```
+
 Run Vuepress
+
 ```cmd
 npm run docs:dev
 ```
 
 Open Docs File 📁 > Create File 📁
+
 ```
 index.md
 ```
 
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
 
 ## LICENSE
 
 Create File 📝 [ LICENSE ]
+
 ```text
 LICENSE
 ```
+
 ```text
 MIT License
 Copyright (c) 2024 Hossam Rashad
 ```
 
+---
 
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
 
 ## Django
 
 Create Virtual Environment
+
 ```cmd
 python -m venv script_youtube_virtual_environment
 ```
-* Activate Virtual Environment
+
+- Activate Virtual Environment
+
 ```cmd
 script_youtube_virtual_environment\Scripts\activate
 ```
-* Install Django
+
+- Install Django
+
 ```cmd
 pip install django
 ```
-* 5 Install Django Libraries 
-[ 
-1 - djangorestframework | 
-2 - djangorestframework-simplejwt | 
-3 - django-cors-headers | 
-4 - pillow 
-]
+
+- 5 Install Django Libraries
+  [
+  1 - djangorestframework |
+  2 - djangorestframework-simplejwt |
+  3 - django-cors-headers |
+  4 - pillow
+  ]
+
 ```cmd
 pip install djangorestframework djangorestframework-simplejwt django-cors-headers pillow
 ```
@@ -133,14 +190,17 @@ django-admin startproject script_youtube_django
 ```
 
 ### Create Django App Account
+
 ```cmd
 cd script_youtube_django
 ```
+
 ```cmd
 python manage.py startapp account
 ```
 
 ### Settings 📝
+
 Setup Django File 📝 Settings
 
 ```python
@@ -195,8 +255,9 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 ### Models 📝
 
-* Setup Django App 📦 Account
-* Edite Page 📝 [ models.py ] Inside App Account
+- Setup Django App 📦 Account
+- Edite Page 📝 [ models.py ] Inside App Account
+
 ```python
 # Page [ script_youtube/script_youtube_django/account/models.py ]
 
@@ -228,7 +289,7 @@ class CustomUserManager(UserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-          
+
     name = models.CharField(max_length=255, blank=True, null=True, default="")
     surname = models.CharField(max_length=255, blank=True, default="")
     email = models.EmailField(unique=True)
@@ -236,33 +297,39 @@ class User(AbstractBaseUser, PermissionsMixin):
     gender = models.CharField(max_length=15, blank=True, null=True)
     avatar = models.ImageField(upload_to="avatars", blank=True, null=True)
     cover = models.ImageField(upload_to="covers", blank=True, null=True)
-        
+
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-        
+
     date_joined = models.DateTimeField(default=timezone.now)
     last_login = models.DateTimeField(blank=True, null=True)
-        
+
     objects = CustomUserManager()
-        
+
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
     REQUIRED_FIELDS = []
 ```
+
 ### Admin 📝
 
 Edite Page 📝 [ admin.py ] Inside App Account
+
 ```python
 from django.contrib import admin
 from .models import User
 admin.site.register(User)
 ```
+
 ### Serializers 📝
+
 Create Page 📝 [ serializers.py ] Inside App Account
+
 ```text
 serializers.py
 ```
+
 ```python
 # Page [ script_youtube/script_youtube_django/account/serializers.py ]
 from rest_framework import serializers
@@ -283,9 +350,11 @@ class UserSerializer(serializers.ModelSerializer):
 ### Forms 📝
 
 Create Page 📝[ forms.py ] Inside App Account
+
 ```text
 forms.py
 ```
+
 ```python
 # Page [ script_youtube/script_youtube_django/account/forms.py ]
 
@@ -309,9 +378,11 @@ class SignupForm(UserCreationForm):
 ### Api 📝
 
 Create Page 📝 [ api.py ] Inside App Account
+
 ```text
 api.py
 ```
+
 ```python
 # Page [ script_youtube/script_youtube_django/account/api.py ]
 
@@ -375,12 +446,15 @@ def me(request):
     }
   )
 ```
+
 ### Urls 📝
 
 Create Page 📝[ urls.py ] Inside App Account
+
 ```text
 urls.py
 ```
+
 ```python
 # Page [ script_youtube/script_youtube_django/account/urls.py ]
 from django.urls import path
@@ -396,7 +470,8 @@ urlpatterns = [
 ]
 ```
 
-* Setup Page 📝 [ urls.py ] Inside script_youtube_django
+- Setup Page 📝 [ urls.py ] Inside script_youtube_django
+
 ```python
 # Page [ script_youtube/script_youtube_django/script_youtube_django/urls.py ]
 
@@ -410,9 +485,11 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ```
+
 ### Superuser 👉️
 
 Create Superuser
+
 ```cmd
 python manage.py createsuperuser
 ```
@@ -420,6 +497,7 @@ python manage.py createsuperuser
 ### Makemigrations 🛠️
 
 🛠️ Modifications To Models File
+
 ```cmd
 python manage.py makemigrations
 ```
@@ -427,40 +505,63 @@ python manage.py makemigrations
 ### Makemigrations 🛠️
 
 🛠️ Migrate To The Database
+
 ```cmd
 python manage.py migrate
 ```
+
 ### Run Server 🚀
+
 🚀 Try The Project On Your Device
+
 ```cmd
 python manage.py runserver
 ```
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
 
 ## Vue
 
 ### Create Vue Project
+
 ```cmd
 npm create vue@latest
 ```
 
-* 11 Choose Vite [ Project name & Select a framework ]
+- 11 Choose Vite [ Project name & Select a framework ]
+
 ```cmd
 √ Project name: ... script_youtube_vue
 √ Add TypeScript? ... [No] / Yes
@@ -482,54 +583,69 @@ Done. Now run:
   npm run build
   npm run dev
 ```
-### Install Vue Libraries 
-[ 
-1 - Tailwind | 
-2 - PrimeVue | 
-3 - scss | 
-4 - Axios | 
-5 - Font Awesome | 
-6 - Pwa | 
-7 - | 
-8 - | 
-9 - | 
+
+### Install Vue Libraries
+
+[
+1 - Tailwind |
+2 - PrimeVue |
+3 - scss |
+4 - Axios |
+5 - Font Awesome |
+6 - Pwa |
+7 - |
+8 - |
+9 - |
 ]
 
 ```cmd
 npm install -D tailwindcss postcss autoprefixer
 ```
+
 ```cmd
 npx tailwindcss init -p
 ```
+
 ```cmd
-npm install primevue primeicons 
+npm install primevue primeicons
 ```
+
 ```cmd
 npm install @primevue/themes
 ```
+
 ```cmd
 npm install quill
 ```
+
 ```cmd
 npm install -D sass
 ```
+
 ```cmd
 npm install axios
 ```
+
 ```cmd
 npm i --save @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome@latest @fortawesome/vue-fontawesome@prerelease @fortawesome/free-solid-svg-icons @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons
 ```
+
 ```cmd
 npm install -D vite-plugin-pwa
 ```
+
 ```cmd
 npm i swiper
 ```
+
 ### Sutap Vue Libraries
+
 #### Tailwind
 
 Configure Tailwind
+
 - File 📝 [ tailwind.config.js ]
+
 ```js
 // Page [ script_youtube/script_youtube_vue/tailwind.config.js ]
 content: [
@@ -537,7 +653,9 @@ content: [
 "./src/**/*.{vue,js,ts,jsx,tsx}",
 ],
 ```
+
 - style.css
+
 ```css
 @tailwind base;
 @tailwind components;
@@ -545,6 +663,7 @@ content: [
 ```
 
 #### Import Font Awesome
+
 ```js
 // Page [ script_youtube/script_youtube_vue/src/main.js ]
 // Font Awesome
@@ -557,33 +676,34 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 library.add(fas, far, fab);
 
 // eslint-disable-next-line vue/multi-word-component-names
-app.component("fa", FontAwesomeIcon)
+app.component("fa", FontAwesomeIcon);
 ```
 
 #### Setup Pwa
+
 - Edit Page 📝 [ vite.config.js ]
+
 ```js
 // Page [ script_youtube/script_youtube_vue/vite.config.js ]
 
-import { fileURLToPath, URL } from 'node:url'
+import { fileURLToPath, URL } from "node:url";
 
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
 
 // For Pwa
 // https://vite-pwa-org.netlify.app/guide/
-import { VitePWA } from 'vite-plugin-pwa'
-
+import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     // For Pwa
-    VitePWA({ 
-      registerType: 'autoUpdate',
+    VitePWA({
+      registerType: "autoUpdate",
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
         clientsClaim: true,
         skipWaiting: true,
         cleanupOutdatedCaches: false,
@@ -591,104 +711,106 @@ export default defineConfig({
         sourcemap: true,
         runtimeCaching: [
           {
-            urlPattern: ({ request }) => 
-              request.destination === 'document' || 
-              request.destination === 'script' || 
-              request.destination === 'style' || 
-              request.destination === 'image' || 
-              request.destination === 'font',
-            handler: 'StaleWhileRevalidate',
+            urlPattern: ({ request }) =>
+              request.destination === "document" ||
+              request.destination === "script" ||
+              request.destination === "style" ||
+              request.destination === "image" ||
+              request.destination === "font",
+            handler: "StaleWhileRevalidate",
             options: {
-              cacheName: 'assets-cache',
+              cacheName: "assets-cache",
               expiration: {
                 maxEntries: 100,
-                maxAgeSeconds: 60 * 60 * 24 * 30 
+                maxAgeSeconds: 60 * 60 * 24 * 30
               }
             }
           }
-        ],
+        ]
       },
       devOptions: {
         enabled: true
       },
-      injectRegister: 'auto',
+      injectRegister: "auto",
       includeAssets: ["**/*"],
       manifest: {
-        name: 'Script Youtube',
-        short_name: 'Script Youtube',
-        description: 'My Awesome App Script Youtube',
-        theme_color: '#ffffff',
+        name: "Script Youtube",
+        short_name: "Script Youtube",
+        description: "My Awesome App Script Youtube",
+        theme_color: "#ffffff",
         icons: [
-                {
-                  "src": "./images/icons/script_youtube_icon_72x72.png",
-                  "type": "image/png",
-                  "sizes": "72x72",
-                  "purpose": "any maskable"
-                },
-                {
-                  "src": "./images/icons/script_youtube_icon_96x96.png",
-                  "type": "image/png",
-                  "sizes": "96x96",
-                  "purpose": "any maskable"
-                },
-                {
-                  "src": "./images/icons/script_youtube_icon_128x128.png",
-                  "type": "image/png",
-                  "sizes": "128x128",
-                  "purpose": "any maskable"
-                },
-                {
-                  "src": "./images/icons/script_youtube_icon_144x144.png",
-                  "type": "image/png",
-                  "sizes": "144x144",
-                  "purpose": "any maskable"
-                },
-                {
-                  "src": "./images/icons/script_youtube_icon_152x152.png",
-                  "type": "image/png",
-                  "sizes": "152x152",
-                  "purpose": "any maskable"
-                },
-                {
-                  "src": "./images/icons/script_youtube_icon_192x192.png",
-                  "type": "image/png",
-                  "sizes": "192x192",
-                  "purpose": "any maskable"
-                },
-                {
-                  "src": "./images/icons/script_youtube_icon_384x384.png",
-                  "type": "image/png",
-                  "sizes": "384x384",
-                  "purpose": "any maskable"
-                },
-                {
-                  "src": "./images/icons/script_youtube_icon_512x512.png",
-                  "type": "image/png",
-                  "sizes": "512x512",
-                  "purpose": "any maskable"
-                }
-              ],
-              screenshots: [
-                {
-                  "src": "./images/screenshots/screenshots.png",
-                  "sizes": "640x480",
-                  "type": "image/png",
-                  "form_factor": "wide"
-                  // "form_factor": "narrow"
-                }
-              ]
-      },
+          {
+            src: "./images/icons/script_youtube_icon_72x72.png",
+            type: "image/png",
+            sizes: "72x72",
+            purpose: "any maskable"
+          },
+          {
+            src: "./images/icons/script_youtube_icon_96x96.png",
+            type: "image/png",
+            sizes: "96x96",
+            purpose: "any maskable"
+          },
+          {
+            src: "./images/icons/script_youtube_icon_128x128.png",
+            type: "image/png",
+            sizes: "128x128",
+            purpose: "any maskable"
+          },
+          {
+            src: "./images/icons/script_youtube_icon_144x144.png",
+            type: "image/png",
+            sizes: "144x144",
+            purpose: "any maskable"
+          },
+          {
+            src: "./images/icons/script_youtube_icon_152x152.png",
+            type: "image/png",
+            sizes: "152x152",
+            purpose: "any maskable"
+          },
+          {
+            src: "./images/icons/script_youtube_icon_192x192.png",
+            type: "image/png",
+            sizes: "192x192",
+            purpose: "any maskable"
+          },
+          {
+            src: "./images/icons/script_youtube_icon_384x384.png",
+            type: "image/png",
+            sizes: "384x384",
+            purpose: "any maskable"
+          },
+          {
+            src: "./images/icons/script_youtube_icon_512x512.png",
+            type: "image/png",
+            sizes: "512x512",
+            purpose: "any maskable"
+          }
+        ],
+        screenshots: [
+          {
+            src: "./images/screenshots/screenshots.png",
+            sizes: "640x480",
+            type: "image/png",
+            form_factor: "wide"
+            // "form_factor": "narrow"
+          }
+        ]
+      }
     })
   ],
 
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      "@": fileURLToPath(new URL("./src", import.meta.url))
     }
   }
-})
+});
 ```
+
 - Add Image Inside Public
+
 ```
 ├── public/
 │   ├── images/
@@ -704,28 +826,33 @@ export default defineConfig({
 │   |   ├── screenshots/
 │   │   |   ├── 🖼️ screenshots.png
 ```
-* Setup Axios
+
+- Setup Axios
+
 ```js
 // Axios  استيراد
-import axios from "axios"
-axios.defaults.baseURL = "http://127.0.0.1:8000"
+import axios from "axios";
+axios.defaults.baseURL = "http://127.0.0.1:8000";
 
-app.use(router, axios)
+app.use(router, axios);
 ```
 
-* Setup PrimeVue
-- Create Page 📝 [ primeTheme.js ] Inside stores
+- Setup PrimeVue
+
+* Create Page 📝 [ primeTheme.js ] Inside stores
+
 ```js
 // Page [ script_youtube/script_youtube_vue/src/stores/primeTheme.js ]
 
-import { reactive } from 'vue';
+import { reactive } from "vue";
 export default {
-    install: (app) => {
-        const _appState = reactive({ theme: 'Aura', darkTheme: false });
-        app.config.globalProperties.$appState = _appState;
-    }
+  install: (app) => {
+    const _appState = reactive({ theme: "Aura", darkTheme: false });
+    app.config.globalProperties.$appState = _appState;
+  }
 };
 ```
+
 - Create Page [ Theme/ThemeSwitcher.vue ] Inside components
 
 ```html
@@ -745,10 +872,11 @@ export default {
   </span>
 </template>
 ```
+
 ```js
 <script>
   import { updatePreset, updateSurfacePalette } from '@primevue/themes'
-  
+
   export default {
     data() {
       return {
@@ -763,11 +891,11 @@ export default {
         root.classList.toggle('p-dark')
         this.iconClass = this.iconClass === 'pi-moon' ? 'pi-sun' : 'pi-moon'
       },
-  
+
       updateColors(type, color) {
         if (type === 'primary') this.selectedPrimaryColor = color.name
         else if (type === 'surface') this.selectedSurfaceColor = color.name
-  
+
         this.applyTheme(type, color)
       },
       applyTheme(type, color) {
@@ -789,175 +917,192 @@ export default {
   }
 </script>
 ```
+
 - Create Page 📝 [ presets/Noir.js ] Inside src
+
 ```js
-import { definePreset } from '@primevue/themes';
-import Aura from '@primevue/themes/aura';
+import { definePreset } from "@primevue/themes";
+import Aura from "@primevue/themes/aura";
 
 const Noir = definePreset(Aura, {
-    semantic: {
+  semantic: {
+    primary: {
+      50: "{surface.50}",
+      100: "{surface.100}",
+      200: "{surface.200}",
+      300: "{surface.300}",
+      400: "{surface.400}",
+      500: "{surface.500}",
+      600: "{surface.600}",
+      700: "{surface.700}",
+      800: "{surface.800}",
+      900: "{surface.900}",
+      950: "{surface.950}"
+    },
+    colorScheme: {
+      light: {
         primary: {
-        50: '{surface.50}',
-        100: '{surface.100}',
-        200: '{surface.200}',
-        300: '{surface.300}',
-        400: '{surface.400}',
-        500: '{surface.500}',
-        600: '{surface.600}',
-        700: '{surface.700}',
-        800: '{surface.800}',
-        900: '{surface.900}',
-        950: '{surface.950}'
+          color: "{primary.950}",
+          contrastColor: "#ffffff",
+          hoverColor: "{primary.900}",
+          activeColor: "{primary.800}"
         },
-        colorScheme: {
-            light: {
-                primary: {
-                color: '{primary.950}',
-                contrastColor: '#ffffff',
-                hoverColor: '{primary.900}',
-                activeColor: '{primary.800}'
-                },
-                highlight: {
-                background: '{primary.950}',
-                focusBackground: '{primary.700}',
-                color: '#ffffff',
-                focusColor: '#ffffff'
-                },
-            },
-            dark: {
-                primary: {
-                color: '{primary.50}',
-                contrastColor: '{primary.950}',
-                hoverColor: '{primary.100}',
-                activeColor: '{primary.200}'
-                },
-                highlight: {
-                background: '{primary.50}',
-                focusBackground: '{primary.300}',
-                color: '{primary.950}',
-                focusColor: '{primary.950}'
-                }
-            }
+        highlight: {
+          background: "{primary.950}",
+          focusBackground: "{primary.700}",
+          color: "#ffffff",
+          focusColor: "#ffffff"
         }
+      },
+      dark: {
+        primary: {
+          color: "{primary.50}",
+          contrastColor: "{primary.950}",
+          hoverColor: "{primary.100}",
+          activeColor: "{primary.200}"
+        },
+        highlight: {
+          background: "{primary.50}",
+          focusBackground: "{primary.300}",
+          color: "{primary.950}",
+          focusColor: "{primary.950}"
+        }
+      }
     }
+  }
 });
 
 export default Noir;
 ```
 
-* Setup User Store
-- Create Page 📝 [ user.js ] Inside Stores
+- Setup User Store
+
+* Create Page 📝 [ user.js ] Inside Stores
+
 ```js
 // Page [ script_youtube/script_youtube_vue/src/stores/user.js ]
-import { defineStore } from 'pinia'
-import axios from 'axios'
+import { defineStore } from "pinia";
+import axios from "axios";
 export const useUserStore = defineStore({
-    id: 'user',
-    state: () => ({
-        user: {
-            isAuthenticated: false, 
-            id: null,
-            name: null,
-            surname: null,
-            email: null,
-            date_of_birth: null,
-            access: null,
-            refresh: null,
-        }
-    }),
-    actions: {
-        initStore() {
-            if (localStorage.getItem('user.access')) {
-                console.log('User has access!')
-                this.user.isAuthenticated = true
-                this.user.id = localStorage.getItem('user.id')
-                this.user.name = localStorage.getItem('user.name')
-                this.user.surname = localStorage.getItem('user.surname')
-                this.user.email = localStorage.getItem('user.email')
-                this.user.date_of_birth = localStorage.getItem('user.date_of_birth')
-                this.user.access = localStorage.getItem('user.access')
-                this.user.refresh = localStorage.getItem('user.refresh')
-                this.refreshToken()
-            }
-        },
-        setToken(data) {
-            console.log('setToken', data)
-            this.user.access = data.access
-            this.user.refresh = data.refresh
-            this.user.isAuthenticated = true
-            localStorage.setItem('user.access', data.access)
-            localStorage.setItem('user.refresh', data.refresh)
-
-            console.log('user.access: ', localStorage.getItem('user.access'))
-        },
-        removeToken() {
-            console.log('removeToken')
-            this.user.refresh = null
-            this.user.access = null
-            this.user.isAuthenticated = false
-            this.user.id = null
-            this.user.name = null
-            this.user.surname = null
-            this.user.email = null
-            this.user.date_of_birth = null
-            localStorage.setItem('user.access', '')
-            localStorage.setItem('user.refresh', '')
-            localStorage.setItem('user.id', '')
-            localStorage.setItem('user.name', '')
-            localStorage.setItem('user.surname', '')
-            localStorage.setItem('user.email', '')
-            localStorage.setItem('user.date_of_birth', '')
-        },
-        setUserInfo(user) {
-            console.log('setUserInfo', user)
-            this.user.id = user.id
-            this.user.name = user.name
-            this.user.surname = user.surname
-            this.user.email = user.email
-            this.user.date_of_birth = user.date_of_birth
-            localStorage.setItem('user.id', this.user.id)
-            localStorage.setItem('user.name', this.user.name)
-            localStorage.setItem('user.surname', this.user.surname)
-            localStorage.setItem('user.email', this.user.email)
-            localStorage.setItem('user.date_of_birth', this.user.date_of_birth)
-        },
-        refreshToken() {
-            axios.post('/api/refresh/', {
-                refresh: this.user.refresh
-            })
-                .then((response) => {
-                    this.user.access = response.data.access
-                    localStorage.setItem('user.access', response.data.access)
-                    axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.access
-                })
-                .catch((error)=>{
-                    console.log(error)
-                    this.removeToken()
-                })
-        },
+  id: "user",
+  state: () => ({
+    user: {
+      isAuthenticated: false,
+      id: null,
+      name: null,
+      surname: null,
+      email: null,
+      date_of_birth: null,
+      access: null,
+      refresh: null
     }
-})
+  }),
+  actions: {
+    initStore() {
+      if (localStorage.getItem("user.access")) {
+        console.log("User has access!");
+        this.user.isAuthenticated = true;
+        this.user.id = localStorage.getItem("user.id");
+        this.user.name = localStorage.getItem("user.name");
+        this.user.surname = localStorage.getItem("user.surname");
+        this.user.email = localStorage.getItem("user.email");
+        this.user.date_of_birth = localStorage.getItem("user.date_of_birth");
+        this.user.access = localStorage.getItem("user.access");
+        this.user.refresh = localStorage.getItem("user.refresh");
+        this.refreshToken();
+      }
+    },
+    setToken(data) {
+      console.log("setToken", data);
+      this.user.access = data.access;
+      this.user.refresh = data.refresh;
+      this.user.isAuthenticated = true;
+      localStorage.setItem("user.access", data.access);
+      localStorage.setItem("user.refresh", data.refresh);
+
+      console.log("user.access: ", localStorage.getItem("user.access"));
+    },
+    removeToken() {
+      console.log("removeToken");
+      this.user.refresh = null;
+      this.user.access = null;
+      this.user.isAuthenticated = false;
+      this.user.id = null;
+      this.user.name = null;
+      this.user.surname = null;
+      this.user.email = null;
+      this.user.date_of_birth = null;
+      localStorage.setItem("user.access", "");
+      localStorage.setItem("user.refresh", "");
+      localStorage.setItem("user.id", "");
+      localStorage.setItem("user.name", "");
+      localStorage.setItem("user.surname", "");
+      localStorage.setItem("user.email", "");
+      localStorage.setItem("user.date_of_birth", "");
+    },
+    setUserInfo(user) {
+      console.log("setUserInfo", user);
+      this.user.id = user.id;
+      this.user.name = user.name;
+      this.user.surname = user.surname;
+      this.user.email = user.email;
+      this.user.date_of_birth = user.date_of_birth;
+      localStorage.setItem("user.id", this.user.id);
+      localStorage.setItem("user.name", this.user.name);
+      localStorage.setItem("user.surname", this.user.surname);
+      localStorage.setItem("user.email", this.user.email);
+      localStorage.setItem("user.date_of_birth", this.user.date_of_birth);
+    },
+    refreshToken() {
+      axios
+        .post("/api/refresh/", {
+          refresh: this.user.refresh
+        })
+        .then((response) => {
+          this.user.access = response.data.access;
+          localStorage.setItem("user.access", response.data.access);
+          axios.defaults.headers.common["Authorization"] =
+            "Bearer " + response.data.access;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.removeToken();
+        });
+    }
+  }
+});
 ```
 
-* Create Page 📝 [ Authentication/Login.vue ] Inside views
+- Create Page 📝 [ Authentication/Login.vue ] Inside views
+
 ```text
 Authentication/Login.vue
 ```
+
 ```html
-```
-```js
+
 ```
 
-* Create Page 📝 [ Account/Profile.vue ] Inside views
+```js
+
+```
+
+- Create Page 📝 [ Account/Profile.vue ] Inside views
+
 ```text
 Account/Profile.vue
 ```
+
 ```html
-```
-```js
+
 ```
 
-* Edite Page 📝 [ App.vue ]
+```js
+
+```
+
+- Edite Page 📝 [ App.vue ]
+
 ```js
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
@@ -1001,6 +1146,7 @@ let logout = () => {
 }
 </script>
 ```
+
 ```html
 <template>
   <!-- Header -->
@@ -1010,16 +1156,24 @@ let logout = () => {
       <header class="card shadow-md fixed top-0 left-0 right-0 h-16 px-2">
         <div class="container mx-auto flex justify-between items-center h-full">
           <!-- Left Section (Logo and Search Bar) -->
-          <div class="header_left_section flex items-center space-x-1 basis-1/4">
+          <div
+            class="header_left_section flex items-center space-x-1 basis-1/4"
+          >
             <!-- Logo -->
             <RouterLink to="/" class="logo flex">
-              <fa :icon="['fab', 'facebook']" class="text-5xl text-indigo-700" />
+              <fa
+                :icon="['fab', 'facebook']"
+                class="text-5xl text-indigo-700"
+              />
             </RouterLink>
             <!-- Search Bar -->
             <div class="search_bar w-full flex">
               <prime_icon_field>
                 <prime_input_icon class="pi pi-search" />
-                <prime_input_text v-model="value1" placeholder="Search Script Youtube" />
+                <prime_input_text
+                  v-model="value1"
+                  placeholder="Search Script Youtube"
+                />
               </prime_icon_field>
 
               <!--               
@@ -1034,7 +1188,9 @@ let logout = () => {
             </div>
           </div>
           <!-- Center Section (Navigation Icons) -->
-          <div class="header_center_section flex items-center justify-center space-x-1 basis-1/2">
+          <div
+            class="header_center_section flex items-center justify-center space-x-1 basis-1/2"
+          >
             <RouterLink to="/" class="header_center_section_link_home grow">
               <span class="header_center_section_link_home_span">
                 <svg
@@ -1050,7 +1206,10 @@ let logout = () => {
                 </svg>
               </span>
             </RouterLink>
-            <RouterLinka to="/" class="text-xl grow header_center_section_link_friends">
+            <RouterLinka
+              to="/"
+              class="text-xl grow header_center_section_link_friends"
+            >
               <span class="header_center_section_link_friends_span">
                 <svg
                   viewBox="0 0 24 24"
@@ -1065,7 +1224,10 @@ let logout = () => {
                 </svg>
               </span>
             </RouterLinka>
-            <RouterLink to="/" class="text-xl grow header_center_section_link_videos">
+            <RouterLink
+              to="/"
+              class="text-xl grow header_center_section_link_videos"
+            >
               <span class="header_center_section_link_videos_span">
                 <svg
                   viewBox="0 0 24 24"
@@ -1083,7 +1245,10 @@ let logout = () => {
                 </svg>
               </span>
             </RouterLink>
-            <RouterLink to="/" class="text-xl grow header_center_section_link_marketplace">
+            <RouterLink
+              to="/"
+              class="text-xl grow header_center_section_link_marketplace"
+            >
               <span class="header_center_section_link_marketplace_span">
                 <svg
                   viewBox="0 0 24 24"
@@ -1098,7 +1263,10 @@ let logout = () => {
                 </svg>
               </span>
             </RouterLink>
-            <RouterLink to="/" class="text-xl grow header_center_section_link_groups">
+            <RouterLink
+              to="/"
+              class="text-xl grow header_center_section_link_groups"
+            >
               <span class="header_center_section_link_groups_span">
                 <svg
                   viewBox="0 0 24 24"
@@ -1122,8 +1290,13 @@ let logout = () => {
             <span class="icon"> <i class="fas fa-bars"></i> </span>
           </div>
           <!-- Right Section (Profile and Notifications) -->
-          <div class="header_right_section flex items-center justify-end space-x-1 basis-1/4">
-            <RouterLinka to="/" class="header_right_section_link bg-gray-300 p-3 rounded-full">
+          <div
+            class="header_right_section flex items-center justify-end space-x-1 basis-1/4"
+          >
+            <RouterLinka
+              to="/"
+              class="header_right_section_link bg-gray-300 p-3 rounded-full"
+            >
               <span class="header_right_section_link_span">
                 <svg
                   viewBox="0 0 24 24"
@@ -1138,7 +1311,10 @@ let logout = () => {
                 </svg>
               </span>
             </RouterLinka>
-            <RouterLinka to="/" class="header_right_section_link bg-gray-300 p-3 rounded-full">
+            <RouterLinka
+              to="/"
+              class="header_right_section_link bg-gray-300 p-3 rounded-full"
+            >
               <span class="header_right_section_link_span">
                 <svg
                   viewBox="0 0 12 13"
@@ -1155,7 +1331,10 @@ let logout = () => {
                 </svg>
               </span>
             </RouterLinka>
-            <RouterLink to="/" class="header_right_section_link bg-gray-300 p-3 rounded-full">
+            <RouterLink
+              to="/"
+              class="header_right_section_link bg-gray-300 p-3 rounded-full"
+            >
               <span class="header_right_section_link_span">
                 <svg
                   viewBox="0 0 24 24"
@@ -1217,7 +1396,11 @@ let logout = () => {
                   @click="logout"
                 >
                   <div class="icon_logout flex justify-center items-start">
-                    <i class="pi pi-sign-out" style="font-size: 1rem" shape="circle"></i>
+                    <i
+                      class="pi pi-sign-out"
+                      style="font-size: 1rem"
+                      shape="circle"
+                    ></i>
                   </div>
                   <button class="font-bold py-3">Log out</button>
                 </div>
@@ -1240,18 +1423,29 @@ let logout = () => {
 </template>
 ```
 
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
-__________________________________________
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
 
 ## Django
 
@@ -1262,6 +1456,7 @@ python manage.py startapp script
 ```
 
 Add To Apps Inside [ settings.py ]
+
 ```python
 INSTALLED_APPS = [
     # Apps
@@ -1270,26 +1465,38 @@ INSTALLED_APPS = [
 ]
 ```
 
-Edite Page 📝 [ models.py ] Inside App Script 
+Edite Page 📝 [ models.py ] Inside App Script
+
 ```python
+
 ```
 
-Edite Page 📝 [ admin.py ] Inside App Script 
+Edite Page 📝 [ admin.py ] Inside App Script
+
 ```python
+
 ```
 
-Edite Page 📝 [ serializers.py ] Inside App Script 
+Edite Page 📝 [ serializers.py ] Inside App Script
+
 ```python
+
 ```
 
-Create Page 📝 [ forms.py ] Inside App Script 
+Create Page 📝 [ forms.py ] Inside App Script
+
 ```python
+
 ```
 
-Create Page 📝 [ api.py ] Inside App Script 
+Create Page 📝 [ api.py ] Inside App Script
+
 ```python
+
 ```
 
-Create Page 📝 [ urls.py ] Inside App Script 
+Create Page 📝 [ urls.py ] Inside App Script
+
 ```python
+
 ```

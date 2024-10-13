@@ -26,6 +26,10 @@ python manage.py runserver
 npm run dev
 ```
 
+```cmd
+npm run build
+```
+
 # Vite Press
 
 ```cmd
