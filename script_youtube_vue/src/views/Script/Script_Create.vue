@@ -2,7 +2,11 @@
   <div class="Component-Name mt-8">
     <div class="container mx-auto">
       <div class="wrapper_form_create_script px-5">
-        <form class="form_login" v-on:submit.prevent="submitAddScriptForm">
+        <form
+          class="form_login"
+          v-on:submit.prevent="submitAddScriptForm"
+          enctype="multipart/form-data"
+        >
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
             <!-- 1️⃣ title -->
             <div class="title border p-5 rounded shadow-lg">
@@ -109,7 +113,7 @@
                 <prime_input_text
                   type="text"
                   v-model="item.text"
-                  placeholder="Font Name"
+                  placeholder="Paragraphs Name"
                   class="mb-5"
                 >
                 </prime_input_text>
@@ -122,7 +126,7 @@
                   type="number"
                   v-model="item.text"
                   placeholder="00.00"
-                  class="mb-5"
+                  class="mb-5 mr-3"
                 >
                 </prime_input_text>
                 <prime_input_text
@@ -615,6 +619,7 @@ export default {
       } else if (this.script !== '') {
         formData.append('script', this.script)
       }
+
       // Add Image [  ] إضافة الصور إذا تم تحديدها
       if (this.selectedImageFile) {
         formData.append('attachments', this.selectedImageFile)
@@ -628,6 +633,7 @@ export default {
         })
         this.errors.push('Upload Script Image')
       }
+
       // All Is Good
       if (this.errors.length === 0) {
         axios

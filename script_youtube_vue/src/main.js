@@ -47,6 +47,7 @@ import FileUpload from 'primevue/fileupload';
 import Menubar from 'primevue/menubar';
 import TieredMenu from 'primevue/tieredmenu';
 // Image
+import Image from 'primevue/image';
 import Avatar from 'primevue/avatar';
 import AvatarGroup from 'primevue/avatargroup';
 // Popup
@@ -67,6 +68,8 @@ import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 // Quill محرر النصوص الغنية المستندة إلى 
 import Editor from 'primevue/editor';
+// 
+
 
 import 'primeicons/primeicons.css'
 import 'tailwindcss/tailwind.css'
@@ -113,6 +116,7 @@ app.component('prime_file_upload', FileUpload);
 // Prime Menu
 app.component('prime_menubar', Menubar);
 app.component('prime_tiered_menu', TieredMenu);
+app.component('prime_image', Image);
 app.component('prime_avatar', Avatar);
 app.component('prime_avatar_group', AvatarGroup);
 app.component('prime_popover', Popover);

@@ -1,3 +1,5 @@
+# Page [ script_youtube/script_youtube_django/script_youtube_django/settings.py ]
+
 # استيراد مكتبة timedelta عشان نحدد مدة صلاحية التوكين
 from datetime import timedelta
 

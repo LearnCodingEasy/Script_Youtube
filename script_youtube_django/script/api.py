@@ -21,7 +21,7 @@ from .serializers import ScriptSerializer, ScriptDetailSerializer
 
 @api_view(["POST"])
 def script_create(request):
-    # Handling the PostForm and AttachmentForm
+    # Handling the Script Form and Attachment Form
     form = ScriptForm(request.POST)
     attachment_form = AttachmentForm(request.POST, request.FILES)
     video_form = VideoForm(request.POST, request.FILES)
@@ -61,7 +61,12 @@ def script_create(request):
         return JsonResponse(serializer.data, status=201)  # HTTP 201 Created
     else:
         # If form validation fails, return error response
-        errors = form.errors.as_json()
+        # errors = form.errors.as_json()
+        errors = {
+            "script_errors": form.errors,
+            "attachment_errors": attachment_form.errors,
+            "video_errors": video_form.errors,
+        }
         return JsonResponse({"error": errors}, status=400)
 
 
