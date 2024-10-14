@@ -136,3 +136,5 @@ app.component('prime_message', Message);
 app.component('prime_editor', Editor);
 
 app.mount('#app')
+
+

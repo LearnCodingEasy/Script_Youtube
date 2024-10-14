@@ -18,6 +18,9 @@ from .forms import ScriptForm, AttachmentForm, VideoForm
 from .models import Script
 from .serializers import ScriptSerializer, ScriptDetailSerializer
 
+#
+from rest_framework.response import Response
+
 
 @api_view(["POST"])
 def script_create(request):
@@ -85,77 +88,71 @@ def script_delete(request, pk):
     return JsonResponse({"message": "script deleted"})
 
 
-# _______________________
-# user_ids = [request.user.id]
+@api_view(["GET"])
+def script_detail(request, pk):
+    script = Script.objects.get(pk=pk)
+    user = script.created_by
 
-# for user in request.user.friends.all():
-#     user_ids.append(user.id)
+    user_serializer = UserSerializer(user)
 
-# posts = Post.objects.filter(created_by_id__in=list(user_ids))
-
-# trend = request.GET.get("trend", "")
-
-# if trend:
-#     posts = posts.filter(body__icontains="#" + trend).filter(is_private=False)
-
-# serializer = PostSerializer(posts, many=True)
-
-# return JsonResponse(serializer.data, safe=False)
-
-
-# @api_view(["GET"])
-# def post_detail(request, pk):
-#     post = Post.objects.get(pk=pk)
-#     user = post.created_by
-
-#     user_serializer = UserSerializer(user)
-
-#     post_serializer = PostDetailSerializer(post)
-#     return JsonResponse(
-#         {
-#             "post": post_serializer.data,
-#             "user": user_serializer.data,
-#         },
-#         safe=False,
-#     )
+    script_serializer = ScriptDetailSerializer(script)
+    return JsonResponse(
+        {
+            "script": script_serializer.data,
+            "user": user_serializer.data,
+        },
+        safe=False,
+    )
 
 
-# @api_view(["GET"])
-# def post_list_profile(request, id):
+@api_view(["GET", "PUT"])
+def script_edit(request, pk):
+    # Get the script object to update
+    script = get_object_or_404(Script, pk=pk, created_by=request.user)
 
-#     user = User.objects.get(pk=id)
-#     posts = Post.objects.filter(created_by_id=id)
+    if request.method == "GET":
+        # Serialize the script data and return as JSON
+        serializer = ScriptSerializer(script)
+        return JsonResponse(serializer.data, status=200)  # HTTP 200 OK
 
-#     # user = get_object_or_404(User, pk=id)
+    elif request.method == "PUT":
+        # Handling the Script Form, Attachment Form, and Video Form
+        form = ScriptForm(request.data, instance=script)
+        attachment_form = AttachmentForm(request.data, request.FILES)
+        video_form = VideoForm(request.data, request.FILES)
 
-#     # posts = Post.objects.filter(created_by_id=id)
+        # Update the attachment if valid
+        attachment = None
+        if attachment_form.is_valid():
+            attachment = attachment_form.save(commit=False)
+            attachment.created_by = request.user
+            attachment.save()
 
-#     # if not request.user in user.friends.all():
-#     #     posts = posts.filter(is_private=False)
+        # Update the video if valid
+        video = None
+        if video_form.is_valid():
+            video = video_form.save(commit=False)
+            video.created_by = request.user
+            video.save()
 
-#     posts_serializer = PostSerializer(posts, many=True)
-#     user_serializer = UserSerializer(user)
+        # Proceed with updating the script if valid
+        if form.is_valid():
+            script = form.save()
 
-#     can_send_friendship_request = True
+            # Associate updated attachment and video with the script
+            if attachment:
+                script.attachments.add(attachment)
+            if video:
+                script.videos.add(video)
 
-#     if request.user in user.friends.all():
-#         can_send_friendship_request = False
-
-#     check1 = FriendshipRequest.objects.filter(created_for=request.user).filter(
-#         created_by=user
-#     )
-#     check2 = FriendshipRequest.objects.filter(created_for=user).filter(
-#         created_by=request.user
-#     )
-
-#     if check1 or check2:
-#         can_send_friendship_request = False
-
-#     return JsonResponse(
-#         {
-#             "posts": posts_serializer.data,
-#             "user": user_serializer.data,
-#             "can_send_friendship_request": can_send_friendship_request,
-#         },
-#         safe=False,
-#     )
+            # Serialize the updated script and return as JSON response
+            serializer = ScriptSerializer(script)
+            return JsonResponse(serializer.data, status=200)  # HTTP 200 OK
+        else:
+            # If form validation fails, return error response
+            errors = {
+                "script_errors": form.errors,
+                "attachment_errors": attachment_form.errors,
+                "video_errors": video_form.errors,
+            }
+            return JsonResponse({"error": errors}, status=400)

@@ -42,6 +42,13 @@ export default defineConfig({
             }
           }
         ],
+        // زيادة الحد إلى 5 ميجابايت أو كما تحتاج
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, 
+
+        // تعطيل السجلات
+        // أو يمكنك استخدام true لتفعيل السجلات إذا كنت بحاجة لها أثناء التطوير
+        // debug: false, 
+
       },
       devOptions: {
         enabled: true
@@ -115,6 +122,8 @@ export default defineConfig({
       },
     })
   ],
+  // يمكنك تغيير هذا إلى 'error' لتجاهل التحذيرات والمعلومات
+  logLevel: 'warn',
 
   resolve: {
     alias: {

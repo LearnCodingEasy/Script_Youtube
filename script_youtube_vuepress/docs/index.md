@@ -619,7 +619,7 @@ npm install quill
 ```
 
 ```cmd
-npm install -D sass
+npm install -D sass@latest
 ```
 
 ```cmd

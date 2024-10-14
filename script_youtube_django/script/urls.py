@@ -7,5 +7,13 @@ from . import api
 urlpatterns = [
     path("script_create/", api.script_create, name="script_create"),
     path("script_list/", api.script_list, name="script_list"),
-    path("<uuid:pk>/script_delete/", api.script_delete, name="script_delete"),
+    path(
+        "script_list/script_detail/<uuid:pk>/", api.script_detail, name="script_detail"
+    ),
+    path(
+        "script_list/script_edit/<uuid:pk>/", api.script_edit, name="script_edit"
+    ),
+    path(
+        "script_list/script_delete/<uuid:pk>/", api.script_delete, name="script_delete"
+    ),
 ]

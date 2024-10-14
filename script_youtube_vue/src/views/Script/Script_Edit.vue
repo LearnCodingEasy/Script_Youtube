@@ -1,10 +1,10 @@
 <template>
-  <div class="Component-Name mt-8">
+  <div class="">
     <div class="container mx-auto">
       <div class="wrapper_form_create_script px-5">
         <form
           class="form_login"
-          v-on:submit.prevent="submitAddScriptForm"
+          v-on:submit.prevent="submitEditScriptForm"
           enctype="multipart/form-data"
         >
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
@@ -12,14 +12,19 @@
             <div class="title border p-5 rounded shadow-lg">
               <h2 dir="auto" class="mb-5 text-1xl font-bold">موضوع الفيديو [ العنوان ]</h2>
               <div class="card">
-                <prime_editor v-model="title" editorStyle="height: 50px" />
+                <h2 v-html="script.title"></h2>
+                <prime_editor
+                  v-if="script.title"
+                  v-model="script.title"
+                  editorStyle="height: 100px"
+                />
               </div>
             </div>
             <!-- 2️⃣ list of sources urls -->
             <div class="list_of_sources">
               <h2 dir="auto">قائمة المصادار</h2>
-              <div v-for="(item, index) in list_of_sources_urls" :key="index">
-                <prime_input_text type="text" v-model="item.name" placeholder="Enter URL" />
+              <div v-for="(item, index) in script.list_of_sources_urls" :key="index">
+                <prime_input_text type="text" v-model="item.name" placeholder="Enter Name" />
                 <prime_input_text type="url" v-model="item.url" placeholder="Enter URL" />
 
                 <prime_button
@@ -28,23 +33,25 @@
                   icon="pi pi-trash"
                   iconPos="right"
                   class="mx-3"
-                ></prime_button>
+                >
+                </prime_button>
                 <prime_button
                   @click="addOneOfListOfSourcesUrls"
                   severity="success"
                   icon="pi pi-folder-plus"
                   iconPos="right"
-                ></prime_button>
+                >
+                </prime_button>
               </div>
             </div>
             <!-- 3️⃣ list of shots -->
             <div class="list_of_sources shadow-lg py-7 px-3">
               <h2 dir="auto">قائمة التصوير</h2>
-              <div v-for="(item, index) in list_of_shots" :key="index" class="mb-5">
+              <div v-for="(item, index) in script.list_of_shots" :key="index" class="mb-5">
                 <prime_input_text
                   type="text"
                   v-model="item.text"
-                  placeholder="Shots Name "
+                  placeholder="Shots Name"
                   class="mb-5"
                 >
                 </prime_input_text>
@@ -67,7 +74,7 @@
             <!-- 4️⃣ list of examples -->
             <div class="list_of_sources shadow-lg py-7 px-3">
               <h2 dir="auto">قائمة الامثلة</h2>
-              <div v-for="(item, index) in list_of_examples" :key="index" class="mb-5">
+              <div v-for="(item, index) in script.list_of_examples" :key="index" class="mb-5">
                 <prime_input_text
                   type="text"
                   v-model="item.title"
@@ -109,7 +116,7 @@
             <!-- 5️⃣ list of Paragraphs -->
             <div class="list_of_sources shadow-lg py-7 px-3">
               <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة الفقرات</h2>
-              <div v-for="(item, index) in list_of_paragraphs" :key="index" class="mb-5">
+              <div v-for="(item, index) in script.list_of_paragraphs" :key="index" class="mb-5">
                 <prime_input_text
                   type="text"
                   v-model="item.text"
@@ -124,17 +131,12 @@
                 />
                 <prime_input_text
                   type="number"
-                  v-model="item.text"
+                  v-model="item.start"
                   placeholder="00.00"
                   class="mb-5 mr-3"
                 >
                 </prime_input_text>
-                <prime_input_text
-                  type="number"
-                  v-model="item.text"
-                  placeholder="00.01"
-                  class="mb-5"
-                >
+                <prime_input_text type="number" v-model="item.end" placeholder="00.01" class="mb-5">
                 </prime_input_text>
                 <prime_button
                   @click="removeOneOfListOfParagraphs(index)"
@@ -154,7 +156,7 @@
             <!-- 6️⃣ list of fonts urls -->
             <div class="list_of_sources shadow-lg py-7 px-3">
               <h2 dir="auto">قائمة الخط</h2>
-              <div v-for="(item, index) in list_of_fonts_urls" :key="index">
+              <div v-for="(item, index) in script.list_of_fonts_urls" :key="index">
                 <prime_input_text type="text" v-model="item.name" placeholder="Font Name">
                 </prime_input_text>
                 <prime_input_text type="url" v-model="item.url" placeholder="URL Fonts" />
@@ -176,7 +178,7 @@
             <!-- 7️⃣ list of Colors -->
             <div class="list_of_sources shadow-lg py-7 px-3">
               <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة الالوان</h2>
-              <div v-for="(item, index) in list_of_colors" :key="index">
+              <div v-for="(item, index) in script.list_of_colors" :key="index">
                 <prime_input_text type="text" v-model="item.name" placeholder="Font Name">
                 </prime_input_text>
                 <prime_button
@@ -197,7 +199,7 @@
             <!-- 8️⃣ list of Musics -->
             <div class="list_of_sources shadow-lg py-7 px-3">
               <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة الموسيقى</h2>
-              <div v-for="(item, index) in list_of_musics" :key="index">
+              <div v-for="(item, index) in script.list_of_musics" :key="index">
                 <prime_input_text type="text" v-model="item.name" placeholder="Musics Name">
                 </prime_input_text>
                 <prime_input_text type="url" v-model="item.url" placeholder="Musics Url">
@@ -220,7 +222,7 @@
             <!-- 9️⃣ list of Musics -->
             <div class="list_of_sources shadow-lg py-7 px-3">
               <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة فيديوهات الخلفية</h2>
-              <div v-for="(item, index) in list_of_videos_background" :key="index">
+              <div v-for="(item, index) in script.list_of_videos_background" :key="index">
                 <prime_input_text type="text" v-model="item.name" placeholder="Musics Name">
                 </prime_input_text>
                 <prime_input_text type="url" v-model="item.url" placeholder="Musics Url">
@@ -243,7 +245,7 @@
             <!-- 🔟 list of Images -->
             <div class="list_of_sources shadow-lg py-7 px-3">
               <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة الصور</h2>
-              <div v-for="(item, index) in list_of_images" :key="index">
+              <div v-for="(item, index) in script.list_of_images" :key="index">
                 <prime_input_text type="text" v-model="item.name" placeholder="Images Name">
                 </prime_input_text>
                 <prime_input_text type="url" v-model="item.url" placeholder="Images Url">
@@ -266,7 +268,7 @@
             <!-- 1️⃣1️⃣ list of Icons -->
             <div class="list_of_sources shadow-lg py-7 px-3">
               <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة الأيقونات</h2>
-              <div v-for="(item, index) in list_of_icons" :key="index">
+              <div v-for="(item, index) in script.list_of_icons" :key="index">
                 <prime_input_text type="text" v-model="item.name" placeholder="Icons Name">
                 </prime_input_text>
                 <prime_input_text type="url" v-model="item.url" placeholder="Icons Url">
@@ -289,7 +291,7 @@
             <!-- 1️⃣2️⃣ list of Visual Effects -->
             <div class="list_of_sources shadow-lg py-7 px-3">
               <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة التأثيرات البصرية</h2>
-              <div v-for="(item, index) in list_of_visual_effects" :key="index">
+              <div v-for="(item, index) in script.list_of_visual_effects" :key="index">
                 <prime_input_text type="text" v-model="item.name" placeholder="Visual Effects Name">
                 </prime_input_text>
                 <prime_input_text type="url" v-model="item.url" placeholder="Visual Effects Url">
@@ -312,7 +314,7 @@
             <!-- 1️⃣3️⃣ list of Sound Effects -->
             <div class="list_of_sources shadow-lg py-7 px-3">
               <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة المؤثرات الصوتية</h2>
-              <div v-for="(item, index) in list_of_sound_effects" :key="index">
+              <div v-for="(item, index) in script.list_of_sound_effects" :key="index">
                 <prime_input_text type="text" v-model="item.name" placeholder="Sound Effects Name">
                 </prime_input_text>
                 <prime_input_text type="url" v-model="item.url" placeholder="Sound Effects Url">
@@ -332,14 +334,15 @@
                 ></prime_button>
               </div>
             </div>
-            <!-- Script -->
+            <!-- 📝 Script -->
             <div class="script border p-5 rounded shadow-lg">
               <h2 dir="auto" class="mb-5 text-1xl font-bold">السيناريو</h2>
               <div class="card">
-                <prime_editor v-model="script" editorStyle="height: 350px" />
+                <prime_editor v-model="script.script" editorStyle="height: 350px" />
               </div>
             </div>
-            <!-- Image -->
+
+            <!-- 🖼️ Image -->
             <div class="script border p-5 rounded shadow-lg">
               <h2 dir="auto" class="mb-5 text-1xl font-bold">صورة الغلاف</h2>
               <div class="card">
@@ -355,14 +358,19 @@
                   <div id="preview" v-if="imageFileUrl">
                     <img :src="imageFileUrl" class="img-thumbnail" />
                   </div>
+                  <div id="preview" v-else>
+                    <div class="" v-for="image in script.attachments" :key="image.id">
+                      <img :src="image.get_image" class="img-thumbnail" />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <!-- Send -->
             <div class="send">
               <prime_button
-                @click="submitAddScriptForm"
-                label="Submit"
+                @click="submitEditScriptForm"
+                label="Updated"
                 severity="success"
                 icon="pi pi-send"
                 iconPos="right"
@@ -379,43 +387,111 @@
 import axios from 'axios'
 
 export default {
-  name: 'Script_Create',
-  // props: {
-  //   user: Object,
-  //   posts: Array
-  // },
-  setup() {
-    return {}
-  },
+  name: 'Script_Edit',
+
   data() {
     return {
-      title: '',
-      list_of_sources_urls: [{ name: '', url: '' }],
-      list_of_shots: [{ text: '', description: '' }],
-      list_of_examples: [{ title: '', page: '', lang: '', code: '' }],
-      list_of_paragraphs: [{ text: '', description: '', start: '', end: '' }],
-      list_of_fonts_urls: [{ name: '', url: '' }],
-      list_of_colors: [{ name: '' }],
-      list_of_musics: [{ name: '', url: '' }],
-      list_of_videos_background: [{ name: '', url: '' }],
-      list_of_images: [{ name: '', url: '' }],
-      list_of_icons: [{ name: '', url: '' }],
-      list_of_visual_effects: [{ name: '', url: '' }],
-      list_of_sound_effects: [{ name: '', url: '' }],
-      script: '',
+      script: {
+        id: null,
+        title: '',
+        list_of_sources_urls: [{ name: '', url: '' }],
+        list_of_shots: [{ text: '', description: '' }],
+        list_of_examples: [{ title: '', page: '', lang: '', code: '' }],
+        list_of_paragraphs: [{ text: '', description: '', start: '', end: '' }],
+        list_of_fonts_urls: [{ name: '', url: '' }],
+        list_of_colors: [{ name: '' }],
+        list_of_musics: [{ name: '', url: '' }],
+        list_of_videos_background: [{ name: '', url: '' }],
+        list_of_images: [{ name: '', url: '' }],
+        list_of_icons: [{ name: '', url: '' }],
+        list_of_visual_effects: [{ name: '', url: '' }],
+        list_of_sound_effects: [{ name: '', url: '' }],
+        script: '',
+        attachments: []
+      },
       selectedImageFile: null,
       imageFileUrl: null,
       errors: []
     }
   },
 
+  mounted() {
+    this.getScript()
+    console.log('script.list_of_sources_urls: ', this.script.list_of_sources_urls)
+  },
+
   methods: {
+    getScript() {
+      axios
+        .get(`/api/scripts/script_list/script_edit/${this.$route.params.id}/`)
+        .then((response) => {
+          console.log('data', response.data)
+          this.script = response.data
+          // تحقق من كل قائمة إذا كانت فارغة، أضف عناصر افتراضية
+          if (!this.script.list_of_sources_urls || this.script.list_of_sources_urls.length === 0) {
+            this.script.list_of_sources_urls = [{ name: '', url: '' }]
+          }
+          if (!this.script.list_of_shots || this.script.list_of_shots.length === 0) {
+            this.script.list_of_shots = [{ text: '', description: '' }]
+          }
+          if (!this.script.list_of_examples || this.script.list_of_examples.length === 0) {
+            this.script.list_of_examples = [{ title: '', page: '', lang: '', code: '' }]
+          }
+          if (!this.script.list_of_paragraphs || this.script.list_of_paragraphs.length === 0) {
+            this.script.list_of_paragraphs = [{ text: '', description: '', start: '', end: '' }]
+          }
+          if (!this.script.list_of_fonts_urls || this.script.list_of_fonts_urls.length === 0) {
+            this.script.list_of_fonts_urls = [{ name: '', url: '' }]
+          }
+          if (!this.script.list_of_colors || this.script.list_of_colors.length === 0) {
+            this.script.list_of_colors = [{ name: '' }]
+          }
+          if (!this.script.list_of_musics || this.script.list_of_musics.length === 0) {
+            this.script.list_of_musics = [{ name: '', url: '' }]
+          }
+          if (
+            !this.script.list_of_videos_background ||
+            this.script.list_of_videos_background.length === 0
+          ) {
+            this.script.list_of_videos_background = [{ name: '', url: '' }]
+          }
+          if (!this.script.list_of_images || this.script.list_of_images.length === 0) {
+            this.script.list_of_images = [{ name: '', url: '' }]
+          }
+          if (!this.script.list_of_icons || this.script.list_of_icons.length === 0) {
+            this.script.list_of_icons = [{ name: '', url: '' }]
+          }
+          if (
+            !this.script.list_of_visual_effects ||
+            this.script.list_of_visual_effects.length === 0
+          ) {
+            this.script.list_of_visual_effects = [{ name: '', url: '' }]
+          }
+          if (
+            !this.script.list_of_sound_effects ||
+            this.script.list_of_sound_effects.length === 0
+          ) {
+            this.script.list_of_sound_effects = [{ name: '', url: '' }]
+          }
+        })
+        .catch((error) => {
+          console.log('error', error)
+          this.$toast.add({
+            severity: 'error',
+            summary: 'Script List Error',
+            detail: `Your Error ${error}`,
+            life: 10000
+          })
+        })
+    },
     // For Upload Image to Post Store and for Post
     handleImageFileUpload(event) {
       let file = event.target.files[0]
       if (file) {
         this.selectedImageFile = file
-
+        this.script.image = file
+        console.log('file: ', file)
+        console.log('this.script.image: ', this.script.image)
         // توليد URL للصورة للعرض
         this.imageFileUrl = URL.createObjectURL(file)
       } else {
@@ -425,212 +501,97 @@ export default {
       // this.imageFileUrl = URL.createObjectURL(file)
       // this.selectedImageFile = event.target.files[0]
     },
-    // Add Script
-    submitAddScriptForm() {
-      this.errors = []
-
+    submitEditScriptForm() {
       let formData = new FormData()
-      // Title
-      if (this.title == '') {
-        this.$toast.add({
-          severity: 'error',
-          summary: 'Type Script Title',
-          detail: 'Your Script Title is missing',
-          life: 3000
-        })
-        this.errors.push('Type Script Title')
-      } else if (this.title !== '') {
-        formData.append('title', this.title)
-      }
-      // list of sources urls
-      const validSourcesUrls = this.list_of_sources_urls.filter((url) => url !== '')
-      if (validSourcesUrls.length > 0) {
-        formData.append('list_of_sources_urls', JSON.stringify(validSourcesUrls))
-      }
-      // 2️⃣ list of Shots
-      const validShots = this.list_of_shots.filter((item) => item.text !== '')
-      if (validShots.length > 0) {
-        // console.log('validFontsUrls: ', validFontsUrls)
-        formData.append('list_of_shots', JSON.stringify(validShots))
-      }
-      // 3️⃣ list of examples
-      const validExamples = this.list_of_shots.filter((item) => item.text !== '')
-      if (validExamples.length > 0) {
-        // console.log('validFontsUrls: ', validFontsUrls)
-        formData.append('list_of_examples', JSON.stringify(validExamples))
-      }
-      // 4️⃣ list of paragraphs
-      const validParagraphs = this.list_of_paragraphs.filter((item) => item.text !== '')
-      if (validParagraphs.length > 0) {
-        // console.log('validFontsUrls: ', validFontsUrls)
-        formData.append('list_of_paragraphs', JSON.stringify(validParagraphs))
-      }
-      // list of fonts urls
-      const validFontsUrls = this.list_of_fonts_urls.filter((item) => item.url !== '')
-      if (validFontsUrls.length > 0) {
-        console.log('validFontsUrls: ', validFontsUrls)
-        formData.append('list_of_fonts_urls', JSON.stringify(validFontsUrls))
-      }
-      // 2️ list of Colors
-      const validColors = this.list_of_colors.filter((item) => item.text !== '')
-      if (validColors.length > 0) {
-        formData.append('list_of_colors', JSON.stringify(validColors))
-      }
-      // 2️ list of Musics
-      const validMusics = this.list_of_musics.filter((item) => item.text !== '')
-      if (validMusics.length > 0) {
-        formData.append('list_of_musics', JSON.stringify(validMusics))
-      }
-      // 2️ list of Videos Background
-      const validVideosBackground = this.list_of_videos_background.filter(
-        (item) => item.text !== ''
-      )
-      if (validVideosBackground.length > 0) {
-        formData.append('list_of_videos_background', JSON.stringify(validVideosBackground))
-      }
-      // 2️ list of Images
-      const validImages = this.list_of_images.filter((item) => item.name !== '')
-      if (validImages.length > 0) {
-        formData.append('list_of_images', JSON.stringify(validImages))
-      }
-      // 2️ list of Icons
-      const validIcons = this.list_of_icons.filter((item) => item.name !== '')
-      if (validIcons.length > 0) {
-        formData.append('list_of_icons', JSON.stringify(validIcons))
-      }
-      // 2️ list of Visual Effects
-      const validVisualEffects = this.list_of_visual_effects.filter((item) => item.name !== '')
-      if (validVisualEffects.length > 0) {
-        formData.append('list_of_visual_effects', JSON.stringify(validVisualEffects))
-      }
-      // 2️ list of Sound Effects
-      const validSoundEffects = this.list_of_sound_effects.filter((item) => item.name !== '')
-      if (validSoundEffects.length > 0) {
-        formData.append('list_of_sound_effects', JSON.stringify(validSoundEffects))
-      }
-      // Script
-      if (this.script !== '') {
-        formData.append('script', this.script)
-      }
 
-      // Add Image [  ] إضافة الصور إذا تم تحديدها
       if (this.selectedImageFile) {
         formData.append('image', this.selectedImageFile)
       }
+      // دالة لتحديث البيانات وإرسال الطلب
+      axios
+        .put(`/api/scripts/script_list/script_edit/${this.script.id}/`, this.script)
+        .then((response) => {
+          console.log('Data updated successfully:', response.data)
+          this.$router.push({ name: 'ScriptDetails', params: { id: this.script.id } })
 
-      // All Is Good
-      if (this.errors.length === 0) {
-        axios
-          .post('/api/scripts/script_create/', formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          })
-          .then((response) => {
-            console.log('Data Is Send To Django: ', response.data)
-            this.$toast.add({
-              severity: 'success',
-              summary: 'Script Done',
-              detail: 'Good Script Youtube Adding.',
-              life: 3000
-            })
-            this.scripts.unshift(response.data), (this.title = '')
-            this.list_of_sources_urls = [{ name: '', url: '' }]
-            this.list_of_shots = [{ text: '', description: '' }]
-            this.list_of_examples = [{ title: '', page: '', lang: '', code: '' }]
-            this.list_of_paragraphs = [{ text: '', description: '', start: '', end: '' }]
-            this.list_of_fonts_urls = [{ name: '', url: '' }]
-            this.list_of_colors = [{ name: '' }]
-            this.list_of_musics = [{ name: '', url: '' }]
-            this.list_of_videos_background = [{ name: '', url: '' }]
-            this.list_of_images = [{ name: '', url: '' }]
-            this.list_of_icons = [{ name: '', url: '' }]
-            this.list_of_visual_effects = [{ name: '', url: '' }]
-            this.list_of_sound_effects = [{ name: '', url: '' }]
-            this.script = ``
-
-            if (this.user) {
-              console.log('this.user: ', this.user)
-              // this.user.posts_count += 1
-            }
-          })
-          .catch((error) => {
-            console.log('error', error)
-          })
-      }
+          // معالجة الاستجابة الناجحة
+        })
+        .catch((error) => {
+          console.error('Error updating data:', error)
+          // معالجة الخطأ
+        })
     },
-
     addOneOfListOfSourcesUrls() {
-      this.list_of_sources_urls.push('')
+      this.script.list_of_sources_urls.push('')
     },
     removeOneOfListOfSourcesUrls(index) {
-      this.list_of_sources_urls.splice(index, 1)
+      this.script.list_of_sources_urls.splice(index, 1)
     },
     addOneOfListOfShots() {
-      this.list_of_shots.push({ text: '', description: '' })
+      this.script.list_of_shots.push({ text: '', description: '' })
     },
     removeOneOfListOfShots(index) {
-      this.list_of_shots.splice(index, 1)
+      this.script.list_of_shots.splice(index, 1)
     },
     addOneOfListOfExamples() {
-      this.list_of_examples.push({ title: '', page: '', lang: '', code: '' })
+      this.script.list_of_examples.push({ title: '', page: '', lang: '', code: '' })
     },
     removeOneOfListOfExamples(index) {
-      this.list_of_shots.splice(index, 1)
+      this.script.list_of_shots.splice(index, 1)
     },
     addOneOfListOfParagraphs() {
-      this.list_of_paragraphs.push({ text: '', description: '', start: '', end: '' })
+      this.script.list_of_paragraphs.push({ text: '', description: '', start: '', end: '' })
     },
     removeOneOfListOfParagraphs(index) {
-      this.list_of_shots.splice(index, 1)
+      this.script.list_of_shots.splice(index, 1)
     },
     addOneOfListOfFontsUrls() {
-      this.list_of_fonts_urls.push({ name: '', url: '' })
+      this.script.list_of_fonts_urls.push({ name: '', url: '' })
     },
     removeOneOfListOfFontsUrls(index) {
-      this.list_of_fonts_urls.splice(index, 1)
+      this.script.list_of_fonts_urls.splice(index, 1)
     },
     addOneOfListOfColors() {
-      this.list_of_colors.push({ name: '' })
+      this.script.list_of_colors.push({ name: '' })
     },
     removeOneOfListOfColors(index) {
-      this.list_of_colors.splice(index, 1)
+      this.script.list_of_colors.splice(index, 1)
     },
     addOneOfListOfMusics() {
-      this.list_of_fonts_urls.push({ name: '', url: '' })
+      this.script.list_of_fonts_urls.push({ name: '', url: '' })
     },
     removeOneOfListOfMusics(index) {
-      this.list_of_musics.splice(index, 1)
+      this.script.list_of_musics.splice(index, 1)
     },
     addOneOfListOfVideosBackground() {
-      this.list_of_videos_background.push({ name: '', url: '' })
+      this.script.list_of_videos_background.push({ name: '', url: '' })
     },
     removeOneOfListOfVideosBackground(index) {
-      this.list_of_videos_background.splice(index, 1)
+      this.script.list_of_videos_background.splice(index, 1)
     },
     addOneOfListOfImages() {
-      this.list_of_images.push({ name: '', url: '' })
+      this.script.list_of_images.push({ name: '', url: '' })
     },
     removeOneOfListOfImages(index) {
-      this.list_of_images.splice(index, 1)
+      this.script.list_of_images.splice(index, 1)
     },
     addOneOfListOfIcons() {
-      this.list_of_icons.push({ name: '', url: '' })
+      this.script.list_of_icons.push({ name: '', url: '' })
     },
     removeOneOfListOfIcons(index) {
-      this.list_of_icons.splice(index, 1)
+      this.script.list_of_icons.splice(index, 1)
     },
     addOneOfListOfVisualEffects() {
-      this.list_of_visual_effects.push({ name: '', url: '' })
+      this.script.list_of_visual_effects.push({ name: '', url: '' })
     },
     removeOneOfListOfVisualEffects(index) {
-      this.list_of_visual_effects.splice(index, 1)
+      this.script.list_of_visual_effects.splice(index, 1)
     },
     addOneOfListOfSoundEffects() {
-      this.list_of_sound_effects.push({ name: '', url: '' })
+      this.script.list_of_sound_effects.push({ name: '', url: '' })
     },
     removeOneOfListOfSoundEffects(index) {
-      this.list_of_sound_effects.splice(index, 1)
+      this.script.list_of_sound_effects.splice(index, 1)
     }
   }
 }

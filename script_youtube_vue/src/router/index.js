@@ -4,12 +4,15 @@ import HomeView from '../views/HomeView.vue'
 // Authentication
 import LoginView from '../views/Authentication/Login.vue'
 
-// Script
-import ScriptCreate from '../views/Script/Script_Create.vue'
-import ScriptList from '../views/Script/Scripts_List.vue'
 
 // Account
 import ProfileView from '../views/Account/Profile.vue'
+
+// Script
+import ScriptCreate from '../views/Script/Script_Create.vue'
+import ScriptList from '../views/Script/Scripts_List.vue'
+import ScriptDetails from '../views/Script/Script_Details.vue'
+import ScriptEdit from '../views/Script/Script_Edit.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,8 +48,24 @@ const router = createRouter({
     },
     {
       path: '/ScriptList',
-      name: 'ScriptList',
+      name: 'Script_List',
       component: ScriptList,
+      meta: {
+        requireLogin: true
+      }
+    },
+    {
+      path: '/ScriptList/ScriptDetails/:id',
+      name: 'ScriptDetails',
+      component: ScriptDetails,
+      meta: {
+        requireLogin: true
+      }
+    },
+    {
+      path: '/ScriptList/ScriptEdit/:id',
+      name: 'ScriptEdit',
+      component: ScriptEdit,
       meta: {
         requireLogin: true
       }

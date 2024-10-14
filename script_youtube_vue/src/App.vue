@@ -96,7 +96,7 @@ let logout = () => {
                     </svg>
                   </span>
                 </RouterLink>
-                <RouterLinka to="/" class="text-xl grow header_center_section_link_friends">
+                <RouterLink to="/" class="text-xl grow header_center_section_link_friends">
                   <span class="header_center_section_link_friends_span">
                     <svg
                       viewBox="0 0 24 24"
@@ -110,7 +110,7 @@ let logout = () => {
                       ></path>
                     </svg>
                   </span>
-                </RouterLinka>
+                </RouterLink>
                 <!-- Add -->
                 <RouterLink
                   to="/ScriptCreate"
@@ -190,7 +190,7 @@ let logout = () => {
               </div>
               <!-- Right Section (Profile and Notifications) -->
               <div class="header_right_section flex items-center justify-end space-x-1 basis-1/4">
-                <RouterLinka to="/" class="header_right_section_link bg-gray-300 p-3 rounded-full">
+                <RouterLink to="/" class="header_right_section_link bg-gray-300 p-3 rounded-full">
                   <span class="header_right_section_link_span">
                     <svg
                       viewBox="0 0 24 24"
@@ -204,8 +204,8 @@ let logout = () => {
                       ></path>
                     </svg>
                   </span>
-                </RouterLinka>
-                <RouterLinka to="/" class="header_right_section_link bg-gray-300 p-3 rounded-full">
+                </RouterLink>
+                <RouterLink to="/" class="header_right_section_link bg-gray-300 p-3 rounded-full">
                   <span class="header_right_section_link_span">
                     <svg
                       viewBox="0 0 12 13"
@@ -221,7 +221,7 @@ let logout = () => {
                       </g>
                     </svg>
                   </span>
-                </RouterLinka>
+                </RouterLink>
                 <RouterLink to="/" class="header_right_section_link bg-gray-300 p-3 rounded-full">
                   <span class="header_right_section_link_span">
                     <svg
@@ -308,13 +308,24 @@ let logout = () => {
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      value1: ''
+      // تعريف الخاصية
+    }
+  }
+}
+</script>
+
 <style lang="scss">
 body {
-  min-height: 10000px;
+  // min-height: 10000px;
 }
 .header_right_section {
   a,
-  routerlinka {
+  RouterLink {
     margin: 0 0.5rem;
   }
 }
