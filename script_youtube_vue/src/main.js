@@ -35,6 +35,7 @@ import Button from 'primevue/button';
 // Form
 import Fluid from 'primevue/fluid';
 import InputText from 'primevue/inputtext';
+import Textarea from 'primevue/textarea';
 import Password from 'primevue/password';
 import FloatLabel from 'primevue/floatlabel';
 import Checkbox from 'primevue/checkbox';
@@ -53,6 +54,16 @@ import AvatarGroup from 'primevue/avatargroup';
 // Popup
 import Popover from 'primevue/popover';
 import Dialog from 'primevue/dialog';
+import Drawer  from 'primevue/drawer';
+// panel
+import Fieldset from 'primevue/fieldset';
+import Stepper from 'primevue/stepper';
+import StepList from 'primevue/steplist';
+import StepPanels from 'primevue/steppanels';
+import StepItem from 'primevue/stepitem';
+import Step from 'primevue/step';
+import StepPanel from 'primevue/steppanel';
+
 // Card
 import Card from 'primevue/card';
 // Theme
@@ -106,6 +117,7 @@ app.component('prime_button', Button);
 // Prime Form
 app.component('prime_fluid', Fluid);
 app.component('prime_input_text', InputText);
+app.component('prime_textarea', Textarea);
 app.component('prime_input_password', Password);
 app.component('prime_float_label', FloatLabel);
 app.component('prime_check_box', Checkbox);
@@ -119,9 +131,22 @@ app.component('prime_tiered_menu', TieredMenu);
 app.component('prime_image', Image);
 app.component('prime_avatar', Avatar);
 app.component('prime_avatar_group', AvatarGroup);
-app.component('prime_popover', Popover);
 app.component('prime_card', Card);
+// Popup 
+app.component('prime_popover', Popover);
 app.component('prime_dialog', Dialog);
+app.component('prime_drawer', Drawer);
+// panel
+app.component('prime_fieldset', Fieldset);
+app.component('prime_stepper', Stepper);
+app.component('prime_steplist', StepList);
+app.component('prime_steppanels', StepPanels);
+app.component('prime_stepitem', StepItem);
+app.component('prime_step', Step);
+app.component('prime_steppanel', StepPanel);
+
+
+
 // Toast
 // app.use(Toast);
 app.component('prime_toast', Toast);

@@ -22,7 +22,7 @@
             </div>
             <!-- 2️⃣ list of sources urls -->
             <div class="list_of_sources">
-              <h2 dir="auto">قائمة المصادار</h2>
+              <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة المصادار</h2>
               <div v-for="(item, index) in script.list_of_sources_urls" :key="index">
                 <prime_input_text type="text" v-model="item.name" placeholder="Enter Name" />
                 <prime_input_text type="url" v-model="item.url" placeholder="Enter URL" />
@@ -46,7 +46,41 @@
             </div>
             <!-- 3️⃣ list of shots -->
             <div class="list_of_sources shadow-lg py-7 px-3">
-              <h2 dir="auto">قائمة التصوير</h2>
+              <div class="flex justify-between items-center">
+                <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة التصوير</h2>
+                <prime_button
+                  icon="pi pi-arrow-left"
+                  @click="list_of_shots_info_visible = true"
+                  class="mx-3"
+                />
+                <prime_drawer
+                  v-model:visible="list_of_shots_info_visible"
+                  :header="list_of_shots_info[0].text"
+                  :key="list_of_shots_info.id"
+                >
+                  <p dir="auto" class="text-lg">
+                    {{ list_of_shots_info[0].description }}
+                  </p>
+                </prime_drawer>
+              </div>
+              <!-- Data -->
+              <div class="mb-4">
+                <prime_fieldset :toggleable="true" legend="قائمة التصوير">
+                  <div class="mb-5">
+                    <ul>
+                      <li
+                        v-for="(item, index) in script.list_of_shots"
+                        :key="index"
+                        class="pb-3 flex font-bold"
+                      >
+                        <span class="pr-5" v-html="item.text"></span>
+                        <span class="" v-html="item.description"> </span>
+                      </li>
+                    </ul>
+                  </div>
+                </prime_fieldset>
+              </div>
+              <!-- Input Edit -->
               <div v-for="(item, index) in script.list_of_shots" :key="index" class="mb-5">
                 <prime_input_text
                   type="text"
@@ -55,7 +89,8 @@
                   class="mb-5"
                 >
                 </prime_input_text>
-                <prime_editor v-model="item.description" editorStyle="height: 100px" />
+                <prime_textarea v-model="item.description" rows="5" cols="30"></prime_textarea>
+                <prime_editor editorStyle="height: 100px" v-model="item.description" />
                 <prime_button
                   @click="removeOneOfListOfShots(index)"
                   severity="danger"
@@ -71,9 +106,30 @@
                 ></prime_button>
               </div>
             </div>
+            <!-- list_of_examples -->
             <!-- 4️⃣ list of examples -->
-            <div class="list_of_sources shadow-lg py-7 px-3">
+            <div class="list_of_examples shadow-lg py-7 px-3">
               <h2 dir="auto">قائمة الامثلة</h2>
+              <!-- Data -->
+              <div class="mb-4">
+                <prime_fieldset :toggleable="true" legend="قائمة الامثلة" style="direction: rtl">
+                  <div class="mb-5" style="direction: ltr">
+                    <ul>
+                      <li
+                        v-for="(item, index) in script.list_of_examples"
+                        :key="index"
+                        class="pb-3 flex font-bold"
+                      >
+                        <span class="pr-5" v-html="item.title"></span>
+                        <span class="" v-html="item.page"> </span>
+                        <span class="mr-5" v-html="item.lang"> </span>
+                        <div class="block" v-html="item.code"></div>
+                      </li>
+                    </ul>
+                  </div>
+                </prime_fieldset>
+              </div>
+              <!-- Input Edit -->
               <div v-for="(item, index) in script.list_of_examples" :key="index" class="mb-5">
                 <prime_input_text
                   type="text"
@@ -113,9 +169,30 @@
                 ></prime_button>
               </div>
             </div>
+            <!-- list_of_paragraphs -->
             <!-- 5️⃣ list of Paragraphs -->
             <div class="list_of_sources shadow-lg py-7 px-3">
               <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة الفقرات</h2>
+              <!-- Data -->
+              <div class="mb-4">
+                <prime_fieldset :toggleable="true" legend="قائمة التصوير">
+                  <div class="mb-5">
+                    <ul>
+                      <li
+                        v-for="(item, index) in script.list_of_paragraphs"
+                        :key="index"
+                        class="pb-3 flex font-bold"
+                      >
+                        <span class="pr-5" v-html="item.text"></span>
+                        <span class="" v-html="item.description"> </span>
+                        <span class="" v-html="item.start"> </span>
+                        <span class="" v-html="item.end"> </span>
+                      </li>
+                    </ul>
+                  </div>
+                </prime_fieldset>
+              </div>
+              <!-- Input Edit -->
               <div v-for="(item, index) in script.list_of_paragraphs" :key="index" class="mb-5">
                 <prime_input_text
                   type="text"
@@ -337,6 +414,7 @@
             <!-- 📝 Script -->
             <div class="script border p-5 rounded shadow-lg">
               <h2 dir="auto" class="mb-5 text-1xl font-bold">السيناريو</h2>
+              <div class="" v-html="script.script" dir="auto"></div>
               <div class="card">
                 <prime_editor v-model="script.script" editorStyle="height: 350px" />
               </div>
@@ -411,7 +489,15 @@ export default {
       },
       selectedImageFile: null,
       imageFileUrl: null,
-      errors: []
+      errors: [],
+      list_of_shots_info: [
+        {
+          text: 'قائمة التصوير',
+          description:
+            '🎥: قائمة تحتوي على جميع المشاهد أو العناصر التي تحتاج إلى تصويرها أو تسجيلها أثناء إعداد الفيديو التعليمي.'
+        }
+      ],
+      list_of_shots_info_visible: false
     }
   },
 
@@ -503,26 +589,135 @@ export default {
     },
     submitEditScriptForm() {
       let formData = new FormData()
-
+      // Title
+      if (this.script.title == '') {
+        this.$toast.add({
+          severity: 'error',
+          summary: 'Type Script Title',
+          detail: 'Your Script Title is missing',
+          life: 3000
+        })
+        this.errors.push('Type Script Title')
+      } else if (this.script.title !== '') {
+        formData.append('title', this.script.title)
+      }
+      // JSON أضف قائمة المصادر كـ
+      const sources = this.script.list_of_sources_urls.map((item) => ({
+        name: item.name,
+        url: item.url
+      }))
+      formData.append('list_of_sources_urls', JSON.stringify(sources))
+      // JSON أضف قائمة التصوير كـ
+      const shots = this.script.list_of_shots.map((item) => ({
+        text: item.text,
+        description: item.description
+      }))
+      formData.append('list_of_shots', JSON.stringify(shots))
+      // JSON أضف قائمة التصوير كـ
+      const examples = this.script.list_of_examples.map((item) => ({
+        title: item.title,
+        lang: item.lang,
+        page: item.page,
+        code: item.code
+      }))
+      formData.append('list_of_examples', JSON.stringify(examples))
+      // JSON أضف قائمة الفقرات كـ
+      const paragraphs = this.script.list_of_paragraphs.map((item) => ({
+        text: item.text,
+        description: item.description,
+        start: item.start,
+        end: item.end
+      }))
+      formData.append('list_of_paragraphs', JSON.stringify(paragraphs))
+      // JSON أضف قائمة الخطوط كـ
+      const fonts = this.script.list_of_fonts_urls.map((item) => ({
+        name: item.name,
+        url: item.url
+      }))
+      formData.append('list_of_fonts_urls', JSON.stringify(fonts))
+      // JSON أضف قائمة الألوان كـ
+      const colors = this.script.list_of_colors.map((item) => ({
+        name: item.name
+      }))
+      formData.append('list_of_colors', JSON.stringify(colors))
+      // JSON أضف قائمة الموسيقى كـ
+      const musics = this.script.list_of_musics.map((item) => ({
+        name: item.name,
+        url: item.url
+      }))
+      formData.append('list_of_musics', JSON.stringify(musics))
+      // JSON أضف قائمة الفيديوهات كـ
+      const videos = this.script.list_of_videos_background.map((item) => ({
+        name: item.name,
+        url: item.url
+      }))
+      formData.append('list_of_videos_background', JSON.stringify(videos))
+      // JSON أضف قائمة الصور كـ
+      const images = this.script.list_of_images.map((item) => ({
+        name: item.name,
+        url: item.url
+      }))
+      formData.append('list_of_images', JSON.stringify(images))
+      // JSON أضف قائمة الأيقونات كـ
+      const icons = this.script.list_of_icons.map((item) => ({
+        name: item.name,
+        url: item.url
+      }))
+      formData.append('list_of_icons', JSON.stringify(icons))
+      // JSON أضف قائمة التأثيرات البصرية كـ
+      const visualEffects = this.script.list_of_visual_effects.map((item) => ({
+        name: item.name,
+        url: item.url
+      }))
+      formData.append('list_of_visual_effects', JSON.stringify(visualEffects))
+      // JSON أضف قائمة المؤثرات الصوتية كـ
+      const soundEffects = this.script.list_of_sound_effects.map((item) => ({
+        name: item.name,
+        url: item.url
+      }))
+      formData.append('list_of_sound_effects', JSON.stringify(soundEffects))
+      // Script
+      if (this.script.script == '') {
+        this.$toast.add({
+          severity: 'error',
+          summary: 'Type Script script',
+          detail: 'Your Script script is missing',
+          life: 3000
+        })
+        this.errors.push('Type Script script')
+      } else if (this.script.script !== '') {
+        formData.append('script', this.script.script)
+      }
+      // أضف الصورة إذا كانت موجودة
       if (this.selectedImageFile) {
         formData.append('image', this.selectedImageFile)
       }
-      // دالة لتحديث البيانات وإرسال الطلب
-      axios
-        .put(`/api/scripts/script_list/script_edit/${this.script.id}/`, this.script)
-        .then((response) => {
-          console.log('Data updated successfully:', response.data)
-          this.$router.push({ name: 'ScriptDetails', params: { id: this.script.id } })
 
-          // معالجة الاستجابة الناجحة
-        })
-        .catch((error) => {
-          console.error('Error updating data:', error)
-          // معالجة الخطأ
-        })
+      // دالة لتحديث البيانات وإرسال الطلب
+      // All Is Good
+      if (this.errors.length === 0) {
+        axios
+          .put(`/api/scripts/script_list/script_edit/${this.script.id}/`, formData)
+          .then((response) => {
+            console.log('Data updated successfully:', response.data)
+            this.$router.push({ name: 'ScriptDetails', params: { id: this.script.id } })
+
+            // معالجة الاستجابة الناجحة
+          })
+          .catch((error) => {
+            console.error('Error updating data:', error)
+            this.$toast.add({
+              severity: 'error',
+              summary: `Script Error`,
+              detail: `Your Error ${error}`,
+              life: 3000
+            })
+            // معالجة الخطأ
+          })
+      }
     },
     addOneOfListOfSourcesUrls() {
-      this.script.list_of_sources_urls.push('')
+      this.script.list_of_sources_urls.push({ name: '', url: '' })
     },
     removeOneOfListOfSourcesUrls(index) {
       this.script.list_of_sources_urls.splice(index, 1)

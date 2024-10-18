@@ -443,10 +443,18 @@ export default {
         formData.append('title', this.title)
       }
       // list of sources urls
-      const validSourcesUrls = this.list_of_sources_urls.filter((url) => url !== '')
-      if (validSourcesUrls.length > 0) {
-        formData.append('list_of_sources_urls', JSON.stringify(validSourcesUrls))
+
+      const sources = this.list_of_sources_urls.map((item) => ({
+        name: item.name,
+        url: item.url
+      }))
+      if (sources.length > 0) {
+        formData.append('list_of_sources_urls', JSON.stringify(sources))
       }
+      // const validSourcesUrls = this.list_of_sources_urls.filter((url) => url !== '')
+      // if (validSourcesUrls.length > 0) {
+      //   formData.append('list_of_sources_urls', JSON.stringify(validSourcesUrls))
+      // }
       // 2️⃣ list of Shots
       const validShots = this.list_of_shots.filter((item) => item.text !== '')
       if (validShots.length > 0) {
@@ -548,7 +556,7 @@ export default {
             this.list_of_visual_effects = [{ name: '', url: '' }]
             this.list_of_sound_effects = [{ name: '', url: '' }]
             this.script = ``
-
+            this.$router.push({ name: 'ScriptDetails', params: { id: this.script.id } })
             if (this.user) {
               console.log('this.user: ', this.user)
               // this.user.posts_count += 1
