@@ -49,29 +49,12 @@ onMounted(() => {
                 </div>
               </template>
               <template #content>
-                <h2 class="text-3xl mb-4 mt-2" dir="auto" v-html="script.title"></h2>
-                <!-- <div class="hidden hover:block"> -->
-                <div class="" v-if="userStore.user.id == script.created_by.id">
-                  <prime_button
-                    @click="deleteScript(script.id)"
-                    severity="danger"
-                    icon="pi pi-trash"
-                    iconPos="right"
-                  ></prime_button>
-                </div>
+                <RouterLink :to="{ name: 'ScriptDetails', params: { id: script.id } }">
+                  <h2 class="text-1xl my-2" dir="auto" v-html="script.title"></h2>
+                </RouterLink>
               </template>
               <template #footer>
                 <div class="flex justify-between items-center">
-                  <RouterLink :to="{ name: 'ScriptDetails', params: { id: script.id } }">
-                    <prime_button
-                      class="text-lg py-1 px-5 capitalize"
-                      icon="pi pi-eye"
-                      aria-label="go"
-                      iconPos="right"
-                    >
-                    </prime_button>
-                  </RouterLink>
-
                   <prime_button
                     class="text-lg py-1 px-5 capitalize block"
                     icon="pi pi-pencil"
@@ -81,6 +64,14 @@ onMounted(() => {
                     v-if="userStore.user.id == script.created_by.id"
                   >
                   </prime_button>
+                  <div class="" v-if="userStore.user.id == script.created_by.id">
+                    <prime_button
+                      @click="deleteScript(script.id)"
+                      severity="danger"
+                      icon="pi pi-trash"
+                      iconPos="right"
+                    ></prime_button>
+                  </div>
                 </div>
               </template>
             </prime_card>

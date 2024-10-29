@@ -7,452 +7,632 @@
           v-on:submit.prevent="submitEditScriptForm"
           enctype="multipart/form-data"
         >
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
-            <!-- 1️⃣ title -->
-            <div class="title border p-5 rounded shadow-lg">
-              <h2 dir="auto" class="mb-5 text-1xl font-bold">موضوع الفيديو [ العنوان ]</h2>
-              <div class="card">
-                <h2 v-html="script.title"></h2>
-                <prime_editor
-                  v-if="script.title"
-                  v-model="script.title"
-                  editorStyle="height: 100px"
-                />
-              </div>
-            </div>
-            <!-- 2️⃣ list of sources urls -->
-            <div class="list_of_sources">
-              <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة المصادار</h2>
-              <div v-for="(item, index) in script.list_of_sources_urls" :key="index">
-                <prime_input_text type="text" v-model="item.name" placeholder="Enter Name" />
-                <prime_input_text type="url" v-model="item.url" placeholder="Enter URL" />
-
-                <prime_button
-                  @click="removeOneOfListOfSourcesUrls(index)"
-                  severity="danger"
-                  icon="pi pi-trash"
-                  iconPos="right"
-                  class="mx-3"
+          <div class="grid gap-7 wrapper_edit_script">
+            <div class="choose_edit_script">
+              <ul class="p-3">
+                <!-- Title العنوان -->
+                <li
+                  @click="activeTab = '1'"
+                  :class="[activeTab === '1' ? 'activeLi' : '']"
+                  class="py-2"
                 >
-                </prime_button>
+                  <span class="text">العنوان</span>
+                </li>
+                <!-- 📚 قائمة المصادار -->
+                <li
+                  @click="activeTab = '2'"
+                  :class="[activeTab === '2' ? 'activeLi' : '']"
+                  class="py-2"
+                >
+                  <span class="icon">📚</span>
+                  <span class="text">قائمة المصادار </span>
+                </li>
+                <!-- 🎥 قائمة التصوير -->
+                <li
+                  @click="activeTab = '3'"
+                  :class="[activeTab === '3' ? 'activeLi' : '']"
+                  class="py-2"
+                >
+                  <span class="icon">🎥</span>
+                  <span class="text">قائمة التصوير </span>
+                </li>
+                <!-- ⭐️ قائمة الامثلة -->
+                <li
+                  @click="activeTab = '4'"
+                  :class="[activeTab === '4' ? 'activeLi' : '']"
+                  class="py-2"
+                >
+                  <span class="icon">⭐️</span>
+                  <span class="text">قائمة الامثلة </span>
+                </li>
+                <!-- 🔗 قائمة الفقرات-->
+                <li
+                  @click="activeTab = '5'"
+                  :class="[activeTab === '5' ? 'activeLi' : '']"
+                  class="py-2"
+                >
+                  <span class="icon">🔗</span>
+                  <span class="text">قائمة الفقرات </span>
+                </li>
+                <!-- ✍️ قائمة الخط -->
+                <li
+                  @click="activeTab = '6'"
+                  :class="[activeTab === '6' ? 'activeLi' : '']"
+                  class="py-2"
+                >
+                  <span class="icon">✍️</span>
+                  <span class="text">قائمة الخط </span>
+                </li>
+                <!-- 🎨 قائمة الالوان -->
+                <li
+                  @click="activeTab = '7'"
+                  :class="[activeTab === '7' ? 'activeLi' : '']"
+                  class="py-2"
+                >
+                  <span class="icon"> 🎨 </span>
+                  <span class="text"> قائمة الالوان </span>
+                </li>
+                <!-- 🎵 قائمة الموسيقى -->
+                <li
+                  @click="activeTab = '8'"
+                  :class="[activeTab === '8' ? 'activeLi' : '']"
+                  class="py-2"
+                >
+                  <span class="icon"> 🎵 </span>
+                  <span class="text"> قائمة الموسيقى </span>
+                </li>
+                <!-- 🎥 قائمة فيديوهات الخلفية -->
+                <li
+                  @click="activeTab = '9'"
+                  :class="[activeTab === '9' ? 'activeLi' : '']"
+                  class="py-2"
+                >
+                  <span class="icon"> 🎥 </span>
+                  <span class="text"> قائمة فيديوهات الخلفية </span>
+                </li>
+                <!--🖼️ قائمة الصور -->
+                <li
+                  @click="activeTab = '10'"
+                  :class="[activeTab === '10' ? 'activeLi' : '']"
+                  class="py-2"
+                >
+                  <span class="icon"> 🖼️ </span>
+                  <span class="text"> قائمة الصور </span>
+                </li>
+                <!-- ⚡ قائمة الأيقونات -->
+                <li
+                  @click="activeTab = '11'"
+                  :class="[activeTab === '11' ? 'activeLi' : '']"
+                  class="py-2"
+                >
+                  <span class="icon"> ⚡ </span>
+                  <span class="text"> قائمة الأيقونات </span>
+                </li>
+                <!--🌌 قائمة التأثيرات البصرية -->
+                <li
+                  @click="activeTab = '12'"
+                  :class="[activeTab === '12' ? 'activeLi' : '']"
+                  class="py-2"
+                >
+                  <span class="icon"> 🌌 </span>
+                  <span class="text"> قائمة التأثيرات البصرية </span>
+                </li>
+                <!--🎶 قائمة المؤثرات الصوتية -->
+                <li
+                  @click="activeTab = '13'"
+                  :class="[activeTab === '13' ? 'activeLi' : '']"
+                  class="py-2"
+                >
+                  <span class="icon"> 🎶 </span>
+                  <span class="text"> قائمة المؤثرات الصوتية </span>
+                </li>
+                <!-- 📜 السيناريو -->
+                <li
+                  @click="activeTab = '14'"
+                  :class="[activeTab === '14' ? 'activeLi' : '']"
+                  class="py-2"
+                >
+                  <span class="icon"> 📜 </span>
+                  <span class="text"> السيناريو </span>
+                </li>
+                <!-- 🖼️ صورة الغلاف -->
+                <li
+                  @click="activeTab = '15'"
+                  :class="[activeTab === '15' ? 'activeLi' : '']"
+                  class="py-2"
+                >
+                  <span class="icon"> 🖼️ </span>
+                  <span class="text"> صورة الغلاف </span>
+                </li>
+              </ul>
+              <!-- Send -->
+              <div class="send">
                 <prime_button
-                  @click="addOneOfListOfSourcesUrls"
+                  @click="submitEditScriptForm"
+                  label="Updated"
                   severity="success"
-                  icon="pi pi-folder-plus"
+                  icon="pi pi-send"
                   iconPos="right"
-                >
-                </prime_button>
+                ></prime_button>
               </div>
             </div>
-            <!-- 3️⃣ list of shots -->
-            <div class="list_of_sources shadow-lg py-7 px-3">
-              <div class="flex justify-between items-center">
-                <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة التصوير</h2>
-                <prime_button
-                  icon="pi pi-arrow-left"
-                  @click="list_of_shots_info_visible = true"
-                  class="mx-3"
-                />
-                <prime_drawer
-                  v-model:visible="list_of_shots_info_visible"
-                  :header="list_of_shots_info[0].text"
-                  :key="list_of_shots_info.id"
-                >
-                  <p dir="auto" class="text-lg">
-                    {{ list_of_shots_info[0].description }}
-                  </p>
-                </prime_drawer>
-              </div>
-              <!-- Data -->
-              <div class="mb-4">
-                <prime_fieldset :toggleable="true" legend="قائمة التصوير">
-                  <div class="mb-5">
-                    <ul>
-                      <li
-                        v-for="(item, index) in script.list_of_shots"
-                        :key="index"
-                        class="pb-3 flex font-bold"
-                      >
-                        <span class="pr-5" v-html="item.text"></span>
-                        <span class="" v-html="item.description"> </span>
-                      </li>
-                    </ul>
+            <div class="content_edit_script">
+              <!-- 1️⃣ title -->
+              <div class="title border p-5 rounded shadow-lg" v-if="activeTab === '1'">
+                <prime_fieldset :toggleable="true" legend="موضوع الفيديو [ العنوان ]">
+                  <h2 dir="auto" class="mb-5 text-1xl font-bold">موضوع الفيديو [ العنوان ]</h2>
+                  <div class="card">
+                    <h2 v-html="script.title" class="my-4"></h2>
+                    <prime_editor
+                      v-if="script.title"
+                      v-model="script.title"
+                      editorStyle="height: 100px"
+                    />
                   </div>
                 </prime_fieldset>
               </div>
-              <!-- Input Edit -->
-              <div v-for="(item, index) in script.list_of_shots" :key="index" class="mb-5">
-                <prime_input_text
-                  type="text"
-                  v-model="item.text"
-                  placeholder="Shots Name"
-                  class="mb-5"
-                >
-                </prime_input_text>
-                <prime_textarea v-model="item.description" rows="5" cols="30"></prime_textarea>
-                <prime_editor editorStyle="height: 100px" v-model="item.description" />
-                <prime_button
-                  @click="removeOneOfListOfShots(index)"
-                  severity="danger"
-                  icon="pi pi-trash"
-                  iconPos="right"
-                  class="mx-3"
-                ></prime_button>
-                <prime_button
-                  @click="addOneOfListOfShots"
-                  severity="success"
-                  icon="pi pi-folder-plus"
-                  iconPos="right"
-                ></prime_button>
+              <!-- 2️⃣ list of sources urls -->
+              <div class="list_of_sources" v-if="activeTab === '2'">
+                <prime_fieldset :toggleable="true" legend="قائمة المصادار" style="direction: rtl">
+                  <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة المصادار</h2>
+                  <div v-for="(item, index) in script.list_of_sources_urls" :key="index">
+                    <prime_input_text type="text" v-model="item.name" placeholder="Enter Name" />
+                    <prime_input_text type="url" v-model="item.url" placeholder="Enter URL" />
+
+                    <prime_button
+                      @click="removeOneOfListOfSourcesUrls(index)"
+                      severity="danger"
+                      icon="pi pi-trash"
+                      iconPos="right"
+                      class="mx-3"
+                    >
+                    </prime_button>
+                    <prime_button
+                      @click="addOneOfListOfSourcesUrls"
+                      severity="success"
+                      icon="pi pi-folder-plus"
+                      iconPos="right"
+                    >
+                    </prime_button>
+                  </div>
+                </prime_fieldset>
               </div>
-            </div>
-            <!-- list_of_examples -->
-            <!-- 4️⃣ list of examples -->
-            <div class="list_of_examples shadow-lg py-7 px-3">
-              <h2 dir="auto">قائمة الامثلة</h2>
-              <!-- Data -->
-              <div class="mb-4">
+              <!-- 3️⃣ list of shots -->
+              <div class="list_of_sources shadow-lg py-7 px-3" v-if="activeTab === '3'">
+                <prime_fieldset :toggleable="true" legend="قائمة التصوير">
+                  <div class="flex justify-between items-center">
+                    <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة التصوير</h2>
+                    <prime_button
+                      icon="pi pi-arrow-left"
+                      @click="list_of_shots_info_visible = true"
+                      class="mx-3"
+                    />
+                    <!-- v-model:visible="list_of_shots_info_visible" -->
+                    <prime_drawer
+                      :visible="list_of_shots_info_visible"
+                      :header="list_of_shots_info[0].text"
+                      :key="list_of_shots_info.id"
+                    >
+                      <p dir="auto" class="text-lg">
+                        {{ list_of_shots_info[0].description }}
+                      </p>
+                    </prime_drawer>
+                  </div>
+                  <!-- Data -->
+                  <div class="mb-4">
+                    <div class="mb-5">
+                      <ul>
+                        <li
+                          v-for="(item, index) in script.list_of_shots"
+                          :key="index"
+                          class="pb-3 flex font-bold"
+                        >
+                          <span class="pr-5" v-html="item.text"></span>
+                          <span class="" v-html="item.description"> </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- Input Edit -->
+                  <div v-for="(item, index) in script.list_of_shots" :key="index" class="mb-5">
+                    <prime_input_text
+                      type="text"
+                      v-model="item.text"
+                      placeholder="Shots Name"
+                      class="mb-5"
+                    >
+                    </prime_input_text>
+                    <prime_textarea v-model="item.description" rows="5" cols="30"></prime_textarea>
+                    <prime_editor editorStyle="height: 100px" v-model="item.description" />
+                    <prime_button
+                      @click="removeOneOfListOfShots(index)"
+                      severity="danger"
+                      icon="pi pi-trash"
+                      iconPos="right"
+                      class="mx-3"
+                    ></prime_button>
+                    <prime_button
+                      @click="addOneOfListOfShots"
+                      severity="success"
+                      icon="pi pi-folder-plus"
+                      iconPos="right"
+                    ></prime_button>
+                  </div>
+                </prime_fieldset>
+              </div>
+              <!-- list_of_examples -->
+              <!-- 4️⃣ list of examples -->
+              <div class="list_of_examples shadow-lg py-7 px-3" v-if="activeTab === '4'">
                 <prime_fieldset :toggleable="true" legend="قائمة الامثلة" style="direction: rtl">
-                  <div class="mb-5" style="direction: ltr">
-                    <ul>
-                      <li
-                        v-for="(item, index) in script.list_of_examples"
-                        :key="index"
-                        class="pb-3 flex font-bold"
-                      >
-                        <span class="pr-5" v-html="item.title"></span>
-                        <span class="" v-html="item.page"> </span>
-                        <span class="mr-5" v-html="item.lang"> </span>
-                        <div class="block" v-html="item.code"></div>
-                      </li>
-                    </ul>
+                  <h2 dir="auto">قائمة الامثلة</h2>
+                  <!-- Data -->
+                  <div class="mb-4">
+                    <div class="mb-5" style="direction: ltr">
+                      <ul>
+                        <li
+                          v-for="(item, index) in script.list_of_examples"
+                          :key="index"
+                          class="pb-3 flex font-bold"
+                        >
+                          <span class="pr-5" v-html="item.title"></span>
+                          <span class="" v-html="item.page"> </span>
+                          <span class="mr-5" v-html="item.lang"> </span>
+                          <div class="block" v-html="item.code"></div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- Input Edit -->
+                  <div v-for="(item, index) in script.list_of_examples" :key="index" class="mb-5">
+                    <prime_input_text
+                      type="text"
+                      v-model="item.title"
+                      placeholder="Examples Title"
+                      class="mb-5"
+                    >
+                    </prime_input_text>
+                    <prime_input_text
+                      type="text"
+                      v-model="item.page"
+                      placeholder="Examples Page Name"
+                      class="mb-5"
+                    >
+                    </prime_input_text>
+                    <prime_input_text
+                      type="text"
+                      v-model="item.lang"
+                      placeholder="Examples  Language"
+                      class="mb-5"
+                    >
+                    </prime_input_text>
+                    <prime_editor v-model="item.code" editorStyle="height: 100px" />
+                    <prime_button
+                      @click="removeOneOfListOfExamples(index)"
+                      severity="danger"
+                      icon="pi pi-trash"
+                      iconPos="right"
+                      class="mx-3"
+                    >
+                    </prime_button>
+                    <prime_button
+                      @click="addOneOfListOfExamples"
+                      severity="success"
+                      icon="pi pi-folder-plus"
+                      iconPos="right"
+                    ></prime_button>
                   </div>
                 </prime_fieldset>
               </div>
-              <!-- Input Edit -->
-              <div v-for="(item, index) in script.list_of_examples" :key="index" class="mb-5">
-                <prime_input_text
-                  type="text"
-                  v-model="item.title"
-                  placeholder="Examples Title"
-                  class="mb-5"
-                >
-                </prime_input_text>
-                <prime_input_text
-                  type="text"
-                  v-model="item.page"
-                  placeholder="Examples Page Name"
-                  class="mb-5"
-                >
-                </prime_input_text>
-                <prime_input_text
-                  type="text"
-                  v-model="item.lang"
-                  placeholder="Examples  Language"
-                  class="mb-5"
-                >
-                </prime_input_text>
-                <prime_editor v-model="item.code" editorStyle="height: 100px" />
-                <prime_button
-                  @click="removeOneOfListOfExamples(index)"
-                  severity="danger"
-                  icon="pi pi-trash"
-                  iconPos="right"
-                  class="mx-3"
-                >
-                </prime_button>
-                <prime_button
-                  @click="addOneOfListOfExamples"
-                  severity="success"
-                  icon="pi pi-folder-plus"
-                  iconPos="right"
-                ></prime_button>
-              </div>
-            </div>
-            <!-- list_of_paragraphs -->
-            <!-- 5️⃣ list of Paragraphs -->
-            <div class="list_of_sources shadow-lg py-7 px-3">
-              <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة الفقرات</h2>
-              <!-- Data -->
-              <div class="mb-4">
-                <prime_fieldset :toggleable="true" legend="قائمة التصوير">
-                  <div class="mb-5">
-                    <ul>
-                      <li
-                        v-for="(item, index) in script.list_of_paragraphs"
-                        :key="index"
-                        class="pb-3 flex font-bold"
-                      >
-                        <span class="pr-5" v-html="item.text"></span>
-                        <span class="" v-html="item.description"> </span>
-                        <span class="" v-html="item.start"> </span>
-                        <span class="" v-html="item.end"> </span>
-                      </li>
-                    </ul>
+              <!-- list_of_paragraphs -->
+              <!-- 5️⃣ list of Paragraphs -->
+              <div class="list_of_sources shadow-lg py-7 px-3" v-if="activeTab === '5'">
+                <prime_fieldset :toggleable="true" legend="قائمة الفقرات" style="direction: rtl">
+                  <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة الفقرات</h2>
+                  <!-- Data -->
+                  <div class="mb-4">
+                    <div class="mb-5">
+                      <ul>
+                        <li
+                          v-for="(item, index) in script.list_of_paragraphs"
+                          :key="index"
+                          class="pb-3 flex font-bold"
+                        >
+                          <span class="pr-5" v-html="item.text"></span>
+                          <span class="" v-html="item.description"> </span>
+                          <span class="" v-html="item.start"> </span>
+                          <span class="" v-html="item.end"> </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- Input Edit -->
+                  <div v-for="(item, index) in script.list_of_paragraphs" :key="index" class="mb-5">
+                    <prime_input_text
+                      type="text"
+                      v-model="item.text"
+                      placeholder="Paragraphs Name"
+                      class="mb-5"
+                    >
+                    </prime_input_text>
+                    <prime_editor
+                      v-model="item.description"
+                      editorStyle="height: 100px"
+                      style="margin-bottom: 1rem"
+                    />
+                    <prime_input_text
+                      type="number"
+                      v-model="item.start"
+                      placeholder="00.00"
+                      class="mb-5 mr-3"
+                    >
+                    </prime_input_text>
+                    <prime_input_text
+                      type="number"
+                      v-model="item.end"
+                      placeholder="00.01"
+                      class="mb-5"
+                    >
+                    </prime_input_text>
+                    <prime_button
+                      @click="removeOneOfListOfParagraphs(index)"
+                      severity="danger"
+                      icon="pi pi-trash"
+                      iconPos="right"
+                      class="mx-3"
+                    ></prime_button>
+                    <prime_button
+                      @click="addOneOfListOfParagraphs"
+                      severity="success"
+                      icon="pi pi-folder-plus"
+                      iconPos="right"
+                    ></prime_button>
                   </div>
                 </prime_fieldset>
               </div>
-              <!-- Input Edit -->
-              <div v-for="(item, index) in script.list_of_paragraphs" :key="index" class="mb-5">
-                <prime_input_text
-                  type="text"
-                  v-model="item.text"
-                  placeholder="Paragraphs Name"
-                  class="mb-5"
-                >
-                </prime_input_text>
-                <prime_editor
-                  v-model="item.description"
-                  editorStyle="height: 100px"
-                  style="margin-bottom: 1rem"
-                />
-                <prime_input_text
-                  type="number"
-                  v-model="item.start"
-                  placeholder="00.00"
-                  class="mb-5 mr-3"
-                >
-                </prime_input_text>
-                <prime_input_text type="number" v-model="item.end" placeholder="00.01" class="mb-5">
-                </prime_input_text>
-                <prime_button
-                  @click="removeOneOfListOfParagraphs(index)"
-                  severity="danger"
-                  icon="pi pi-trash"
-                  iconPos="right"
-                  class="mx-3"
-                ></prime_button>
-                <prime_button
-                  @click="addOneOfListOfShots"
-                  severity="success"
-                  icon="pi pi-folder-plus"
-                  iconPos="right"
-                ></prime_button>
+              <!-- 6️⃣ list of fonts urls -->
+              <div class="list_of_sources shadow-lg py-7 px-3" v-if="activeTab === '6'">
+                <prime_fieldset :toggleable="true" legend="قائمة الخط">
+                  <h2 dir="auto">قائمة الخط</h2>
+                  <div v-for="(item, index) in script.list_of_fonts_urls" :key="index">
+                    <prime_input_text type="text" v-model="item.name" placeholder="Font Name">
+                    </prime_input_text>
+                    <prime_input_text type="url" v-model="item.url" placeholder="URL Fonts" />
+                    <prime_button
+                      @click="removeOneOfListOfFontsUrls(index)"
+                      severity="danger"
+                      icon="pi pi-trash"
+                      iconPos="right"
+                      class="mx-3"
+                    ></prime_button>
+                    <prime_button
+                      @click="addOneOfListOfFontsUrls"
+                      severity="success"
+                      icon="pi pi-folder-plus"
+                      iconPos="right"
+                    ></prime_button>
+                  </div>
+                </prime_fieldset>
               </div>
-            </div>
-            <!-- 6️⃣ list of fonts urls -->
-            <div class="list_of_sources shadow-lg py-7 px-3">
-              <h2 dir="auto">قائمة الخط</h2>
-              <div v-for="(item, index) in script.list_of_fonts_urls" :key="index">
-                <prime_input_text type="text" v-model="item.name" placeholder="Font Name">
-                </prime_input_text>
-                <prime_input_text type="url" v-model="item.url" placeholder="URL Fonts" />
-                <prime_button
-                  @click="removeOneOfListOfFontsUrls(index)"
-                  severity="danger"
-                  icon="pi pi-trash"
-                  iconPos="right"
-                  class="mx-3"
-                ></prime_button>
-                <prime_button
-                  @click="addOneOfListOfFontsUrls"
-                  severity="success"
-                  icon="pi pi-folder-plus"
-                  iconPos="right"
-                ></prime_button>
+              <!-- 7️⃣ list of Colors -->
+              <div class="list_of_sources shadow-lg py-7 px-3" v-if="activeTab === '7'">
+                <prime_fieldset :toggleable="true" legend="قائمة الالوان">
+                  <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة الالوان</h2>
+                  <div v-for="(item, index) in script.list_of_colors" :key="index">
+                    <prime_input_text type="text" v-model="item.name" placeholder="Font Name">
+                    </prime_input_text>
+                    <prime_button
+                      @click="removeOneOfListOfColors(index)"
+                      severity="danger"
+                      icon="pi pi-trash"
+                      iconPos="right"
+                      class="mx-3"
+                    ></prime_button>
+                    <prime_button
+                      @click="addOneOfListOfColors"
+                      severity="success"
+                      icon="pi pi-folder-plus"
+                      iconPos="right"
+                    ></prime_button>
+                  </div>
+                </prime_fieldset>
               </div>
-            </div>
-            <!-- 7️⃣ list of Colors -->
-            <div class="list_of_sources shadow-lg py-7 px-3">
-              <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة الالوان</h2>
-              <div v-for="(item, index) in script.list_of_colors" :key="index">
-                <prime_input_text type="text" v-model="item.name" placeholder="Font Name">
-                </prime_input_text>
-                <prime_button
-                  @click="removeOneOfListOfColors(index)"
-                  severity="danger"
-                  icon="pi pi-trash"
-                  iconPos="right"
-                  class="mx-3"
-                ></prime_button>
-                <prime_button
-                  @click="addOneOfListOfColors"
-                  severity="success"
-                  icon="pi pi-folder-plus"
-                  iconPos="right"
-                ></prime_button>
+              <!-- 8️⃣ list of Musics -->
+              <div class="list_of_sources shadow-lg py-7 px-3" v-if="activeTab === '8'">
+                <prime_fieldset :toggleable="true" legend="قائمة الموسيقى">
+                  <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة الموسيقى</h2>
+                  <div v-for="(item, index) in script.list_of_musics" :key="index">
+                    <prime_input_text type="text" v-model="item.name" placeholder="Musics Name">
+                    </prime_input_text>
+                    <prime_input_text type="url" v-model="item.url" placeholder="Musics Url">
+                    </prime_input_text>
+                    <prime_button
+                      @click="removeOneOfListOfColors(index)"
+                      severity="danger"
+                      icon="pi pi-trash"
+                      iconPos="right"
+                      class="mx-3"
+                    ></prime_button>
+                    <prime_button
+                      @click="addOneOfListOfColors"
+                      severity="success"
+                      icon="pi pi-folder-plus"
+                      iconPos="right"
+                    ></prime_button>
+                  </div>
+                </prime_fieldset>
               </div>
-            </div>
-            <!-- 8️⃣ list of Musics -->
-            <div class="list_of_sources shadow-lg py-7 px-3">
-              <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة الموسيقى</h2>
-              <div v-for="(item, index) in script.list_of_musics" :key="index">
-                <prime_input_text type="text" v-model="item.name" placeholder="Musics Name">
-                </prime_input_text>
-                <prime_input_text type="url" v-model="item.url" placeholder="Musics Url">
-                </prime_input_text>
-                <prime_button
-                  @click="removeOneOfListOfColors(index)"
-                  severity="danger"
-                  icon="pi pi-trash"
-                  iconPos="right"
-                  class="mx-3"
-                ></prime_button>
-                <prime_button
-                  @click="addOneOfListOfColors"
-                  severity="success"
-                  icon="pi pi-folder-plus"
-                  iconPos="right"
-                ></prime_button>
+              <!-- 9️⃣ list of Musics -->
+              <div class="list_of_sources shadow-lg py-7 px-3" v-if="activeTab === '9'">
+                <prime_fieldset :toggleable="true" legend="قائمة فيديوهات الخلفية">
+                  <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة فيديوهات الخلفية</h2>
+                  <div v-for="(item, index) in script.list_of_videos_background" :key="index">
+                    <prime_input_text type="text" v-model="item.name" placeholder="Musics Name">
+                    </prime_input_text>
+                    <prime_input_text type="url" v-model="item.url" placeholder="Musics Url">
+                    </prime_input_text>
+                    <prime_button
+                      @click="removeOneOfListOfColors(index)"
+                      severity="danger"
+                      icon="pi pi-trash"
+                      iconPos="right"
+                      class="mx-3"
+                    ></prime_button>
+                    <prime_button
+                      @click="addOneOfListOfColors"
+                      severity="success"
+                      icon="pi pi-folder-plus"
+                      iconPos="right"
+                    ></prime_button>
+                  </div>
+                </prime_fieldset>
               </div>
-            </div>
-            <!-- 9️⃣ list of Musics -->
-            <div class="list_of_sources shadow-lg py-7 px-3">
-              <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة فيديوهات الخلفية</h2>
-              <div v-for="(item, index) in script.list_of_videos_background" :key="index">
-                <prime_input_text type="text" v-model="item.name" placeholder="Musics Name">
-                </prime_input_text>
-                <prime_input_text type="url" v-model="item.url" placeholder="Musics Url">
-                </prime_input_text>
-                <prime_button
-                  @click="removeOneOfListOfColors(index)"
-                  severity="danger"
-                  icon="pi pi-trash"
-                  iconPos="right"
-                  class="mx-3"
-                ></prime_button>
-                <prime_button
-                  @click="addOneOfListOfColors"
-                  severity="success"
-                  icon="pi pi-folder-plus"
-                  iconPos="right"
-                ></prime_button>
+              <!-- 🔟 list of Images -->
+              <div class="list_of_sources shadow-lg py-7 px-3" v-if="activeTab === '10'">
+                <prime_fieldset :toggleable="true" legend="قائمة الصور">
+                  <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة الصور</h2>
+                  <div v-for="(item, index) in script.list_of_images" :key="index">
+                    <prime_input_text type="text" v-model="item.name" placeholder="Images Name">
+                    </prime_input_text>
+                    <prime_input_text type="url" v-model="item.url" placeholder="Images Url">
+                    </prime_input_text>
+                    <prime_button
+                      @click="removeOneOfListOfImages(index)"
+                      severity="danger"
+                      icon="pi pi-trash"
+                      iconPos="right"
+                      class="mx-3"
+                    ></prime_button>
+                    <prime_button
+                      @click="addOneOfListOfImages"
+                      severity="success"
+                      icon="pi pi-folder-plus"
+                      iconPos="right"
+                    ></prime_button>
+                  </div>
+                </prime_fieldset>
               </div>
-            </div>
-            <!-- 🔟 list of Images -->
-            <div class="list_of_sources shadow-lg py-7 px-3">
-              <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة الصور</h2>
-              <div v-for="(item, index) in script.list_of_images" :key="index">
-                <prime_input_text type="text" v-model="item.name" placeholder="Images Name">
-                </prime_input_text>
-                <prime_input_text type="url" v-model="item.url" placeholder="Images Url">
-                </prime_input_text>
-                <prime_button
-                  @click="removeOneOfListOfImages(index)"
-                  severity="danger"
-                  icon="pi pi-trash"
-                  iconPos="right"
-                  class="mx-3"
-                ></prime_button>
-                <prime_button
-                  @click="addOneOfListOfImages"
-                  severity="success"
-                  icon="pi pi-folder-plus"
-                  iconPos="right"
-                ></prime_button>
+              <!-- 1️⃣1️⃣ list of Icons -->
+              <div class="list_of_sources shadow-lg py-7 px-3" v-if="activeTab === '11'">
+                <prime_fieldset :toggleable="true" legend="قائمة الأيقونات">
+                  <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة الأيقونات</h2>
+                  <div v-for="(item, index) in script.list_of_icons" :key="index">
+                    <prime_input_text type="text" v-model="item.name" placeholder="Icons Name">
+                    </prime_input_text>
+                    <prime_input_text type="url" v-model="item.url" placeholder="Icons Url">
+                    </prime_input_text>
+                    <prime_button
+                      @click="removeOneOfListOfIcons(index)"
+                      severity="danger"
+                      icon="pi pi-trash"
+                      iconPos="right"
+                      class="mx-3"
+                    ></prime_button>
+                    <prime_button
+                      @click="addOneOfListOfIcons"
+                      severity="success"
+                      icon="pi pi-folder-plus"
+                      iconPos="right"
+                    ></prime_button>
+                  </div>
+                </prime_fieldset>
               </div>
-            </div>
-            <!-- 1️⃣1️⃣ list of Icons -->
-            <div class="list_of_sources shadow-lg py-7 px-3">
-              <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة الأيقونات</h2>
-              <div v-for="(item, index) in script.list_of_icons" :key="index">
-                <prime_input_text type="text" v-model="item.name" placeholder="Icons Name">
-                </prime_input_text>
-                <prime_input_text type="url" v-model="item.url" placeholder="Icons Url">
-                </prime_input_text>
-                <prime_button
-                  @click="removeOneOfListOfIcons(index)"
-                  severity="danger"
-                  icon="pi pi-trash"
-                  iconPos="right"
-                  class="mx-3"
-                ></prime_button>
-                <prime_button
-                  @click="addOneOfListOfIcons"
-                  severity="success"
-                  icon="pi pi-folder-plus"
-                  iconPos="right"
-                ></prime_button>
+              <!-- 1️⃣2️⃣ list of Visual Effects -->
+              <div class="list_of_sources shadow-lg py-7 px-3" v-if="activeTab === '12'">
+                <prime_fieldset :toggleable="true" legend="قائمة التأثيرات البصرية">
+                  <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة التأثيرات البصرية</h2>
+                  <div v-for="(item, index) in script.list_of_visual_effects" :key="index">
+                    <prime_input_text
+                      type="text"
+                      v-model="item.name"
+                      placeholder="Visual Effects Name"
+                    >
+                    </prime_input_text>
+                    <prime_input_text
+                      type="url"
+                      v-model="item.url"
+                      placeholder="Visual Effects Url"
+                    >
+                    </prime_input_text>
+                    <prime_button
+                      @click="removeOneOfListOfVisualEffects(index)"
+                      severity="danger"
+                      icon="pi pi-trash"
+                      iconPos="right"
+                      class="mx-3"
+                    ></prime_button>
+                    <prime_button
+                      @click="addOneOfListOfVisualEffects"
+                      severity="success"
+                      icon="pi pi-folder-plus"
+                      iconPos="right"
+                    ></prime_button>
+                  </div>
+                </prime_fieldset>
               </div>
-            </div>
-            <!-- 1️⃣2️⃣ list of Visual Effects -->
-            <div class="list_of_sources shadow-lg py-7 px-3">
-              <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة التأثيرات البصرية</h2>
-              <div v-for="(item, index) in script.list_of_visual_effects" :key="index">
-                <prime_input_text type="text" v-model="item.name" placeholder="Visual Effects Name">
-                </prime_input_text>
-                <prime_input_text type="url" v-model="item.url" placeholder="Visual Effects Url">
-                </prime_input_text>
-                <prime_button
-                  @click="removeOneOfListOfVisualEffects(index)"
-                  severity="danger"
-                  icon="pi pi-trash"
-                  iconPos="right"
-                  class="mx-3"
-                ></prime_button>
-                <prime_button
-                  @click="addOneOfListOfVisualEffects"
-                  severity="success"
-                  icon="pi pi-folder-plus"
-                  iconPos="right"
-                ></prime_button>
+              <!-- 1️⃣3️⃣ list of Sound Effects -->
+              <div class="list_of_sources shadow-lg py-7 px-3" v-if="activeTab === '13'">
+                <prime_fieldset :toggleable="true" legend="قائمة المؤثرات الصوتية">
+                  <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة المؤثرات الصوتية</h2>
+                  <div v-for="(item, index) in script.list_of_sound_effects" :key="index">
+                    <prime_input_text
+                      type="text"
+                      v-model="item.name"
+                      placeholder="Sound Effects Name"
+                    >
+                    </prime_input_text>
+                    <prime_input_text type="url" v-model="item.url" placeholder="Sound Effects Url">
+                    </prime_input_text>
+                    <prime_button
+                      @click="removeOneOfListOfSoundEffects(index)"
+                      severity="danger"
+                      icon="pi pi-trash"
+                      iconPos="right"
+                      class="mx-3"
+                    ></prime_button>
+                    <prime_button
+                      @click="addOneOfListOfSoundEffects"
+                      severity="success"
+                      icon="pi pi-folder-plus"
+                      iconPos="right"
+                    ></prime_button>
+                  </div>
+                </prime_fieldset>
               </div>
-            </div>
-            <!-- 1️⃣3️⃣ list of Sound Effects -->
-            <div class="list_of_sources shadow-lg py-7 px-3">
-              <h2 dir="auto" class="mb-5 text-1xl font-bold">قائمة المؤثرات الصوتية</h2>
-              <div v-for="(item, index) in script.list_of_sound_effects" :key="index">
-                <prime_input_text type="text" v-model="item.name" placeholder="Sound Effects Name">
-                </prime_input_text>
-                <prime_input_text type="url" v-model="item.url" placeholder="Sound Effects Url">
-                </prime_input_text>
-                <prime_button
-                  @click="removeOneOfListOfSoundEffects(index)"
-                  severity="danger"
-                  icon="pi pi-trash"
-                  iconPos="right"
-                  class="mx-3"
-                ></prime_button>
-                <prime_button
-                  @click="addOneOfListOfSoundEffects"
-                  severity="success"
-                  icon="pi pi-folder-plus"
-                  iconPos="right"
-                ></prime_button>
+              <!-- 📝 Script -->
+              <div class="script border p-5 rounded shadow-lg" v-if="activeTab === '14'">
+                <prime_fieldset :toggleable="true" legend="السيناريو">
+                  <h2 dir="auto" class="mb-5 text-1xl font-bold">السيناريو</h2>
+                  <div class="" v-html="script.script" dir="auto"></div>
+                  <div class="card">
+                    <prime_editor v-model="script.script" editorStyle="height: 350px" />
+                  </div>
+                </prime_fieldset>
               </div>
-            </div>
-            <!-- 📝 Script -->
-            <div class="script border p-5 rounded shadow-lg">
-              <h2 dir="auto" class="mb-5 text-1xl font-bold">السيناريو</h2>
-              <div class="" v-html="script.script" dir="auto"></div>
-              <div class="card">
-                <prime_editor v-model="script.script" editorStyle="height: 350px" />
-              </div>
-            </div>
 
-            <!-- 🖼️ Image -->
-            <div class="script border p-5 rounded shadow-lg">
-              <h2 dir="auto" class="mb-5 text-1xl font-bold">صورة الغلاف</h2>
-              <div class="card">
-                <input
-                  type="file"
-                  ref="file"
-                  @change="handleImageFileUpload"
-                  class="form-control"
-                  placeholder="image"
-                  id="image"
-                />
-                <div class="show_image_script">
-                  <div id="preview" v-if="imageFileUrl">
-                    <img :src="imageFileUrl" class="img-thumbnail" />
-                  </div>
-                  <div id="preview" v-else>
-                    <div class="" v-for="image in script.attachments" :key="image.id">
-                      <img :src="image.get_image" class="img-thumbnail" />
+              <!-- 🖼️ Image -->
+              <div class="script border p-5 rounded shadow-lg" v-if="activeTab === '15'">
+                <h2 dir="auto" class="mb-5 text-1xl font-bold">صورة الغلاف</h2>
+                <div class="card">
+                  <input
+                    type="file"
+                    ref="file"
+                    @change="handleImageFileUpload"
+                    class="form-control"
+                    placeholder="image"
+                    id="image"
+                  />
+                  <div class="show_image_script">
+                    <div id="preview" v-if="imageFileUrl">
+                      <img :src="imageFileUrl" class="img-thumbnail" />
+                    </div>
+                    <div id="preview" v-else>
+                      <div class="" v-for="image in script.attachments" :key="image.id">
+                        <img :src="image.get_image" class="img-thumbnail" />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- Send -->
-            <div class="send">
-              <prime_button
-                @click="submitEditScriptForm"
-                label="Updated"
-                severity="success"
-                icon="pi pi-send"
-                iconPos="right"
-              ></prime_button>
             </div>
           </div>
         </form>
@@ -469,6 +649,10 @@ export default {
 
   data() {
     return {
+      // Active Tab
+      activeTab: '1',
+
+      //
       script: {
         id: null,
         title: '',
@@ -487,6 +671,7 @@ export default {
         script: '',
         attachments: []
       },
+
       selectedImageFile: null,
       imageFileUrl: null,
       errors: [],

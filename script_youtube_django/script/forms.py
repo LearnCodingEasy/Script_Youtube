@@ -21,6 +21,7 @@ class ScriptForm(ModelForm):
             "list_of_images",
             "list_of_icons",
             "list_of_visual_effects",
+            "list_of_transitions",
             "list_of_sound_effects",
             "script",
         )

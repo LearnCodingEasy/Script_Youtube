@@ -30,7 +30,8 @@
               </div>
             </div>
           </div>
-          <div class="script_list_of_shots">
+          <!-- list_of_shots[ قائمة التصوير ] -->
+          <div class="script_list_of_shots mt-5">
             <prime_fieldset :toggleable="true" legend="قائمة التصوير" style="direction: rtl">
               <div
                 v-for="(item, index) in script.list_of_shots"
@@ -47,7 +48,8 @@
               </div>
             </prime_fieldset>
           </div>
-          <div class="script_list_of_examples">
+          <!-- list_of_examples قائمة الامثلة -->
+          <div class="script_list_of_examples mt-5">
             <prime_fieldset :toggleable="true" legend="قائمة الامثلة" style="direction: rtl">
               <div
                 v-for="(item, index) in script.list_of_examples"
@@ -66,12 +68,33 @@
               </div>
             </prime_fieldset>
           </div>
-          <div class="script_title"></div>
           <!-- script -->
-          <div class="script_script">
+          <div class="script_script mt-5">
             <prime_fieldset :toggleable="true" legend="الاسكرابت" style="direction: rtl">
               <div class="mb-5" style="direction: ltr">
                 <h2 v-html="script.script" class="text-2xl font-bold" dir="auto"></h2>
+              </div>
+            </prime_fieldset>
+          </div>
+          <!-- list_of_shots[ قائمة المؤثرات الصوتية ] -->
+          <div class="script_list_of_sound_effects mt-5">
+            <prime_fieldset
+              :toggleable="true"
+              legend="قائمة المؤثرات الصوتية"
+              style="direction: rtl"
+            >
+              <div
+                v-for="(item, index) in script.list_of_sound_effects"
+                :key="index"
+                class="mb-5"
+                style="direction: ltr"
+              >
+                <ul>
+                  <li>
+                    <span class="pr-5" v-html="item.name"> </span>
+                    <span class="" v-html="item.url"> </span>
+                  </li>
+                </ul>
               </div>
             </prime_fieldset>
           </div>
@@ -97,8 +120,6 @@ export default {
 
   mounted() {
     this.getScript()
-    console.log('script: ', this.script)
-    console.log('script: ', this.script.script)
   },
 
   methods: {
@@ -106,11 +127,9 @@ export default {
       axios
         .get(`/api/scripts/script_list/script_detail/${this.$route.params.id}/`)
         .then((response) => {
-          console.log('data', response.data)
-
+          // For Test
+          // console.log('data', response.data)
           this.script = response.data.script
-          console.log('this.script: ', this.script)
-          console.log('this.script.script: ', this.script.script)
         })
         .catch((error) => {
           console.log('error', error)

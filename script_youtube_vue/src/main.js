@@ -1,6 +1,8 @@
 // Page [ script_youtube/script_youtube_vue/src/main.js ]
 
 import './assets/main.css'
+// My Style
+import './assets/Scss/Style.scss'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

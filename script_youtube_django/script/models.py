@@ -49,6 +49,7 @@ class Script(models.Model):
     list_of_images = models.JSONField(default=list, blank=True, null=True)
     list_of_icons = models.JSONField(default=list, blank=True, null=True)
     list_of_visual_effects = models.JSONField(default=list, blank=True, null=True)
+    list_of_transitions = models.JSONField(default=list, blank=True, null=True)
     list_of_sound_effects = models.JSONField(default=list, blank=True, null=True)
     script = models.TextField(blank=True, null=True)
     # 🖼️ Image

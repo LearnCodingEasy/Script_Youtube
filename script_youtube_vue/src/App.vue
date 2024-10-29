@@ -312,8 +312,10 @@ let logout = () => {
 export default {
   data() {
     return {
-      value1: ''
       // تعريف الخاصية
+      value1: '',
+      // Website Direction
+      website_direction: 'en'
     }
   }
 }
