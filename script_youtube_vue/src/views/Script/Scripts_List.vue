@@ -43,8 +43,17 @@ onMounted(() => {
                     width="100%"
                     preview
                     class="rounded-lg"
-                    style="height: 299px; max-height: 300px !important; width: 100%"
+                    style="height: 199px; max-height: 200px !important; width: 100%"
                     v-if="script.attachments.length > 0"
+                  />
+                  <prime_image
+                    src="../../assets/Image/Placeholder.png"
+                    alt="Image"
+                    width="100%"
+                    preview
+                    class="rounded-lg"
+                    style="height: 199px; max-height: 200px !important; width: 100%"
+                    v-else
                   />
                 </div>
               </template>

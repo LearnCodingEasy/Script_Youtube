@@ -593,7 +593,7 @@ Done. Now run:
 4 - Axios |
 5 - Font Awesome |
 6 - Pwa |
-7 - |
+7 - Prism |
 8 - |
 9 - |
 ]
@@ -636,6 +636,10 @@ npm install -D vite-plugin-pwa
 
 ```cmd
 npm i swiper
+```
+
+```cmd
+npm i prismjs vue-prism-component
 ```
 
 ### Sutap Vue Libraries

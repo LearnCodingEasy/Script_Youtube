@@ -22,3 +22,246 @@
   .content_edit_script {
   }
 }
+
+.content_code,
+.content-code {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // border: 2px solid #fff;
+  // background-color: #fff;
+  padding: 0.5rem 0.5rem;
+  border-radius: 10px;
+  margin: 2rem 0;
+  transition: all 0.3s linear;
+  position: relative;
+  .try {
+    width: 200px;
+    height: 100%;
+    button {
+      height: 100%;
+      width: 95%;
+      margin: auto;
+      padding: 1rem 5px;
+      background-color: #324696;
+      color: #fff;
+      font-weight: bold;
+    }
+  }
+  .code {
+    width: 100%;
+    pre {
+      margin: 0;
+      code {
+        font-size: 1.1rem;
+        font-weight: bold;
+        /* Bootstrap Devices */
+        /* Small Devices (Mobail, Less Than 575.98px) = Bootstrap V5 Xs */
+        @media screen and (max-width: 575.98px) {
+          font-size: 0.5rem;
+        }
+        /* Medium Devices (Phones, 576px And 677px) = Bootstrap V5 Sm */
+        @media screen and (min-width: 576px) and (max-width: 677px) {
+          font-size: 0.5rem;
+        }
+        /* Large Devices (Phones, 678px And 767px) */
+        @media screen and (min-width: 678px) and (max-width: 767px) {
+          font-size: 0.5rem;
+        }
+      }
+    }
+  }
+  .icon-copy {
+    padding: 5px;
+    background-color: #228ae6;
+    color: #fff;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    transition: all 0.3s linear;
+    opacity: 0;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  &:hover {
+    // box-shadow:
+    //   1px 1px 2px #fff,
+    //   -1px -1px 2px #fff;
+    .icon-copy {
+      opacity: 1;
+    }
+  }
+
+  .code {
+    pre.language-css,
+    pre.language-git,
+    pre.language-html,
+    pre.language-html.inspect,
+    pre.language-javascript,
+    pre.language-javascript.browsers,
+    pre.language-javascript.console,
+    pre.language-javascript.vue,
+    pre.language-pug,
+    pre.language-scss,
+    pre.language-python {
+      position: relative;
+      padding-top: 50px !important;
+      font-size: 18px;
+      font-weight: 700;
+      /* Bootstrap Devices */
+      /* Small Devices (Mobail, Less Than 575.98px) = Bootstrap V5 Xs */
+      @media screen and (max-width: 575.98px) {
+        font-size: 0.5rem;
+      }
+      /* Medium Devices (Phones, 576px And 677px) = Bootstrap V5 Sm */
+      @media screen and (min-width: 576px) and (max-width: 677px) {
+        font-size: 0.5rem;
+      }
+      /* Large Devices (Phones, 678px And 767px) */
+      @media screen and (min-width: 678px) and (max-width: 767px) {
+        font-size: 0.5rem;
+      }
+    }
+
+    pre.language-css:before,
+    pre.language-git:before,
+    pre.language-html.inspect:before,
+    pre.language-html:before,
+    pre.language-javascript.browsers:before,
+    pre.language-javascript.console:before,
+    pre.language-javascript.vue:before,
+    pre.language-javascript:before,
+    pre.language-pug:before,
+    pre.language-scss:before,
+    pre.language-python:before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 5px 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    pre.language-html:before {
+      content: 'HTML';
+      background-color: #e97601;
+    }
+    pre.language-pug:before {
+      content: 'PUG';
+      background-color: #583129;
+    }
+    pre.language-css:before {
+      content: 'CSS';
+      background-color: #3498db;
+    }
+    pre.language-scss:before {
+      content: 'SCSS';
+      background-color: #3498db;
+    }
+    pre.language-javascript:before {
+      content: 'JAVASCRIPT';
+      background-color: #ffc107;
+    }
+    pre.language-javascript.browsers:before {
+      background-color: #2d2d2d;
+      padding: 0;
+    }
+    pre.language-git:before {
+      content: 'Github';
+      background-color: #707070;
+    }
+    pre.language-javascript.console:before {
+      content: 'console';
+      background-color: #000;
+    }
+    pre.language-html.inspect:before {
+      content: 'inspect element';
+      background-color: #000;
+    }
+    pre.language-javascript.vue:before {
+      content: 'Vue';
+      background-color: #7bcca8;
+    }
+    pre.language-javascript.cmd:before {
+      content: 'CMD';
+      background-color: #ffc107;
+    }
+  }
+  // هرجع اضيف جنب الكود اسم الملف فى الاتش تى ال ام او السي اس اس و الجافااسكربت
+  .code.git {
+    pre.language-javascript:before {
+      content: 'GitHub';
+      background-color: #f5f5f5;
+      color: #000;
+    }
+  }
+  .code.scss {
+    pre.language-css:before {
+      content: 'Scss';
+      background-color: #cf649a;
+      color: #fff;
+    }
+    pre.language-css:after {
+      content: 'Style.scss';
+      background-color: #111;
+      color: #fff;
+      position: absolute;
+      left: 70px;
+      top: 0;
+      font-weight: 700;
+      padding: 4px 10px;
+    }
+  }
+  .code.scss.underScore {
+    pre.language-css:before {
+      content: 'Scss';
+      background-color: #cf649a;
+      color: #fff;
+    }
+    pre.language-css:after {
+      content: '_Header.scss';
+      background-color: #111;
+      color: #fff;
+      position: absolute;
+      left: 70px;
+      top: 0;
+      font-weight: 700;
+      padding: 4px 10px;
+    }
+  }
+  .code.Python {
+    pre.language-css:before {
+      content: 'Pyrhon';
+      background-color: #cf649a;
+      color: #fff;
+    }
+    pre.language-python:after {
+      content: 'pythonFile.py';
+      background-color: #0d1827;
+      color: #fff;
+      position: absolute;
+      left: 90px;
+      top: 0;
+      font-weight: 700;
+      padding: 4px 10px;
+    }
+    pre.language-python:before {
+      content: 'Python';
+      background-color: #3498db;
+    }
+  }
+  .code.cmd {
+    pre.language-javascript:before {
+      content: 'CMD';
+      background-color: #f5f5f5;
+      color: #000;
+      font-weight: bold;
+    }
+  }
+}

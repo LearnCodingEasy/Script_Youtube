@@ -8,15 +8,23 @@ import LoginView from '../views/Authentication/Login.vue'
 // Account
 import ProfileView from '../views/Account/Profile.vue'
 
+// Dashboard
+import Dashboard from '../views/Dashboard/DashboardView.vue'
+
+
 // Script
 import ScriptCreate from '../views/Script/Script_Create.vue'
 import ScriptList from '../views/Script/Scripts_List.vue'
 import ScriptDetails from '../views/Script/Script_Details.vue'
 import ScriptEdit from '../views/Script/Script_Edit.vue'
 
+// 404 catchall Page Not Found
+import PageNotFound from "@/components/PageNotFound/PageNotFound.vue";
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // Home
     {
       path: '/',
       name: 'home',
@@ -37,7 +45,16 @@ const router = createRouter({
         requireLogin: true
       }
     },
-    // Script []
+    // Dashboard [ Profile ]
+    {
+      path: '/Dashboard',
+      name: 'Dashboard',
+      component: Dashboard,
+      meta: {
+        requireLogin: true
+      }
+    },
+    // Script [Create | List | Details | Edit ]
     {
       path: '/ScriptCreate',
       name: 'Script_Create',
@@ -69,6 +86,12 @@ const router = createRouter({
       meta: {
         requireLogin: true
       }
+    },
+    // 404 Catchall Page Not Found
+    {
+      path: "/:catchAll(.*)",
+      name: "PageNotFound",
+      component: PageNotFound
     },
     {
       path: '/about',

@@ -88,6 +88,21 @@ import 'primeicons/primeicons.css'
 import 'tailwindcss/tailwind.css'
 
 
+// Prismjs For Type Code Like Vscode
+import "prismjs";
+import "prismjs/components/prism-pug";
+import "prismjs/components/prism-scss";
+import "prismjs/components/prism-git";
+import "prismjs/components/prism-python";
+// This Is The Theme
+// import "prismjs/themes/prism-coy.css";
+// import "prismjs/themes/prism-dark.css";
+// import "prismjs/themes/prism-okaidia.css";
+// import "prismjs/themes/prism-solarizedlight.css";
+// import "prismjs/themes/prism-twilight.css";
+// import "prismjs/themes/prism.css";
+import "prismjs/themes/prism-tomorrow.css";
+
 const app = createApp(App)
 
 
@@ -161,6 +176,7 @@ app.component('prime_input_icon', InputIcon);
 app.component('prime_message', Message);
 // Editor
 app.component('prime_editor', Editor);
+
 
 app.mount('#app')
 

@@ -284,42 +284,46 @@
                   </div>
                   <!-- Input Edit -->
                   <div v-for="(item, index) in script.list_of_examples" :key="index" class="mb-5">
-                    <prime_input_text
-                      type="text"
-                      v-model="item.title"
-                      placeholder="Examples Title"
-                      class="mb-5"
-                    >
-                    </prime_input_text>
-                    <prime_input_text
-                      type="text"
-                      v-model="item.page"
-                      placeholder="Examples Page Name"
-                      class="mb-5"
-                    >
-                    </prime_input_text>
-                    <prime_input_text
-                      type="text"
-                      v-model="item.lang"
-                      placeholder="Examples  Language"
-                      class="mb-5"
-                    >
-                    </prime_input_text>
-                    <prime_editor v-model="item.code" editorStyle="height: 100px" />
-                    <prime_button
-                      @click="removeOneOfListOfExamples(index)"
-                      severity="danger"
-                      icon="pi pi-trash"
-                      iconPos="right"
-                      class="mx-3"
-                    >
-                    </prime_button>
-                    <prime_button
-                      @click="addOneOfListOfExamples"
-                      severity="success"
-                      icon="pi pi-folder-plus"
-                      iconPos="right"
-                    ></prime_button>
+                    <div class="flex">
+                      <prime_input_text
+                        type="text"
+                        v-model="item.title"
+                        placeholder="Examples Title"
+                        class="mb-5"
+                      >
+                      </prime_input_text>
+                      <prime_input_text
+                        type="text"
+                        v-model="item.page"
+                        placeholder="Examples Page Name"
+                        class="mb-5"
+                      >
+                      </prime_input_text>
+                      <prime_input_text
+                        type="text"
+                        v-model="item.lang"
+                        placeholder="Examples  Language"
+                        class="mb-5"
+                      >
+                      </prime_input_text>
+                    </div>
+                    <div class="">
+                      <prime_textarea v-model="item.code" rows="5" cols="30"></prime_textarea>
+                      <prime_button
+                        @click="removeOneOfListOfExamples(index)"
+                        severity="danger"
+                        icon="pi pi-trash"
+                        iconPos="right"
+                        class="mx-3"
+                      >
+                      </prime_button>
+                      <prime_button
+                        @click="addOneOfListOfExamples"
+                        severity="success"
+                        icon="pi pi-folder-plus"
+                        iconPos="right"
+                      ></prime_button>
+                    </div>
                   </div>
                 </prime_fieldset>
               </div>
@@ -603,8 +607,10 @@
                 <prime_fieldset :toggleable="true" legend="السيناريو">
                   <h2 dir="auto" class="mb-5 text-1xl font-bold">السيناريو</h2>
                   <div class="" v-html="script.script" dir="auto"></div>
+                  <button type="button" @click="copyCode(script.script)">Copy Script</button>
                   <div class="card">
                     <prime_editor v-model="script.script" editorStyle="height: 350px" />
+                    <prime_textarea v-model="script.script" rows="5" cols="30"></prime_textarea>
                   </div>
                 </prime_fieldset>
               </div>
@@ -972,6 +978,16 @@ export default {
     },
     removeOneOfListOfSoundEffects(index) {
       this.script.list_of_sound_effects.splice(index, 1)
+    },
+    copyCode(e) {
+      navigator.clipboard.writeText(e)
+      this.$toast.add({
+            severity: 'success',
+            summary: '🖥️ Code',
+            detail: `Code Is Copy`,
+            life: 3000
+          })
+      console.log(e)
     }
   }
 }

@@ -14,19 +14,31 @@
               <h2 v-html="script.title" class="text-8xl font-bold"></h2>
             </div>
           </div>
+          <!-- list_of_sources_urls -->
           <div class="script_list_of_sources_urls shadow-lg mb-7 py-5 px-3">
             <div class="inner">
-              <div class="text">
+              <div class="text border-b py-3">
                 <h2 class="text-2xl font-bold" dir="auto">قائمة المصادار</h2>
               </div>
-              <div class="data" v-for="(script, index) in script.list_of_sources_urls" :key="index">
-                <ul>
-                  <li>
-                    <a :href="script.url" target="_blank" class="">
-                      {{ script.name }}
+              <div class="my-5 flex justify-between">
+                <div
+                  class="data"
+                  v-for="(script, index) in script.list_of_sources_urls"
+                  :key="index"
+                >
+                  <div class="flex justify-center items-center flex-col">
+                    <a :href="script.url" target="_blank" class="mb-3">
+                      <prime_button :label="script.name" severity="secondary" />
                     </a>
-                  </li>
-                </ul>
+                    <iframe
+                      :src="script.url"
+                      frameborder="0"
+                      height="100%"
+                      width="100%"
+                      style="border: 1px solid #ccc"
+                    ></iframe>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -60,11 +72,19 @@
                 <ul>
                   <li>
                     <span class="pr-5" v-html="item.title"> </span>
-                    <span class="" v-html="item.page"> </span>
+                    <span class="pr-5" v-html="item.page"> </span>
                     <span class="" v-html="item.lang"> </span>
-                    <span class="" v-html="item.code"> </span>
                   </li>
                 </ul>
+
+                <div class="content-code">
+                  <div class="code">
+                    <prism :language="item.lang">{{ item.code }}</prism>
+                  </div>
+                  <div class="icon-copy" @click="copyCode(item.code)">
+                    <fa :icon="['fas', 'copy']" />
+                  </div>
+                </div>
               </div>
             </prime_fieldset>
           </div>
@@ -99,6 +119,7 @@
             </prime_fieldset>
           </div>
         </div>
+        <prime_toast />
       </div>
     </div>
   </div>
@@ -106,17 +127,19 @@
 
 <script>
 import axios from 'axios'
-
+import Prism from 'vue-prism-component'
 export default {
   name: 'Script_Details',
 
   data() {
     return {
+      code: 'const a = b',
       script: {
         id: null
       }
     }
   },
+  components: { Prism },
 
   mounted() {
     this.getScript()
@@ -140,6 +163,10 @@ export default {
             life: 3000
           })
         })
+    },
+    copyCode(e) {
+      navigator.clipboard.writeText(e)
+      console.log(e)
     }
   }
 }
@@ -212,3 +239,7 @@ export default {
   }
 }
 </style>
+
+<!--  
+
+-->

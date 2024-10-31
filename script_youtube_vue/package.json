@@ -21,11 +21,13 @@
     "pinia": "^2.1.7",
     "primeicons": "^7.0.0",
     "primevue": "^4.1.0",
+    "prismjs": "^1.29.0",
     "quill": "^2.0.2",
     "sass": "^1.79.5",
     "swiper": "^11.1.14",
     "vite-plugin-sass": "^0.1.0",
     "vue": "^3.4.29",
+    "vue-prism-component": "^2.0.0",
     "vue-router": "^4.3.3"
   },
   "devDependencies": {

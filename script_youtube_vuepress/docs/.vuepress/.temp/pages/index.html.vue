@@ -432,7 +432,7 @@
 4 - Axios |
 5 - Font Awesome |
 6 - Pwa |
-7 - |
+7 - Prism |
 8 - |
 9 - |
 ]</p>
@@ -455,6 +455,8 @@
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">npm install -D vite-plugin-pwa</span>
 <span class="line"></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">npm i swiper</span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">npm i prismjs vue-prism-component</span>
 <span class="line"></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h3 id="sutap-vue-libraries" tabindex="-1"><a class="header-anchor" href="#sutap-vue-libraries"><span>Sutap Vue Libraries</span></a></h3>
 <h4 id="tailwind" tabindex="-1"><a class="header-anchor" href="#tailwind"><span>Tailwind</span></a></h4>
