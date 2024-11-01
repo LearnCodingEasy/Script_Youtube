@@ -28,7 +28,7 @@ onMounted(() => {
 
 <template>
   <div class="wrapper_dashboard">
-    <div class="container">
+    <div class="container mx-auto">
       <div class="inner">
         <!-- sidebar -->
         <div class="sidebar">
@@ -111,34 +111,34 @@ onMounted(() => {
             <div class="cards">
               <div class="card_single">
                 <div class="text">
-                  <h2>54</h2>
-                  <span>Customers</span>
+                  <h2>{{ scripts.length }}</h2>
+                  <span>All Script</span>
                 </div>
                 <div class="icon">
                   <span class="">
-                    <i class="pi pi-cog"></i>
+                    <i class="pi pi-folder-open"></i>
                   </span>
                 </div>
               </div>
               <div class="card_single">
                 <div class="text">
-                  <h2>54</h2>
-                  <span>Customers</span>
+                  <h2>{{ scriptsUser.length }}</h2>
+                  <span>Your Scripts</span>
                 </div>
                 <div class="icon">
                   <span class="">
-                    <i class="pi pi-cog"></i>
+                    <i class="pi pi-file-check"></i>
                   </span>
                 </div>
               </div>
               <div class="card_single">
                 <div class="text">
-                  <h2>54</h2>
-                  <span>Customers</span>
+                  <h2>77</h2>
+                  <span>Tasks</span>
                 </div>
                 <div class="icon">
                   <span class="">
-                    <i class="pi pi-cog"></i>
+                    <i class="pi pi-list-check"></i>
                   </span>
                 </div>
               </div>
@@ -158,12 +158,87 @@ onMounted(() => {
           <div class="main_content_footer">
             <div class="project">
               <div class="card">
-                <div class="card_header">
-                  <h2>Header2</h2>
-                  <button>Sell All <i class="pi pi-arrow-right"></i></button>
+                <div class="card_header flex justify-between item-center px-6">
+                  <h2 class="text-3xl bold">Recent Projects</h2>
+                  <!-- <button>Sell All <i class="pi pi-arrow-right"></i></button> -->
+                  <prime_button
+                    label="Sell All"
+                    icon="pi pi-arrow-right"
+                    iconPos="right"
+                    severity="danger"
+                  />
                 </div>
-                <div class="card_body">
-                  <table></table>
+
+                <div class="card_body px-6">
+                  <prime_data_table
+                    v-model:filters="filters"
+                    :value="scriptsUser"
+                    paginator
+                    :rows="5"
+                    dataKey="id"
+                    filterDisplay="row"
+                    :loading="loading"
+                    :globalFilterFields="['title', 'name']"
+                  >
+                    <!-- Header Search -->
+                    <template #header>
+                      <div class="flex justify-end">
+                        <prime_icon_field>
+                          <prime_input_icon>
+                            <i class="pi pi-search" />
+                          </prime_input_icon>
+                          <prime_input_text
+                            v-model="filters['global'].value"
+                            placeholder="Keyword Search"
+                          />
+                        </prime_icon_field>
+                      </div>
+                    </template>
+                    <template #empty> No scripts found. </template>
+                    <template #loading> Loading scripts data. Please wait. </template>
+                    <!-- Table Data -->
+                    <prime_column
+                      v-for="col in columns"
+                      :key="col.field"
+                      :field="col.field"
+                      :header="col.header"
+                      style="min-width: 12rem"
+                    >
+                      <template #body="{ data }">
+                        <span class="" v-if="userStore.user.id == data.created_by.id">
+                          {{ data[col.field] }}
+                        </span>
+                      </template>
+                    </prime_column>
+                    <!-- Delete -->
+                    <prime_column header="Delete" style="min-width: 10rem">
+                      <template #body="{ data }">
+                        <prime_button
+                          icon="pi pi-trash"
+                          severity="danger"
+                          text
+                          rounded
+                          aria-label="Delete"
+                          @click="deleteScript(data.id)"
+                          v-if="userStore.user.id == data.created_by.id"
+                        />
+                      </template>
+                    </prime_column>
+                    <!-- Edit -->
+                    <prime_column header="Edit" style="min-width: 10rem">
+                      <template #body="{ data }">
+                        <prime_button
+                          icon="pi pi-file-edit"
+                          severity="success"
+                          text
+                          rounded
+                          aria-label="Edit"
+                          @click="$router.push({ name: 'ScriptEdit', params: { id: data.id } })"
+                          v-if="userStore.user.id == data.created_by.id"
+                        />
+                      </template>
+                    </prime_column>
+                  </prime_data_table>
                 </div>
               </div>
             </div>
@@ -176,7 +251,122 @@ onMounted(() => {
 </template>
 
 <script>
-export default { name: 'DashboardView' }
+// import axios from 'axios'
+import { FilterMatchMode } from '@primevue/core/api'
+import { useUserStore } from '@/stores/user'
+
+export default {
+  name: 'DashboardView',
+  data() {
+    return {
+      // البيانات
+      scripts: [],
+      scriptsUser: [],
+
+      // T
+      columns: [
+        { field: 'title', header: 'Title' },
+        { field: 'name', header: 'Name' }
+      ],
+      filters: {
+        global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        title: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        name: { value: null, matchMode: FilterMatchMode.STARTS_WITH }
+      },
+      loading: true,
+
+      scriptId: 'your-script-uuid-here', // معرف السكريبت المطلوب حذفه
+      errors: [] // مصفوفة الأخطاء
+    }
+  },
+  async mounted() {
+    await this.getAllScripts()
+    await this.getAllScriptsUser()
+  },
+  methods: {
+    /* 
+    .get(`/api/posts/profile/${this.$route.params.id}/`)
+      .then(response => {
+          console.log('data', response.data)
+          this.posts = response.data.posts
+          this.user = response.data.user
+      })
+    */
+    async getAllScripts() {
+      try {
+        const response = await axios.get(`/api/scripts/script_list/`)
+        console.log('response: ', response)
+        this.scripts = response.data
+        console.log('response.data: ', response.data)
+        console.log('this.scripts: ', this.scripts)
+        this.loading = false
+      } catch (error) {
+        console.error('Error fetching scripts:', error)
+        this.$toast.add({
+          severity: 'error',
+          summary: 'Script List Error',
+          detail: `Error: ${error.message}`,
+          life: 5000
+        })
+      }
+    },
+    async getAllScriptsUser() {
+      try {
+        // تعريف userStore هنا
+        const userStore = useUserStore()
+
+        const response = await axios.get(`/api/scripts/script_list/${userStore.user.id}`)
+        console.log('response: ', response)
+
+        console.log('userStore.id: ', userStore.user.id)
+        this.scriptsUser = response.data.scripts
+        console.log('scriptsUser response.data: ', response.data)
+        console.log('this.scriptsUser: ', this.scriptsUser)
+        this.loading = false
+      } catch (error) {
+        console.error('Error fetching scripts:', error)
+        this.$toast.add({
+          severity: 'error',
+          summary: 'Script List Error',
+          detail: `Error: ${error.message}`,
+          life: 5000
+        })
+      }
+    },
+    async deleteScript(scriptId) {
+      if (confirm('Are you sure you want to delete this script?')) {
+        try {
+          const response = await axios.delete(`/api/scripts/script_list/script_delete/${scriptId}/`)
+          if (response.data.message === 'script deleted') {
+            this.scripts = this.scripts.filter((script) => script.id !== scriptId)
+            this.$toast.add({
+              severity: 'success',
+              summary: 'Script Deleted',
+              detail: 'Script successfully deleted.',
+              life: 3000
+            })
+          }
+        } catch (error) {
+          console.error('Error deleting script:', error)
+          this.$toast.add({
+            severity: 'error',
+            summary: 'Delete Error',
+            detail: `Error: ${error.message}`,
+            life: 5000
+          })
+        }
+      }
+    }
+  },
+  created() {
+    // this.columns = [
+    //   { field: 'title', header: 'Title' },
+    //   { field: 'name', header: 'Name' },
+    //   { field: 'category', header: 'Category' },
+    //   { field: 'quantity', header: 'Quantity' }
+    // ]
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -320,6 +510,18 @@ export default { name: 'DashboardView' }
             }
           }
         }
+      }
+    }
+  }
+}
+body {
+  border: 0.5rem solid #f00;
+  #app {
+    border: 0.5rem solid #f00;
+    > div {
+      border: 0.5rem solid #f00;
+      .wrapper_header {
+        display: none;
       }
     }
   }

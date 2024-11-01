@@ -56,7 +56,7 @@ def script_create(request):
 
         # Increment user's script count
         user = request.user
-        # user.scripts_count += 1
+        user.script_count = user.script_count + 1
         user.save()
 
         # Serialize the script and return as JSON response
@@ -81,9 +81,29 @@ def script_list(request):
     return JsonResponse(serializer.data, safe=False)
 
 
+@api_view(["GET"])
+def script_list_dashboard(request, id):
+    user = User.objects.get(pk=id)
+    scripts = Script.objects.filter(created_by_id=id)
+
+    scripts_serializer = ScriptSerializer(scripts, many=True)
+    user_serializer = UserSerializer(user)
+
+    return JsonResponse(
+        {
+            "scripts": scripts_serializer.data,
+            "user": user_serializer.data,
+        },
+        safe=False,
+    )
+
+
 @api_view(["DELETE"])
 def script_delete(request, pk):
     script = Script.objects.filter(created_by=request.user).get(pk=pk)
+    user = request.user
+    user.script_count = user.script_count - 1
+    user.save()
     script.delete()
     return JsonResponse({"message": "script deleted"})
 

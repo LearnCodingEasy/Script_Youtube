@@ -24,6 +24,7 @@ class ScriptForm(ModelForm):
             "list_of_transitions",
             "list_of_sound_effects",
             "script",
+            "is_private",
         )
 
 

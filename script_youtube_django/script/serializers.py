@@ -54,6 +54,7 @@ class ScriptSerializer(serializers.ModelSerializer):
             "created_at_formatted",
             "attachments",
             "videos",
+            "is_private",
         )
 
 
@@ -81,9 +82,12 @@ class ScriptDetailSerializer(serializers.ModelSerializer):
             "list_of_transitions",
             "list_of_sound_effects",
             "script",
+            "is_private",
+            # Option
+            "attachments",
+            "videos",
+            # Automatic
             "created_by",
             "created_at",
             "created_at_formatted",
-            "attachments",
-            "videos",
         )

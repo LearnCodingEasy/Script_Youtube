@@ -21,6 +21,9 @@ import ScriptEdit from '../views/Script/Script_Edit.vue'
 // 404 catchall Page Not Found
 import PageNotFound from "@/components/PageNotFound/PageNotFound.vue";
 
+// Test
+import TestView from "../views/Dashboard/TestView.vue";
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -50,6 +53,14 @@ const router = createRouter({
       path: '/Dashboard',
       name: 'Dashboard',
       component: Dashboard,
+      meta: {
+        requireLogin: true
+      }
+    },
+    {
+      path: '/TestView',
+      name: 'TestView',
+      component: TestView,
       meta: {
         requireLogin: true
       }

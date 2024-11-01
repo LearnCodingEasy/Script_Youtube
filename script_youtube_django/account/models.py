@@ -39,6 +39,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     avatar = models.ImageField(upload_to="avatars", blank=True, null=True)
     cover = models.ImageField(upload_to="covers", blank=True, null=True)
 
+    script_count = models.IntegerField(default=0)
+    #
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)

@@ -81,7 +81,7 @@ let logout = () => {
               <div
                 class="header_center_section flex items-center justify-center space-x-1 basis-1/2"
               >
-                <RouterLink to="/" class="header_center_section_link_home grow">
+                <RouterLink to="/" class="header_center_section_link_home grow pl-16">
                   <span class="header_center_section_link_home_span">
                     <svg
                       viewBox="0 0 24 24"
@@ -133,7 +133,7 @@ let logout = () => {
                     </svg>
                   </span>
                 </RouterLink>
-                <!-- Add -->
+                <!-- ScriptList -->
                 <RouterLink to="/ScriptList" class="text-xl grow header_center_section_link_videos">
                   <span class="header_center_section_link_videos_span">
                     <svg
@@ -150,7 +150,11 @@ let logout = () => {
                     </svg>
                   </span>
                 </RouterLink>
-                <RouterLink to="/" class="text-xl grow header_center_section_link_marketplace">
+                <!-- Dashboard -->
+                <RouterLink
+                  to="/Dashboard"
+                  class="text-xl grow header_center_section_link_marketplace"
+                >
                   <span class="header_center_section_link_marketplace_span">
                     <svg
                       viewBox="0 0 24 24"
@@ -165,7 +169,8 @@ let logout = () => {
                     </svg>
                   </span>
                 </RouterLink>
-                <RouterLink to="/" class="text-xl grow header_center_section_link_groups">
+                <!-- TestView -->
+                <RouterLink to="/TestView" class="text-xl grow header_center_section_link_groups">
                   <span class="header_center_section_link_groups_span">
                     <svg
                       viewBox="0 0 24 24"

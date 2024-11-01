@@ -41,11 +41,13 @@ import Textarea from 'primevue/textarea';
 import Password from 'primevue/password';
 import FloatLabel from 'primevue/floatlabel';
 import Checkbox from 'primevue/checkbox';
+import Listbox from 'primevue/listbox';
 import DatePicker from 'primevue/datepicker';
 import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
 // File Upload
 import FileUpload from 'primevue/fileupload';
+import ToggleButton from 'primevue/togglebutton';
 // Menu
 import Menubar from 'primevue/menubar';
 import TieredMenu from 'primevue/tieredmenu';
@@ -81,7 +83,11 @@ import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 // Quill محرر النصوص الغنية المستندة إلى 
 import Editor from 'primevue/editor';
-// 
+// Table
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import ColumnGroup from 'primevue/columngroup';   // optional
+import Row from 'primevue/row';                   // optional
 
 
 import 'primeicons/primeicons.css'
@@ -138,10 +144,13 @@ app.component('prime_textarea', Textarea);
 app.component('prime_input_password', Password);
 app.component('prime_float_label', FloatLabel);
 app.component('prime_check_box', Checkbox);
+app.component('prime_list_box', Listbox);
 app.component('prime_date_picker', DatePicker);
 app.component('prime_input_group', InputGroup);
 app.component('prime_input_group_addon', InputGroupAddon);
 app.component('prime_file_upload', FileUpload);
+app.component('prime_toggle_button', ToggleButton);
+
 // Prime Menu
 app.component('prime_menubar', Menubar);
 app.component('prime_tiered_menu', TieredMenu);
@@ -162,8 +171,6 @@ app.component('prime_stepitem', StepItem);
 app.component('prime_step', Step);
 app.component('prime_steppanel', StepPanel);
 
-
-
 // Toast
 // app.use(Toast);
 app.component('prime_toast', Toast);
@@ -176,8 +183,10 @@ app.component('prime_input_icon', InputIcon);
 app.component('prime_message', Message);
 // Editor
 app.component('prime_editor', Editor);
-
+// 
+app.component('prime_data_table', DataTable);
+app.component('prime_column', Column);
+app.component('prime_column_group', ColumnGroup);
+app.component('prime_row', Row);
 
 app.mount('#app')
-
-

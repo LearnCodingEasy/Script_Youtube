@@ -13,6 +13,7 @@ export const useUserStore = defineStore({
             date_of_birth: null,
             access: null,
             refresh: null,
+            script_count: null,
         }
     }),
     actions: {
@@ -28,6 +29,7 @@ export const useUserStore = defineStore({
                 this.user.access = localStorage.getItem('user.access')
                 this.user.refresh = localStorage.getItem('user.refresh')
                 this.refreshToken()
+                this.user.script_count = localStorage.getItem('user.script_count')
             }
         },
         setToken(data) {
@@ -50,6 +52,7 @@ export const useUserStore = defineStore({
             this.user.surname = null
             this.user.email = null
             this.user.date_of_birth = null
+            this.user.script_count = null
             localStorage.setItem('user.access', '')
             localStorage.setItem('user.refresh', '')
             localStorage.setItem('user.id', '')
@@ -57,6 +60,7 @@ export const useUserStore = defineStore({
             localStorage.setItem('user.surname', '')
             localStorage.setItem('user.email', '')
             localStorage.setItem('user.date_of_birth', '')
+            localStorage.setItem('user.script_count', '')
         },
         setUserInfo(user) {
             console.log('setUserInfo', user)
@@ -65,11 +69,14 @@ export const useUserStore = defineStore({
             this.user.surname = user.surname
             this.user.email = user.email
             this.user.date_of_birth = user.date_of_birth
+            this.user.script_count = user.script_count
             localStorage.setItem('user.id', this.user.id)
             localStorage.setItem('user.name', this.user.name)
             localStorage.setItem('user.surname', this.user.surname)
             localStorage.setItem('user.email', this.user.email)
             localStorage.setItem('user.date_of_birth', this.user.date_of_birth)
+            localStorage.setItem('user.script_count', this.user.script_count)
+
         },
         refreshToken() {
             axios.post('/api/refresh/', {

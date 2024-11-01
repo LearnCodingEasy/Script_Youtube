@@ -145,6 +145,20 @@
                   <span class="text"> صورة الغلاف </span>
                 </li>
               </ul>
+
+              <!-- Send -->
+              <div class="card flex justify-center">
+                <prime_toggle_button
+                  v-model="checked"
+                  onLabel="Locked"
+                  offLabel="Unlocked"
+                  onIcon="pi pi-lock"
+                  offIcon="pi pi-lock-open"
+                  class="w-36"
+                  aria-label="Do you confirm"
+                />
+              </div>
+
               <!-- Send -->
               <div class="send">
                 <prime_button
@@ -982,11 +996,11 @@ export default {
     copyCode(e) {
       navigator.clipboard.writeText(e)
       this.$toast.add({
-            severity: 'success',
-            summary: '🖥️ Code',
-            detail: `Code Is Copy`,
-            life: 3000
-          })
+        severity: 'success',
+        summary: '🖥️ Code',
+        detail: `Code Is Copy`,
+        life: 3000
+      })
       console.log(e)
     }
   }

@@ -62,27 +62,7 @@ onMounted(() => {
                   <h2 class="text-1xl my-2" dir="auto" v-html="script.title"></h2>
                 </RouterLink>
               </template>
-              <template #footer>
-                <div class="flex justify-between items-center">
-                  <prime_button
-                    class="text-lg py-1 px-5 capitalize block"
-                    icon="pi pi-pencil"
-                    aria-label="Edit"
-                    iconPos="right"
-                    @click="$router.push({ name: 'ScriptEdit', params: { id: script.id } })"
-                    v-if="userStore.user.id == script.created_by.id"
-                  >
-                  </prime_button>
-                  <div class="" v-if="userStore.user.id == script.created_by.id">
-                    <prime_button
-                      @click="deleteScript(script.id)"
-                      severity="danger"
-                      icon="pi pi-trash"
-                      iconPos="right"
-                    ></prime_button>
-                  </div>
-                </div>
-              </template>
+              <template #footer> </template>
             </prime_card>
           </div>
         </div>
