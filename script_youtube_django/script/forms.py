@@ -9,6 +9,7 @@ class ScriptForm(ModelForm):
     class Meta:
         model = Script
         fields = (
+            "script_status",
             "title",
             "list_of_sources_urls",
             "list_of_shots",

@@ -36,15 +36,16 @@ class ScriptVideo(models.Model):
 
 
 class Script(models.Model):
-    TASKS= "Tasks"
-    DONE= "Dane"
-    IN_MAKING= "In Making"
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    TASKS = "Tasks"
+    DONE = "Dane"
+    IN_MAKING = "In Making"
     scriptStatusList = [
         ("TASKS", "Tasks"),
         ("DONE", "Dane"),
         ("IN_MAKING", "In Making"),
     ]
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.TextField(blank=True, null=True)
     list_of_sources_urls = models.JSONField(default=list, blank=True, null=True)
     list_of_shots = models.JSONField(default=list, blank=True, null=True)
@@ -66,7 +67,7 @@ class Script(models.Model):
     videos = models.ManyToManyField(ScriptVideo, blank=True)
     #
     script_status = models.CharField(
-        max_length=50, choices=scriptStatusList,default=TASKS
+        max_length=50, choices=scriptStatusList, default=TASKS
     )
     # Boolean
     is_private = models.BooleanField(default=False)

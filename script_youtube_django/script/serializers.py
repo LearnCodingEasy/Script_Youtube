@@ -34,6 +34,7 @@ class ScriptSerializer(serializers.ModelSerializer):
         model = Script
         fields = (
             "id",
+            "script_status",
             "title",
             "list_of_sources_urls",
             "list_of_shots",
@@ -49,12 +50,14 @@ class ScriptSerializer(serializers.ModelSerializer):
             "list_of_transitions",
             "list_of_sound_effects",
             "script",
+            "is_private",
+            # Option
+            "attachments",
+            "videos",
+            # Automatic
             "created_by",
             "created_at",
             "created_at_formatted",
-            "attachments",
-            "videos",
-            "is_private",
         )
 
 
@@ -67,6 +70,7 @@ class ScriptDetailSerializer(serializers.ModelSerializer):
         model = Script
         fields = (
             "id",
+            "script_status",
             "title",
             "list_of_sources_urls",
             "list_of_shots",
