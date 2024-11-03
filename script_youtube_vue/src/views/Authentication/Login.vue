@@ -405,15 +405,5 @@ export default {
 .b_test,
 .border_text,
 .border-test {
-  border: 0.1rem solid #f00;
 }
 </style>
-
-<!-- 
-  Name           = Hossam Rashad
-  Personal Phone = 01091642528
-  Public Phone   = 01101853042
-  Address        = Egypt
-  E-mail         = learncodingeasy@yahoo.com
-  Password       = zxc123456789
--->

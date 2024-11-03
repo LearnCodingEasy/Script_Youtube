@@ -155,12 +155,11 @@ onMounted(() => {
               </div>
             </div>
           </div>
-          <div class="main_content_footer">
+          <div class="main_content_footer mt-12 grid">
             <div class="project">
               <div class="card">
                 <div class="card_header flex justify-between item-center px-6">
                   <h2 class="text-3xl bold">Recent Projects</h2>
-                  <!-- <button>Sell All <i class="pi pi-arrow-right"></i></button> -->
                   <prime_button
                     label="Sell All"
                     icon="pi pi-arrow-right"
@@ -242,7 +241,35 @@ onMounted(() => {
                 </div>
               </div>
             </div>
-            <div class="customers"></div>
+            <div class="customers">
+              <div class="card">
+                <div class="card_header flex justify-between item-center px-6">
+                  <h2 class="text-3xl bold">Recent Projects</h2>
+                  <prime_button
+                    label="Sell All"
+                    icon="pi pi-arrow-right"
+                    iconPos="right"
+                    severity="danger"
+                  />
+                </div>
+                <div class="card_body">
+                  <div class="customer">
+                    <div class="data_info">
+                      <img src="" class="" alt="" width="40px" height="40px" />
+                      <div class="data">
+                        <h4>Header 4</h4>
+                        <small>hello ceo</small>
+                      </div>
+                    </div>
+                    <div class="data_call">
+                      <span class="icon pi pi-phone"> </span>
+                      <span class="icon pi pi-envelope"> </span>
+                      <span class="icon pi pi-info-circle"> </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -266,12 +293,13 @@ export default {
       // T
       columns: [
         { field: 'title', header: 'Title' },
-        { field: 'name', header: 'Name' }
+        { field: 'script_status', header: 'Status' },
+        { field: 'attachments[0]', header: 'Image' }
       ],
       filters: {
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-        title: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-        name: { value: null, matchMode: FilterMatchMode.STARTS_WITH }
+        title: { value: null, matchMode: FilterMatchMode.STARTS_WITH }
+        // name: { value: null, matchMode: FilterMatchMode.STARTS_WITH }
       },
       loading: true,
 
@@ -513,17 +541,12 @@ export default {
       }
     }
   }
-}
-body {
-  border: 0.5rem solid #f00;
-  #app {
-    border: 0.5rem solid #f00;
-    > div {
-      border: 0.5rem solid #f00;
-      .wrapper_header {
-        display: none;
-      }
-    }
+  .main_content_footer {
+    grid-template-columns: 67% auto;
+    grid-gap: 2rem;
   }
+}
+td {
+  padding: 0;
 }
 </style>

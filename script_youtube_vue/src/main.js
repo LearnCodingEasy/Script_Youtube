@@ -45,6 +45,8 @@ import Listbox from 'primevue/listbox';
 import DatePicker from 'primevue/datepicker';
 import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
+import ColorPicker from 'primevue/colorpicker';
+
 // File Upload
 import FileUpload from 'primevue/fileupload';
 import ToggleButton from 'primevue/togglebutton';
@@ -89,6 +91,9 @@ import Column from 'primevue/column';
 import ColumnGroup from 'primevue/columngroup';   // optional
 import Row from 'primevue/row';                   // optional
 
+// 
+
+import Skeleton from 'primevue/skeleton';
 
 import 'primeicons/primeicons.css'
 import 'tailwindcss/tailwind.css'
@@ -150,6 +155,8 @@ app.component('prime_input_group', InputGroup);
 app.component('prime_input_group_addon', InputGroupAddon);
 app.component('prime_file_upload', FileUpload);
 app.component('prime_toggle_button', ToggleButton);
+app.component('prime_color_picker ', ColorPicker);
+app.component('PrimeColorPicker ', ColorPicker);
 
 // Prime Menu
 app.component('prime_menubar', Menubar);
@@ -188,5 +195,8 @@ app.component('prime_data_table', DataTable);
 app.component('prime_column', Column);
 app.component('prime_column_group', ColumnGroup);
 app.component('prime_row', Row);
+// Skeleton
+app.component('prime_skeleton', Skeleton);
 
 app.mount('#app')
+

@@ -339,6 +339,29 @@
                 <prime_editor v-model="script" editorStyle="height: 350px" />
               </div>
             </div>
+            <!-- is_private  -->
+            <div class="card flex justify-center">
+              <prime_toggle_button
+                v-model="is_private"
+                onLabel="Locked"
+                offLabel="Unlocked"
+                onIcon="pi pi-lock"
+                offIcon="pi pi-lock-open"
+                class="w-36"
+                aria-label="Do you confirm"
+              />
+            </div>
+            <!-- Status List  -->
+            <div class="card flex justify-center">
+              <prime_list_box
+                v-model="script_status"
+                :options="statusOptions"
+                optionLabel="name"
+                checkmark
+                :highlightOnSelect="false"
+                class="w-full md:w-56"
+              />
+            </div>
             <!-- Image -->
             <div class="script border p-5 rounded shadow-lg">
               <h2 dir="auto" class="mb-5 text-1xl font-bold">صورة الغلاف</h2>
@@ -380,15 +403,23 @@ import axios from 'axios'
 
 export default {
   name: 'Script_Create',
-  // props: {
-  //   user: Object,
-  //   posts: Array
-  // },
+  props: [],
+  computed: {},
+  watch: {},
+  async created() {},
   setup() {
     return {}
   },
   data() {
     return {
+      statusOptions: [
+        { name: 'TASKS', code: 'Tasks' },
+        { name: 'DONE', code: 'Done' },
+        { name: 'IN_MAKING', code: 'In Making' }
+      ],
+      // قيمة افتراضية
+      script_status: 'TASKS',
+      is_private: false,
       title: '',
       list_of_sources_urls: [{ name: '', url: '' }],
       list_of_shots: [{ text: '', description: '' }],
@@ -430,6 +461,13 @@ export default {
       this.errors = []
 
       let formData = new FormData()
+      // إضافة حالة السكربت (Script Status)
+      if (this.script_status) {
+        // استخدام الاسم النصي فقط لقائمة الحالة
+        formData.append('script_status', this.script_status ? this.script_status.name : '')
+      }
+      // is_private
+      formData.append('is_private', this.is_private ? 'true' : 'false')
       // Title
       if (this.title == '') {
         this.$toast.add({
@@ -443,7 +481,6 @@ export default {
         formData.append('title', this.title)
       }
       // list of sources urls
-
       const sources = this.list_of_sources_urls.map((item) => ({
         name: item.name,
         url: item.url
@@ -564,6 +601,13 @@ export default {
           })
           .catch((error) => {
             console.log('error', error)
+            console.log('error.response.data', error.response.data)
+            this.$toast.add({
+              severity: 'error',
+              summary: `Type Script Error`,
+              detail: `Error = ${error.response.data}`,
+              life: 3000
+            })
           })
       }
     },

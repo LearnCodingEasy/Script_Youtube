@@ -35,6 +35,7 @@ class ScriptSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "script_status",
+            "is_private",
             "title",
             "list_of_sources_urls",
             "list_of_shots",
@@ -50,7 +51,6 @@ class ScriptSerializer(serializers.ModelSerializer):
             "list_of_transitions",
             "list_of_sound_effects",
             "script",
-            "is_private",
             # Option
             "attachments",
             "videos",
@@ -71,6 +71,7 @@ class ScriptDetailSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "script_status",
+            "is_private",
             "title",
             "list_of_sources_urls",
             "list_of_shots",
@@ -86,7 +87,6 @@ class ScriptDetailSerializer(serializers.ModelSerializer):
             "list_of_transitions",
             "list_of_sound_effects",
             "script",
-            "is_private",
             # Option
             "attachments",
             "videos",

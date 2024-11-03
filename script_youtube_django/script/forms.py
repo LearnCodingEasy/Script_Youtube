@@ -10,6 +10,7 @@ class ScriptForm(ModelForm):
         model = Script
         fields = (
             "script_status",
+            "is_private",
             "title",
             "list_of_sources_urls",
             "list_of_shots",
@@ -25,7 +26,6 @@ class ScriptForm(ModelForm):
             "list_of_transitions",
             "list_of_sound_effects",
             "script",
-            "is_private",
         )
 
 

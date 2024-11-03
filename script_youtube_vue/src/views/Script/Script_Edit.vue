@@ -146,16 +146,27 @@
                 </li>
               </ul>
 
-              <!-- Send -->
+              <!-- is_private  -->
               <div class="card flex justify-center">
                 <prime_toggle_button
-                  v-model="checked"
+                  v-model="script.is_private"
                   onLabel="Locked"
                   offLabel="Unlocked"
                   onIcon="pi pi-lock"
                   offIcon="pi pi-lock-open"
                   class="w-36"
                   aria-label="Do you confirm"
+                />
+              </div>
+              <!-- Status List  -->
+              <div class="card flex justify-center">
+                <prime_list_box
+                  v-model="script.script_status"
+                  :options="statusOptions"
+                  optionLabel="name"
+                  checkmark
+                  :highlightOnSelect="false"
+                  class="w-full md:w-56"
                 />
               </div>
 
@@ -671,10 +682,18 @@ export default {
     return {
       // Active Tab
       activeTab: '1',
+      statusOptions: [
+        { name: 'TASKS', code: 'Tasks' },
+        { name: 'DONE', code: 'Done' },
+        { name: 'IN_MAKING', code: 'In Making' }
+      ],
 
-      //
+      // Script
       script: {
         id: null,
+        // قيمة افتراضية
+        script_status: 'TASKS',
+        is_private: false,
         title: '',
         list_of_sources_urls: [{ name: '', url: '' }],
         list_of_shots: [{ text: '', description: '' }],
@@ -708,7 +727,7 @@ export default {
 
   mounted() {
     this.getScript()
-    console.log('script.list_of_sources_urls: ', this.script.list_of_sources_urls)
+    console.log(`${this.script.script_status}`)
   },
 
   methods: {
@@ -794,6 +813,16 @@ export default {
     },
     submitEditScriptForm() {
       let formData = new FormData()
+      // إضافة حالة السكربت (Script Status)
+      if (this.script.script_status) {
+        // استخدام الاسم النصي فقط لقائمة الحالة
+        formData.append(
+          'script_status',
+          this.script.script_status ? this.script.script_status.name : ''
+        )
+      }
+      // is_private
+      formData.append('is_private', this.script.is_private ? 'true' : 'false')
       // Title
       if (this.script.title == '') {
         this.$toast.add({
@@ -881,16 +910,9 @@ export default {
         url: item.url
       }))
       formData.append('list_of_sound_effects', JSON.stringify(soundEffects))
+
       // Script
-      if (this.script.script == '') {
-        this.$toast.add({
-          severity: 'error',
-          summary: 'Type Script script',
-          detail: 'Your Script script is missing',
-          life: 3000
-        })
-        this.errors.push('Type Script script')
-      } else if (this.script.script !== '') {
+      if (this.script.script !== '') {
         formData.append('script', this.script.script)
       }
       // أضف الصورة إذا كانت موجودة

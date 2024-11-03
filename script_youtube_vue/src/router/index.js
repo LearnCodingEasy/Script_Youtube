@@ -18,6 +18,9 @@ import ScriptList from '../views/Script/Scripts_List.vue'
 import ScriptDetails from '../views/Script/Script_Details.vue'
 import ScriptEdit from '../views/Script/Script_Edit.vue'
 
+// Task
+import TaskView from '../views/Task/TaskView.vue'
+
 // 404 catchall Page Not Found
 import PageNotFound from "@/components/PageNotFound/PageNotFound.vue";
 
@@ -98,6 +101,17 @@ const router = createRouter({
         requireLogin: true
       }
     },
+    // Task [Create | List | Details | Edit ]
+    {
+      path: '/TaskView',
+      name: 'TaskView',
+      component: TaskView,
+      meta: {
+        requireLogin: true
+      }
+    },
+    
+    
     // 404 Catchall Page Not Found
     {
       path: "/:catchAll(.*)",

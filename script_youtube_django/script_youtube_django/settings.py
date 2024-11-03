@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     # Apps
     "account",
     "script",
+    "task",
     # Libraries
     "rest_framework",
     "rest_framework_simplejwt",
